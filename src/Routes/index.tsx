@@ -1,12 +1,12 @@
 import { BrowserRouter, Switch } from 'react-router-dom'
-import Route from './Route'
+import Router from './Router'
 import Home from '../Pages/Home'
 
 function Routes(){
     return(
         <BrowserRouter>
         <Switch>
-            <Route exact path="/" isPrivate={ false } component={ Home }/>
+            <Router exact path="/" isPrivate={ false } component={ Home }/>
         </Switch>
         </BrowserRouter>
     )

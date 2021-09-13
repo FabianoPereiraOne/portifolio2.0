@@ -1,13 +1,13 @@
-import { Router, Redirect } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 type Props = {
-    component: ()=> JSX.Element,
+    component: any,
     isPrivate: boolean,
     exact: boolean,
     path: string,
 }
 
-function Route({
+function Router({
     component: Component,
     isPrivate,
     ...rest
@@ -20,10 +20,10 @@ function Route({
     }
 
     return(
-        <Router { ...rest } render={ props =>{
-            return  <Component { ...props }/> 
-        }}/>
+        <Route { ...rest } render={ props =>(
+            <Component { ...props }/> 
+        )}/>
     )
 }
 
-export default Route
+export default Router

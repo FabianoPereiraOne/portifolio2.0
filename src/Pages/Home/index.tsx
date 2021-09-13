@@ -1,10 +1,10 @@
-
+import SectionHome from './SectionHome'
 
 function Home(){
     return(
-        <header>
-            <h1>Pagina Home</h1>
-        </header>
+        <>
+            <SectionHome/>
+        </>
     )
 }
 
