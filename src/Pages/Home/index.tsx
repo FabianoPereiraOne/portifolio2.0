@@ -1,9 +1,9 @@
-import SectionHome from './SectionHome'
+import Inicio from './Inicio'
 
 function Home(){
     return(
         <>
-            <SectionHome/>
+            <Inicio/>
         </>
     )
 }

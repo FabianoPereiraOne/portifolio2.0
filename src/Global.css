@@ -21,9 +21,9 @@
 --white-light: #FFFEFE;
 --white-normal: #F3F2F2;
 
---gradient-blue: linear-gradient(90deg, rgba(219,143,44,1)
+--gradient-orange: linear-gradient(90deg, rgba(219,143,44,1)
 0%, rgba(194,118,19,1) 35%, rgba(168,95,0,1) 100%);
---gradient-orange:linear-gradient(90deg, rgba(44,157,219,1
+--gradient-blue:linear-gradient(90deg, rgba(44,157,219,1
 ) 0%, rgba(20,132,193,1) 35%, rgba(0,109,168,1) 100%);
 }
 
@@ -33,4 +33,20 @@ a{
 
 button{
     outline: none;
+    cursor: pointer;
+}
+
+li{
+    list-style: none;
+}
+@media screen and (min-width: 601px) and (max-width: 768px){
+    html,body{
+        font-size: 93.75%;
+    }
+}
+
+@media screen and (max-width: 600px){
+    html,body{
+        font-size: 87.5%;
+    }
 }
