@@ -1,0 +1,68 @@
+.content_about{
+    width: 100%;
+    min-height: 100vh;
+    padding: 4rem 3rem;
+    background-color: var(--white-light);
+    display: flex;
+    gap: 2%;
+}
+
+.content_about .content_myphoto{
+    width: 49%;
+    min-height: 70vh;
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content_about .content_myphoto img{
+    max-width: 100%;
+    width: 60%;
+    height: auto;
+}
+
+.content_about .about{
+    width: 49%;
+    height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.content_about .about h4{
+    font-size: 1.5rem;
+    color: var(--gray-normal);
+    text-transform: uppercase;
+    position: relative;
+}
+
+.content_about .about h4::after{
+    content: "";
+    width: 2.3rem;
+    height: 0.2rem;
+    background-color: var(--orange-light);
+    filter: blur(2px);
+    position: absolute;
+    right: -60%;
+    top: 50%;
+}
+
+.content_about .about strong{
+    margin-top: 1rem;
+    font-size: 2rem;
+    color: var(--black-light);
+}
+
+.content_about .about  p{
+    margin-top: 0.5rem;
+    max-width: 85%;
+    color: var(--gray-dark);
+}
+
+.content_about .about button{
+    margin-top: 2rem;
+}

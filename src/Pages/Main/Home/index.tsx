@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import Styled from './Inicio.module.css'
+import Styled from './home.module.css'
 import { Link } from 'react-router-dom'
 import { FiCodepen, FiMenu } from 'react-icons/fi'
-import { ProgressBar } from '../../../Components/Global'
-import competence from '../../../assets/competence.png'
-import responsivo from '../../../assets/responsivo.png'
-import webSite from '../../../assets/webSite.png'
+import { ProgressBar, ButtonPrimary } from '../../../Components/Global'
+import competence from '../../../Assets/competence.png'
+import responsivo from '../../../Assets/responsivo.png'
+import webSite from '../../../Assets/webSite.png'
 
 
 function Inicio() {
@@ -96,12 +96,12 @@ function Inicio() {
                     <span style={{ '--delay': 19 } as React.CSSProperties}>n</span>
                     <span style={{ '--delay': 20 } as React.CSSProperties}>d</span>    |</p>
                 <div className={Styled.btn_group}>
-                    <button>
+                    <ButtonPrimary>
                         Sobre
-                    </button>
-                    <button>
+                    </ButtonPrimary>
+                    <ButtonPrimary> 
                         Download Cv
-                    </button>
+                    </ButtonPrimary>
                 </div>
             </section>
             <section className={Styled.section_technology_cards}>
