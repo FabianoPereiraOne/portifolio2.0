@@ -1,10 +1,27 @@
 import styled from 'styled-components'
-
+import { Link } from 'react-router-dom'
 
 type progress = {
-    progressValue: number;
-    as?: React.ElementType | keyof JSX.IntrinsicElements;
-  };
+  progressValue: number;
+  as?: React.ElementType | keyof JSX.IntrinsicElements;
+};
+
+type SkillProgressBarProps = {
+  value: number;
+  as?: React.ElementType | keyof JSX.IntrinsicElements;
+};
+
+
+type TitleProps = {
+  valuePositionRight: number;
+  as?: React.ElementType | keyof JSX.IntrinsicElements;
+};
+
+type ProjectProps = {
+  url: string;
+  as?: React.ElementType | keyof JSX.IntrinsicElements;
+};
+
 
 export const ProgressBar = styled.span<progress>`
     width: 4rem;
@@ -12,7 +29,7 @@ export const ProgressBar = styled.span<progress>`
     border-radius: 1rem;
     background-color: var(--blue-normal);
     position: absolute;
-    left: ${ props => props.progressValue }%;
+    left: ${props => props.progressValue}%;
     top: 0;
     transition: 0.35s;
 `
@@ -33,4 +50,43 @@ export const ButtonPrimary = styled.button`
     rgba(0, 109, 168, 1) 100%
   );
   border: none;
+`
+
+export const Title = styled.h4<TitleProps>`
+font-size: 1.5rem;
+color: var(--gray-normal);
+text-transform: uppercase;
+position: relative;
+text-align: center;
+
+    &::after {
+      content: "";
+      width: 2.3rem;
+      height: 0.2rem;
+      background-color: var(--orange-light);
+      filter: blur(2px);
+      position: absolute;
+      right: ${ props => props.valuePositionRight }%;
+      top: 50%;
+    }
+`
+
+export const ContainerProgressBar =  styled.div`
+width: 15rem;
+height: 1rem;
+background-color: var(--white-normal);
+border-radius: 2rem;
+display: inline-block;
+`
+
+export const SkillProgressBar = styled.div<SkillProgressBarProps>`
+width: ${ props => props.value }%;
+height: 100%;
+background-color: var(--blue-light);
+border-radius: 2rem;
+`
+
+export const Project = styled( Link )<ProjectProps>`
+
+
 `

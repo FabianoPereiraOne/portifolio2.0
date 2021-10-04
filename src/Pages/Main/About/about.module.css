@@ -24,24 +24,6 @@
   background-size: 30rem;
 }
 
-.content_about .about h4 {
-  font-size: 1.5rem;
-  color: var(--gray-normal);
-  text-transform: uppercase;
-  position: relative;
-}
-
-.content_about .about h4::after {
-  content: "";
-  width: 2.3rem;
-  height: 0.2rem;
-  background-color: var(--orange-light);
-  filter: blur(2px);
-  position: absolute;
-  right: -60%;
-  top: 50%;
-}
-
 .content_about .about strong {
   margin-top: 1rem;
   font-size: 2rem;
