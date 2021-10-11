@@ -5,5 +5,22 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    padding: 4rem 1rem;
+    padding: 4rem;
+    gap: 5em;
+}
+
+.content_projects .group_projects{
+    width: 90%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.content_projects .group_projects .slider_group{
+    display: flex;
+    overflow-x: auto;
+    padding: 2rem 1rem;
+    gap: 1%;
 }

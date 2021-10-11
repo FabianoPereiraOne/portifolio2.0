@@ -11,14 +11,8 @@ type SkillProgressBarProps = {
   as?: React.ElementType | keyof JSX.IntrinsicElements;
 };
 
-
-type TitleProps = {
-  valuePositionRight: number;
-  as?: React.ElementType | keyof JSX.IntrinsicElements;
-};
-
 type ProjectProps = {
-  url: string;
+  image: string;
   as?: React.ElementType | keyof JSX.IntrinsicElements;
 };
 
@@ -52,25 +46,6 @@ export const ButtonPrimary = styled.button`
   border: none;
 `
 
-export const Title = styled.h4<TitleProps>`
-font-size: 1.5rem;
-color: var(--gray-normal);
-text-transform: uppercase;
-position: relative;
-text-align: center;
-
-    &::after {
-      content: "";
-      width: 2.3rem;
-      height: 0.2rem;
-      background-color: var(--orange-light);
-      filter: blur(2px);
-      position: absolute;
-      right: ${ props => props.valuePositionRight }%;
-      top: 50%;
-    }
-`
-
 export const ContainerProgressBar =  styled.div`
 width: 15rem;
 height: 1rem;
@@ -84,9 +59,4 @@ width: ${ props => props.value }%;
 height: 100%;
 background-color: var(--blue-light);
 border-radius: 2rem;
-`
-
-export const Project = styled( Link )<ProjectProps>`
-
-
 `

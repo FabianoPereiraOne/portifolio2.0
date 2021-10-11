@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react'
 import Styled from './home.module.css'
 import { Link } from 'react-router-dom'
-import { FiCodepen, FiMenu } from 'react-icons/fi'
+import { FiMenu } from 'react-icons/fi'
 import { ProgressBar, ButtonPrimary } from '../../../Components/Global'
-import competence from '../../../Assets/competence.png'
-import responsivo from '../../../Assets/responsivo.png'
-import webSite from '../../../Assets/webSite.png'
-
+import logo from '../../../assets/logo.svg'
 
 function Inicio() {
 
@@ -19,8 +16,9 @@ function Inicio() {
 
     function toggleAnimationCss() {
         const textUp = document.querySelector('#textUp')
+        console.log(textUp)
         if (textUp) {
-            textUp.classList.toggle('Inicio_text_up__3cpTJ')
+            textUp.classList.toggle('home_text_up__8bs_B')
         }
     }
 
@@ -56,7 +54,7 @@ function Inicio() {
 
             <header className={Styled.header}>
                 <Link to="/" className={Styled.container_logo}>
-                    <FiCodepen />
+                    <img src={ logo } alt="logo" />
                     <p>Fabiano Pereira</p>
                 </Link>
                 <nav className={Styled.nav}>
@@ -103,23 +101,6 @@ function Inicio() {
                         Download Cv
                     </ButtonPrimary>
                 </div>
-            </section>
-            <section className={Styled.section_technology_cards}>
-                <article className={Styled.technology_cards}>
-                    <img src={responsivo} alt="Layout resposivo" />
-                    <h3>Responsivo</h3>
-                    <p><mark>Layout 100% Responsivo</mark> que se adapta  a diversos tamanhos de telas.</p>
-                </article>
-                <article className={Styled.technology_cards}>
-                    <img src={competence} alt="Tecnologias modernas" />
-                    <h3>Tecnologias</h3>
-                    <p>Uso das tecnologias de desenvolvimento <mark>FrontEnd Moderno</mark> mais usadas  na atualidade.</p>
-                </article>
-                <article className={Styled.technology_cards}>
-                    <img src={webSite} alt="Website moderno" />
-                    <h3>Moderno</h3>
-                    <p>Desenvolvimento de <mark>WebSites e Sistemas Modernos</mark> a partir de design criativos.</p>
-                </article>
             </section>
         </section>
     )

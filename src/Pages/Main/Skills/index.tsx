@@ -1,11 +1,11 @@
-import { ContainerProgressBar, Title, SkillProgressBar } from '../../../Components/Global'
+import { ContainerProgressBar, SkillProgressBar } from '../../../Components/Global'
 import Styled from './skills.module.css'
+import Title from '../../../Components/Title'
 
 function Skills() {
     return (
         <section className={Styled.content_skills}>
-            <Title valuePositionRight={110}>Habilidades</Title>
-
+            <Title title="Habilidades" subTitle="Principais tecnologias utilizadas"/>
             <div className={Styled.content_progress_skills}>
                 <div className={Styled.skill_group}>
                     <p>HTML 5</p>

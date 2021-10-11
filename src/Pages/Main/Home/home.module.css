@@ -1,9 +1,10 @@
 .section_home {
   width: 100%;
-  min-height: 100vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: aqua;
 }
 
 .section_home .header {
@@ -83,8 +84,8 @@
 
 .section_banner_default {
   width: 100%;
-  height: 50vh;
-  background: url(../../../Assets/bg.jpg);
+  height: 65vh;
+  background: url(../../../assets/bg.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -200,53 +201,6 @@
   border: none;
 }
 
-.section_technology_cards{
-  width: 100%;
-  min-height: 39.25vh;
-  padding: 4rem 3rem;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.section_technology_cards .technology_cards{
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 0.2rem;
-  padding: 0 4rem;
-}
-
-.section_technology_cards .technology_cards img{
-  max-width: 100%;
-  width: 3rem;
-}
-
-.section_technology_cards .technology_cards h3{
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--black-dark);
-}
-
-.section_technology_cards .technology_cards p{
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--black-light);
-}
-
-.section_technology_cards .technology_cards p mark{
-  background-color: var(--blue-light);
-  color: var(--white-normal);
-}
-
-
 @keyframes fadInMenu {
   from {
     height: 0;
@@ -300,15 +254,6 @@
   .menu_mobile li button:hover {
     filter: brightness(1);
   }
-
-  .section_technology_cards{
-    padding:  3rem;
-    gap: 1rem;
-  }
-
-  .section_technology_cards .technology_cards{
-    padding: 0;
-  }
 }
 
 @media screen and (min-width: 601px) and (max-width: 769px) {
@@ -353,15 +298,6 @@
 
   .menu_mobile li button:hover {
     filter: brightness(1);
-  }
-
-  .section_technology_cards{
-    padding:  3rem 2rem;
-    gap: 1rem;
-  }
-
-  .section_technology_cards .technology_cards{
-    padding: 0;
   }
 }
 
@@ -418,29 +354,6 @@
 
   .section_banner_default .btn_group {
     flex-direction: column;
-  }
-
-  .section_technology_cards{
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 2rem;
-    padding: 3rem;
-  }
-
-  .section_technology_cards .technology_cards{
-    padding: 1rem;
-  }
-
-  .section_technology_cards .technology_cards img{
-    width: 4rem;
-  }
-
-  .section_technology_cards .technology_cards h3{
-    font-size: 1.5rem;
-  }
-
-  .section_technology_cards .technology_cards p{
-    font-size: 1.2rem;
   }
   
 }
