@@ -21,6 +21,9 @@
 .content_projects .group_projects .slider_group{
     display: flex;
     overflow-x: auto;
-    padding: 2rem 1rem;
+    padding: 2rem 0;
     gap: 1%;
+    transition: 0.3s;
+
+    scroll-behavior: smooth;
 }

@@ -7,7 +7,7 @@ ${ props => props.fullScreen ? `
     margin: 0 auto;
 ` :
  `
-    width: 24%;
+    width: 19rem;
     height: 10rem;
     &:hover{
         transform: scale(1.1,1.1);

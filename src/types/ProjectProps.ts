@@ -3,4 +3,5 @@ export type ProjectProps = {
     image: string,
     link: string,
     description: string,
+    isActive: boolean,
 }

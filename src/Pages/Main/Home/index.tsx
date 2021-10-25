@@ -16,7 +16,6 @@ function Inicio() {
 
     function toggleAnimationCss() {
         const textUp = document.querySelector('#textUp')
-        console.log(textUp)
         if (textUp) {
             textUp.classList.toggle('home_text_up__8bs_B')
         }
