@@ -27,3 +27,7 @@
 
     scroll-behavior: smooth;
 }
+
+.content_projects .group_projects .slider_group::-webkit-scrollbar{
+    display: none;
+}

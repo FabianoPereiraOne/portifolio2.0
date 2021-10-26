@@ -1,7 +1,7 @@
 import Project from '../../../Components/Project'
 import Styled from './projects.module.css'
 import Title from '../../../Components/Title'
-import { useState, useRef, useEffect, ElementRef} from 'react'
+import { useState, useRef, useEffect, ElementRef } from 'react'
 import happy from '../../../assets/happy.png'
 import onePage from '../../../assets/onePage.png'
 import quark from '../../../assets/quark.png'
@@ -75,48 +75,56 @@ function Projects() {
     },
     {
         name: 'Google Glass',
-        image: google_glass,
+        image: podcastr,
         link: '',
         description: '',
         isActive: false
     },
     ])
     const carouselRef = useRef<HTMLDivElement>(null)
+    let controllDirection = 'right'
+    let timeCarousel = 5
+    let speedCarousel = 5
 
-    const handleScrollRight = (divRef:HTMLDivElement) =>{
+    const handleScrollRight = (divRef: HTMLDivElement) => {
         let c = 0
-        const intervalo = setInterval(()=>{
-            c += 10
-            if(c < 320){
-                divRef.scrollLeft += 10.5
-            }else{
+        const intervalo = setInterval(() => {
+            c += 1
+            if (c < 397) {
+                divRef.scrollLeft += 1
+            } else {
                 clearInterval(intervalo)
             }
-        },10)
-    } 
-
-    const handleScrollLeft = (divRef:HTMLDivElement) =>{
-        let c = 0
-        const intervalo = setInterval(()=>{
-            c += 10
-            if(c < 320){
-                divRef.scrollLeft -= 10.5
-            }else{
-                clearInterval(intervalo)
-            }
-        },10)
+        }, speedCarousel)
     }
 
-    const controllScroll = () =>{
-        const divRef = carouselRef.current
-        let controllDirection = 'left'
+    const handleScrollLeft = (divRef: HTMLDivElement) => {
+        let c = 0
+        const intervalo = setInterval(() => {
+            c += 2
+            if (c < 397) {
+                divRef.scrollLeft -= 1
+            } else {
+                clearInterval(intervalo)
+            }
+        }, speedCarousel + 4)
+    }
 
-        if(divRef !== null){
-            if(controllDirection === 'right'){ 
+    const controllScroll = () => {
+        const divRef = carouselRef.current
+
+        if (divRef !== null) {
+            if (divRef.scrollLeft >= divRef.clientWidth + 332) {
+                controllDirection = 'left'
+            } else if (divRef.scrollLeft === 0) {
+                controllDirection = 'right'
+            }
+
+            if (controllDirection === 'right') {
                 handleScrollRight(divRef)
-            }else{
+            } else {
                 handleScrollLeft(divRef)
-            }   
+            }
         }
     }
 
@@ -140,7 +148,7 @@ function Projects() {
     }
 
     useEffect(() => {
-        setInterval(controllScroll,2000)
+        setInterval(controllScroll, timeCarousel * 1000)
     }, [])
 
     return (

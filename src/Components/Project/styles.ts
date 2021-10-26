@@ -10,7 +10,7 @@ ${ props => props.fullScreen ? `
     width: 19rem;
     height: 10rem;
     &:hover{
-        transform: scale(1.1,1.1);
+        transform: translateY(-0.4rem);
     }
 `}
 background: url(${ props => props.image });
