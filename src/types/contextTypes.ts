@@ -2,7 +2,9 @@ import { ProjectProps } from "./ProjectProps"
 
 export type PortfolioContextTypes = {
     projects: ProjectProps[];
-    handleActiveProjectFromCarousel: ( project:ProjectProps )=> void
+    projectWidth: number;
+    handleActiveProjectFromCarousel: ( project:ProjectProps )=> void;
+    handleWidthProject: (screenWidth:number)=> void
 }
 
 export type portfolioProviderTypes = {

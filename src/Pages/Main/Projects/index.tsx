@@ -8,6 +8,7 @@ import { usePortfolioContext } from '../../../contexts'
 
 function Projects() {
     const carouselRef = useRef<HTMLDivElement>(null)
+    const projectRef = useRef<HTMLButtonElement>(null)
     const useContext = usePortfolioContext()
 
     let controllDirection = 'right'
@@ -16,9 +17,10 @@ function Projects() {
 
     const handleScrollRight = (divRef: HTMLDivElement) => {
         let c = 0
+
         const intervalo = setInterval(() => {
             c += 1
-            if (c < 397) {
+            if (c < projectRef.current!.clientWidth * 1.35) {
                 divRef.scrollLeft += 1
             } else {
                 clearInterval(intervalo)
@@ -30,7 +32,7 @@ function Projects() {
         let c = 0
         const intervalo = setInterval(() => {
             c += 2
-            if (c < 397) {
+            if (c < projectRef.current!.clientWidth * 1.35) {
                 divRef.scrollLeft -= 1
             } else {
                 clearInterval(intervalo)
@@ -42,7 +44,7 @@ function Projects() {
         const divRef = carouselRef.current
 
         if (divRef !== null) {
-            if (divRef.scrollLeft >= divRef.clientWidth + 332) {
+            if (divRef.scrollLeft >= (projectRef.current!.clientWidth * useContext.projects.length) - 650 ) {
                 controllDirection = 'left'
             } else if (divRef.scrollLeft === 0) {
                 controllDirection = 'right'
@@ -76,8 +78,16 @@ function Projects() {
     }
 
     useEffect(() => {
-        setInterval(controllScroll, timeCarousel * 1000)
+        const intervalCarousel = setInterval(controllScroll, timeCarousel * 1000)
+        console.log(projectRef)
+        return () =>{
+            clearInterval(intervalCarousel)
+        }
     }, [])
+
+    useEffect(()=>{
+        useContext.handleWidthProject(window.screen.width)
+    },[window.screen.width])
 
     const projectActive = handleGetActive(useContext.projects)
 
@@ -96,7 +106,7 @@ function Projects() {
                 </FeaturedProject>
                 <div ref={carouselRef} className={styles.slider_group}>
                     {useContext.projects.length > 0 ? useContext.projects.map((project, index: number) => {
-                        return project.isActive !== true && <Project key={index} project={project} />
+                        return project.isActive !== true && <Project reference={ projectRef } key={index} project={project} />
                     }) : ''}
                 </div>
             </section>

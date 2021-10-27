@@ -8,6 +8,7 @@ export const PortfolioContext = createContext({} as Types.PortfolioContextTypes)
 
 export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) => {
     const [projects, setProjects] = useState<ProjectProps[]>(datasTest)
+    const [projectWidth, setProjectWidth] = useState<number>(0)
 
     const handleActiveProjectFromCarousel = (project: ProjectProps) => {
         const resultRemoveProjectActive = handleRemoveProjectActive()
@@ -53,12 +54,26 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
         return newListProjects
     }
 
+    const handleWidthProject = (screenWidth:number) => {
+        if(screenWidth >= 1200 && screenWidth < 1254){
+            setProjectWidth(32.5)
+        }else if(screenWidth >= 769 && screenWidth <= 1080){
+            setProjectWidth(50)
+        }else if(screenWidth>= 600 && screenWidth < 768){
+            setProjectWidth(50)
+        }else if(screenWidth < 600){
+            setProjectWidth(100)
+        }
+    }
+
 
 
     return (
         <PortfolioContext.Provider value={{
             projects,
-            handleActiveProjectFromCarousel
+            projectWidth,
+            handleActiveProjectFromCarousel,
+            handleWidthProject
         }}>
             {children}
         </PortfolioContext.Provider>

@@ -9,4 +9,5 @@ export type ProjectProps = {
 
 export type ProjectParams = {
     project: ProjectProps,
+    reference:React.RefObject<HTMLButtonElement>
 }
