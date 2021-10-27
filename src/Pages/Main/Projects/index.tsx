@@ -1,87 +1,15 @@
 import Project from '../../../Components/Project'
-import Styled from './projects.module.css'
+import { FeaturedProject } from '../../../Components/Global'
+import styles from './projects.module.css'
 import Title from '../../../Components/Title'
-import { useState, useRef, useEffect, ElementRef } from 'react'
-import happy from '../../../assets/happy.png'
-import onePage from '../../../assets/onePage.png'
-import quark from '../../../assets/quark.png'
-import podcastr from '../../../assets/podcastr.png'
-import google_glass from '../../../assets/google-glass.png'
+import { useRef, useEffect } from 'react'
 import { ProjectProps } from '../../../types/ProjectProps'
+import { usePortfolioContext } from '../../../contexts'
 
 function Projects() {
-    const [projects, setProjects] = useState<ProjectProps[]>([{
-        name: 'Happy',
-        image: happy,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    {
-        name: 'OnePage',
-        image: onePage,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    {
-        name: 'Quark',
-        image: quark,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    {
-        name: 'Happy',
-        image: happy,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    {
-        name: 'OnePage',
-        image: onePage,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    {
-        name: 'Quark',
-        image: quark,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    {
-        name: 'Podcastr',
-        image: podcastr,
-        link: '',
-        description: '',
-        isActive: true
-    },
-    {
-        name: 'Google Glass',
-        image: google_glass,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    {
-        name: 'Google Glass',
-        image: google_glass,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    {
-        name: 'Google Glass',
-        image: podcastr,
-        link: '',
-        description: '',
-        isActive: false
-    },
-    ])
     const carouselRef = useRef<HTMLDivElement>(null)
+    const useContext = usePortfolioContext()
+
     let controllDirection = 'right'
     let timeCarousel = 5
     let speedCarousel = 5
@@ -151,14 +79,24 @@ function Projects() {
         setInterval(controllScroll, timeCarousel * 1000)
     }, [])
 
+    const projectActive = handleGetActive(useContext.projects)
+
     return (
-        <section className={Styled.content_projects}>
+        <section className={styles.content_projects}>
             <Title title="Projetos" subTitle="Veja soluções já desenvolvidas" />
-            <section className={Styled.group_projects}>
-                <Project fullScreen={true} key={0} value={handleGetActive(projects)} />
-                <div ref={carouselRef} className={Styled.slider_group}>
-                    {projects.length > 0 ? projects.map((project, index: number) => {
-                        return project.isActive !== true && <Project key={index} value={project} />
+            <section className={styles.group_projects}>
+                <FeaturedProject image={projectActive.image} >
+                    <article className={styles.badFeatured}>
+                        <div className={styles.content_title}>
+                            <h3>{projectActive.name}</h3>
+                            <p>{projectActive.description}</p>
+                        </div>
+                        <a rel="noreferrer" target="_blank" href={projectActive.link}>Saiba mais</a>
+                    </article>
+                </FeaturedProject>
+                <div ref={carouselRef} className={styles.slider_group}>
+                    {useContext.projects.length > 0 ? useContext.projects.map((project, index: number) => {
+                        return project.isActive !== true && <Project key={index} project={project} />
                     }) : ''}
                 </div>
             </section>

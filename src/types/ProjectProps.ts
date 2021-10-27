@@ -4,4 +4,9 @@ export type ProjectProps = {
     link: string,
     description: string,
     isActive: boolean,
+    id: string
+}
+
+export type ProjectParams = {
+    project: ProjectProps,
 }

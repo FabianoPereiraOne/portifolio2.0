@@ -1,8 +1,11 @@
 import Routes from './Routes'
+import { PortfolioProvider } from './contexts'
 
 function App() {
   return (
-    <Routes/>
+    <PortfolioProvider>
+      <Routes/>
+    </PortfolioProvider>
   );
 }
 

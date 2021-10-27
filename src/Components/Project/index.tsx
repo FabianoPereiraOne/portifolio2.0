@@ -1,16 +1,12 @@
 import * as CG from './styles'
-import { ProjectProps } from '../../types/ProjectProps'
+import * as Types from '../../types/ProjectProps'
+import { usePortfolioContext } from '../../contexts'
 
-type Props = {
-    value: ProjectProps,
-    fullScreen?: boolean,
-}
+function Project({ project }:Types.ProjectParams){
+    const useContext = usePortfolioContext()
 
-function Project({ value,fullScreen }:Props){
     return(
-        <CG.ProjectCard image={ value.image } fullScreen={ fullScreen }>
-            
-        </CG.ProjectCard>
+        <CG.ProjectCard onClick={ ()=> useContext.handleActiveProjectFromCarousel(project) } image={ project.image }/>
     )
 }
 

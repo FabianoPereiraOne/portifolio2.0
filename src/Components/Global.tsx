@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 type progress = {
   progressValue: number;
@@ -59,4 +58,22 @@ width: ${ props => props.value }%;
 height: 100%;
 background-color: var(--blue-light);
 border-radius: 2rem;
+`
+export const FeaturedProject = styled.div<{ 
+  image: string,
+  as?: React.ElementType | keyof JSX.IntrinsicElements;
+}>`
+width: 100%;
+height: 80vh;
+background: url(${ props => props.image });
+border: none;
+background-position: center;    
+background-repeat: no-repeat;
+background-size: cover;
+box-shadow: 0px 0px 5px #ccc;
+position: relative;
+overflow: hidden;
+@media screen and (max-width: 600px) {
+  height 40vh;
+}
 `
