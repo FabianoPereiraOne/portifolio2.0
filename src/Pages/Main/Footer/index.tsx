@@ -20,10 +20,10 @@ function Footer(){
 
             <ul className={ styles.menu_links}>
                 <h5>Redes Sociais</h5>
-                <li><Link to="inicio">Inicio</Link></li>
-                <li><Link to="inicio">Sobre</Link></li>
-                <li><Link to="inicio">Habilidades</Link></li>
-                <li><Link to="inicio">Projetos</Link></li>
+                <li><Link to="*">Facebook</Link></li>
+                <li><Link to="*">Instagram</Link></li>
+                <li><Link to="*">Github</Link></li>
+                <li><Link to="*">LinkedIn</Link></li>
             </ul>
         </footer>
     )
