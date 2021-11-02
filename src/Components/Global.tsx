@@ -10,12 +10,6 @@ type SkillProgressBarProps = {
   as?: React.ElementType | keyof JSX.IntrinsicElements;
 };
 
-type ProjectProps = {
-  image: string;
-  as?: React.ElementType | keyof JSX.IntrinsicElements;
-};
-
-
 export const ProgressBar = styled.span<progress>`
     width: 4rem;
     height: 100%;
@@ -45,7 +39,7 @@ export const ButtonPrimary = styled.button`
   border: none;
 `
 
-export const ContainerProgressBar =  styled.div`
+export const ContainerProgressBar = styled.div`
 width: 15rem;
 height: 1rem;
 background-color: var(--white-normal);
@@ -54,18 +48,19 @@ display: inline-block;
 `
 
 export const SkillProgressBar = styled.div<SkillProgressBarProps>`
-width: ${ props => props.value }%;
+width: ${props => props.value}%;
 height: 100%;
 background-color: var(--blue-light);
 border-radius: 2rem;
 `
-export const FeaturedProject = styled.div<{ 
+export const FeaturedProject = styled.div<{
   image: string,
   as?: React.ElementType | keyof JSX.IntrinsicElements;
 }>`
-width: 100%;
+width: 80%;
+max-width: 1254px;
 height: 80vh;
-background: url(${ props => props.image });
+background: url(${props => props.image});
 border: none;
 background-position: center;    
 background-repeat: no-repeat;
