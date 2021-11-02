@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { ProgressBar, ButtonPrimary } from '../../../Components/Global'
 import logo from "../../../assets/logo.svg"
+import * as Scroll from 'react-scroll'
 
 function Inicio() {
 
@@ -30,21 +31,21 @@ function Inicio() {
     }, [])
 
     return (
-        <section className={Styled.section_home}>
+        <section className={Styled.section_home} id="inicio">
             {toggleMenu &&
                 (
                     <ul className={Styled.menu_mobile}>
                         <li>
-                            <button>Inicio</button>
+                            <Scroll.Link onClick={() => setToggleMenu(false)} to="inicio" smooth={true}>Inicio</Scroll.Link>
                         </li>
                         <li>
-                            <button>Sobre</button>
+                            <Scroll.Link onClick={() => setToggleMenu(false)} to="sobre" smooth={true}>Sobre</Scroll.Link>
                         </li>
                         <li>
-                            <button>Habilidades</button>
+                            <Scroll.Link onClick={() => setToggleMenu(false)} to="habilidades" smooth={true}>Habilidades</Scroll.Link>
                         </li>
                         <li>
-                            <button>Projetos</button>
+                            <Scroll.Link onClick={() => setToggleMenu(false)} to="projetos" smooth={true}>Projetos</Scroll.Link>
                         </li>
                     </ul>
                 )
@@ -57,10 +58,10 @@ function Inicio() {
                     <p>Fabiano Pereira</p>
                 </Link>
                 <nav className={Styled.nav}>
-                    <button onClick={() => handleScroll(0, 0)}>Inicio</button>
-                    <button onClick={() => handleScroll(19, 0)}>Sobre</button>
-                    <button onClick={() => handleScroll(49, 0)}>Habilidades</button>
-                    <button onClick={() => handleScroll(82.6, 0)}>Projetos</button>
+                    <Scroll.Link onClick={() => handleScroll(0, 0)} to="inicio" smooth={true}>Inicio</Scroll.Link>
+                    <Scroll.Link onClick={() => handleScroll(19, 0)} to="sobre" smooth={true}>Sobre</Scroll.Link>
+                    <Scroll.Link onClick={() => handleScroll(49, 0)} to="habilidades" smooth={true}>Habilidades</Scroll.Link>
+                    <Scroll.Link onClick={() => handleScroll(82.6, 0)} to="projetos" smooth={true}>Projetos</Scroll.Link>
                     <span className={Styled.progress_bar}>
                         <ProgressBar progressValue={progress} />
                     </span>
@@ -96,7 +97,7 @@ function Inicio() {
                     <ButtonPrimary>
                         Sobre
                     </ButtonPrimary>
-                    <ButtonPrimary> 
+                    <ButtonPrimary>
                         Download Cv
                     </ButtonPrimary>
                 </div>

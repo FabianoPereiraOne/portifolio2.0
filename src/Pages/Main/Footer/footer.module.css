@@ -40,6 +40,7 @@
     color: var(--white-normal);
     font-weight: 400;
     transition: color 0.3s;
+    cursor: pointer;
 }
 
 .content_footer .menu_links li a:hover{

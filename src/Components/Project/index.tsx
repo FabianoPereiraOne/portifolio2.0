@@ -7,7 +7,7 @@ function Project({ project }:Types.ProjectParams){
     const useContext = usePortfolioContext()
 
     return(
-        <div className={styles.container_card_carousel} onClick={ ()=> useContext.handleActiveProjectFromCarousel(project) }>
+        <div className={styles.container_card_carousel} onClick={ ()=> useContext.handleActiveProjectFromCarousel(project)}>
             <CG.ProjectCard width={useContext.projectWidth}  image={ project.image }/>
         </div>
     )

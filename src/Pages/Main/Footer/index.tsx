@@ -1,16 +1,17 @@
 import styles from './footer.module.css'
-import { Link } from 'react-router-dom'
 import logo from '../../../assets/logo.svg'
+import * as Scroll from 'react-scroll'
+import { Link } from 'react-router-dom'
 
 function Footer(){
     return(
         <footer className={ styles.content_footer }>
             <ul className={ styles.menu_links}>
                 <h5>Menu</h5>
-                <li><Link to="inicio">Inicio</Link></li>
-                <li><Link to="inicio">Sobre</Link></li>
-                <li><Link to="inicio">Habilidades</Link></li>
-                <li><Link to="inicio">Projetos</Link></li>
+                <li><Scroll.Link to="inicio" smooth={true}>Inicio</Scroll.Link></li>
+                <li><Scroll.Link to="sobre" smooth={true}>Sobre</Scroll.Link></li>
+                <li><Scroll.Link to="habilidades" smooth={true}>Habilidades</Scroll.Link></li>
+                <li><Scroll.Link to="projetos" smooth={true}>Projetos</Scroll.Link></li>
             </ul>
 
             <div className={ styles.group_copy }>
@@ -21,10 +22,10 @@ function Footer(){
 
             <ul className={ styles.menu_links}>
                 <h5>Redes Sociais</h5>
-                <li><Link to="*">Facebook</Link></li>
-                <li><Link to="*">Instagram</Link></li>
-                <li><Link to="*">Github</Link></li>
-                <li><Link to="*">LinkedIn</Link></li>
+                <li><Link to="/">Facebook</Link></li>
+                <li><Link to="/">Instagram</Link></li>
+                <li><Link to="/">Github</Link></li>
+                <li><Link to="/">LinkedIn</Link></li>
             </ul>
         </footer>
     )

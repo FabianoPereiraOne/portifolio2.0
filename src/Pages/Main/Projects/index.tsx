@@ -4,15 +4,28 @@ import Title from '../../../Components/Title'
 import { FeaturedProject } from '../../../Components/Global'
 import { usePortfolioContext } from '../../../contexts'
 import * as FI from 'react-icons/fi'
-import Glider from 'react-glider'
+import Glider, { GliderMethods } from 'react-glider'
 import 'glider-js/glider.min.css';
+import { useEffect, useRef } from 'react'
+
 
 function Projects() {
   const useContext = usePortfolioContext()
+  const btn = useRef<HTMLButtonElement>(null)
+  const gliderRef = useRef<GliderMethods>(null)
   const projectActive = useContext.handleGetActive(useContext.projects)
 
+  useEffect(() => {
+    const timeInterval = setInterval(() => btn.current?.click(), 10000)
+
+    return () => {
+      clearInterval(timeInterval)
+    }
+  }, [])
+
+
   return (
-    <section className={styles.content_projects}>
+    <section className={styles.content_projects} id="projetos">
       <Title title="Projetos" subTitle="Veja soluções já desenvolvidas" />
       <section className={styles.group_projects}>
         <FeaturedProject className={styles.bannerFeatured} image={projectActive.image}>
@@ -28,9 +41,13 @@ function Projects() {
         <div className={styles.container_carousel}>
           <div className={styles.carousel_center}>
             <Glider
-              draggable
               hasDots
               hasArrows
+              draggable
+              rewind
+              skipTrack
+              ref={gliderRef}
+              duration={2}
               arrows={
                 {
                   prev: `#${styles.btnPrev}`,
@@ -46,7 +63,7 @@ function Projects() {
                   settings: {
                     slidesToShow: 4,
                     slidesToScroll: 1,
-                    duration: 0.25,
+                    duration: 2,
                   },
                 },
                 {
@@ -54,7 +71,7 @@ function Projects() {
                   settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
-                    duration: 0.25,
+                    duration: 2,
                   },
                 },
                 {
@@ -62,18 +79,20 @@ function Projects() {
                   settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
-                    duration: 0.25,
+                    duration: 2
                   },
                 },
               ]}
             >
-              {useContext.projects.length > 0 ? useContext.projects.map((project, index: number) => {
-                return project.isActive !== true && <Project key={index} project={project} />
-              }) : ''}
+              <div className="glider-track">
+                {useContext.projects.length > 0 ? useContext.projects.map((project, index: number) => {
+                  return <Project key={index} project={project} />
+                }) : ''}
+              </div>
             </Glider>
 
             <button id={styles.btnPrev}><FI.FiArrowLeftCircle /></button>
-            <button id={styles.btnNext}><FI.FiArrowRightCircle /></button>
+            <button id={styles.btnNext} ref={btn}><FI.FiArrowRightCircle /></button>
           </div>
         </div>
       </section>

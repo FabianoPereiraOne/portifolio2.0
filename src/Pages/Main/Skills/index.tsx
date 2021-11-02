@@ -4,7 +4,7 @@ import Title from '../../../Components/Title'
 
 function Skills() {
     return (
-        <section className={Styled.content_skills}>
+        <section className={Styled.content_skills} id="habilidades">
             <Title title="Habilidades" subTitle="Principais tecnologias utilizadas"/>
             <div className={Styled.content_progress_skills}>
                 <div className={Styled.skill_group}>
