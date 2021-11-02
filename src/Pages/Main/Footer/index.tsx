@@ -1,5 +1,6 @@
 import styles from './footer.module.css'
 import { Link } from 'react-router-dom'
+import logo from '../../../assets/logo.svg'
 
 function Footer(){
     return(
@@ -13,7 +14,7 @@ function Footer(){
             </ul>
 
             <div className={ styles.group_copy }>
-                <img src="/assets/logo.svg" alt="logo"/>
+                <img src={ logo } alt="logo"/>
                 <p>Copyright &copy;2021</p>
                 <span>Desenvolvido por Fabiano Pereira</span>
             </div>

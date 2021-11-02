@@ -85,7 +85,7 @@
 .section_banner_default {
   width: 100%;
   height: 65vh;
-  background: url(/assets/bg.jpg);
+  background: url(../../../assets/bg.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

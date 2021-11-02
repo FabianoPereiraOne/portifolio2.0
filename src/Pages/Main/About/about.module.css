@@ -19,7 +19,7 @@
   justify-content: center;
   align-items: flex-start;
 
-  background: url(/assets/foto.png);
+  background: url(../../../assets/foto.png);
   background-position: 100% 50%;
   background-repeat: no-repeat;
   background-size: 30rem;

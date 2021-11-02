@@ -3,6 +3,7 @@ import Styled from './home.module.css'
 import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { ProgressBar, ButtonPrimary } from '../../../Components/Global'
+import logo from "../../../assets/logo.svg"
 
 function Inicio() {
 
@@ -52,7 +53,7 @@ function Inicio() {
 
             <header className={Styled.header}>
                 <Link to="/" className={Styled.container_logo}>
-                    <img src="/src/assets/logo.svg" alt="logo" />
+                    <img src={logo} alt="logo" />
                     <p>Fabiano Pereira</p>
                 </Link>
                 <nav className={Styled.nav}>
