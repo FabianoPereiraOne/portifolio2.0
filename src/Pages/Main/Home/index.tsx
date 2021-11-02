@@ -52,7 +52,7 @@ function Inicio() {
 
             <header className={Styled.header}>
                 <Link to="/" className={Styled.container_logo}>
-                    <img src="/assets/logo.svg" alt="logo" />
+                    <img src="/src/assets/logo.svg" alt="logo" />
                     <p>Fabiano Pereira</p>
                 </Link>
                 <nav className={Styled.nav}>
