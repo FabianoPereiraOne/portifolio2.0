@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
-import * as Types from '../types/contextTypes'
 import { ProjectProps } from '../types/ProjectProps'
+import * as Types from '../types/contextTypes'
 const happy = "https://firebasestorage.googleapis.com/v0/b/portfolio-87cf8.appspot.com/o/Testes%2Fhappy.png?alt=media&token=c3be9831-eccf-477d-824c-95a53e3043c2"
 const onePage = "https://firebasestorage.googleapis.com/v0/b/portfolio-87cf8.appspot.com/o/Testes%2FonePage.png?alt=media&token=52673bd9-1446-4674-a8bd-33dc9a6982ca"
 const quark = "https://firebasestorage.googleapis.com/v0/b/portfolio-87cf8.appspot.com/o/Testes%2Fquark.png?alt=media&token=dd85fcdf-639c-4834-990c-0261c8f06d04"
