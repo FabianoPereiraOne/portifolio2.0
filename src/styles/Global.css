@@ -1,52 +1,63 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-:root{
---blue-light: #2C9DDB;
---blue-normal: #1484C1;
---blue-dark: #006DA8;
---gray-light: #DDDDDD;
---gray-normal: #7C7B7B;
---gray-dark: #635959;
---black-light: #403C3A;
---black-normal: #25201E;
---black-dark: #0D0A09;
---orange-light: #DB8F2C;
---orange-normal: #C27613;
---orange-dark: #A85F00;
---white-light: #FFFEFE;
---white-normal: #F3F2F2;
+:root {
+  --blue-light: #2c9ddb;
+  --blue-normal: #1484c1;
+  --blue-dark: #006da8;
+  --gray-light: #dddddd;
+  --gray-normal: #7c7b7b;
+  --gray-dark: #635959;
+  --black-light: #403c3a;
+  --black-normal: #25201e;
+  --black-dark: #0d0a09;
+  --orange-light: #eb9a31;
+  --orange-normal: #c27613;
+  --orange-dark: #a85f00;
+  --white-light: #fffefe;
+  --white-normal: #f3f2f2;
 
---gradient-orange: linear-gradient(90deg, rgba(219,143,44,1)
-0%, rgba(194,118,19,1) 35%, rgba(168,95,0,1) 100%);
---gradient-blue:linear-gradient(90deg, rgba(44,157,219,1
-) 0%, rgba(20,132,193,1) 35%, rgba(0,109,168,1) 100%);
+  --gradient-orange: linear-gradient(
+    90deg,
+    rgba(219, 143, 44, 1) 0%,
+    rgba(194, 118, 19, 1) 35%,
+    rgba(168, 95, 0, 1) 100%
+  );
+  --gradient-blue: linear-gradient(
+    90deg,
+    rgba(44, 157, 219, 1) 0%,
+    rgba(20, 132, 193, 1) 35%,
+    rgba(0, 109, 168, 1) 100%
+  );
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
+  cursor: pointer;
 }
 
-button{
-    outline: none;
-    cursor: pointer;
+button {
+  outline: none;
+  cursor: pointer;
 }
 
-li{
-    list-style: none;
+li {
+  list-style: none;
 }
-@media screen and (min-width: 601px) and (max-width: 768px){
-    html,body{
-        font-size: 93.75%;
-    }
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  html,
+  body {
+    font-size: 93.75%;
+  }
 }
 
-@media screen and (max-width: 600px){
-    html,body{
-        font-size: 87.5%;
-    }
+@media screen and (max-width: 600px) {
+  html,
+  body {
+    font-size: 87.5%;
+  }
 }

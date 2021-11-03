@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
+import * as Scroll from 'react-scroll'
 import Styled from './home.module.css'
+import logo from "../../../assets/logo.svg"
 import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { ProgressBar, ButtonPrimary } from '../../../Components/Global'
-import logo from "../../../assets/logo.svg"
-import * as Scroll from 'react-scroll'
+import { useState, useEffect } from 'react'
 
 function Inicio() {
 
     const [progress, setProgress] = useState(0)
     const [toggleMenu, setToggleMenu] = useState(false)
 
-    function handleScroll(progress: number, pos: number) {
+    function handleScroll(progress: number) {
         setProgress(progress)
     }
 
@@ -58,10 +58,10 @@ function Inicio() {
                     <p>Fabiano Pereira</p>
                 </Link>
                 <nav className={Styled.nav}>
-                    <Scroll.Link onClick={() => handleScroll(0, 0)} to="inicio" smooth={true}>Inicio</Scroll.Link>
-                    <Scroll.Link onClick={() => handleScroll(19, 0)} to="sobre" smooth={true}>Sobre</Scroll.Link>
-                    <Scroll.Link onClick={() => handleScroll(49, 0)} to="habilidades" smooth={true}>Habilidades</Scroll.Link>
-                    <Scroll.Link onClick={() => handleScroll(82.6, 0)} to="projetos" smooth={true}>Projetos</Scroll.Link>
+                    <Scroll.Link onClick={() => handleScroll(0)} to="inicio" smooth={true}>Inicio</Scroll.Link>
+                    <Scroll.Link onClick={() => handleScroll(19)} to="sobre" smooth={true}>Sobre</Scroll.Link>
+                    <Scroll.Link onClick={() => handleScroll(49)} to="habilidades" smooth={true}>Habilidades</Scroll.Link>
+                    <Scroll.Link onClick={() => handleScroll(82.6)} to="projetos" smooth={true}>Projetos</Scroll.Link>
                     <span className={Styled.progress_bar}>
                         <ProgressBar progressValue={progress} />
                     </span>
@@ -94,9 +94,9 @@ function Inicio() {
                     <span style={{ '--delay': 19 } as React.CSSProperties}>n</span>
                     <span style={{ '--delay': 20 } as React.CSSProperties}>d</span>    |</p>
                 <div className={Styled.btn_group}>
-                    <ButtonPrimary>
+                    <Scroll.Link to="sobre" smooth>
                         Sobre
-                    </ButtonPrimary>
+                    </Scroll.Link>
                     <ButtonPrimary>
                         Download Cv
                     </ButtonPrimary>
