@@ -1,11 +1,11 @@
+import * as FI from 'react-icons/fi'
 import Project from '../../../Components/Project'
 import styles from './projects.module.css'
 import Title from '../../../Components/Title'
+import 'glider-js/glider.min.css';
+import Glider, { GliderMethods } from 'react-glider'
 import { FeaturedProject } from '../../../Components/Global'
 import { usePortfolioContext } from '../../../contexts'
-import * as FI from 'react-icons/fi'
-import Glider, { GliderMethods } from 'react-glider'
-import 'glider-js/glider.min.css';
 import { useEffect, useRef } from 'react'
 
 
@@ -26,7 +26,7 @@ function Projects() {
 
   return (
     <section className={styles.content_projects} id="projetos">
-      <Title title="Projetos" subTitle="Veja soluções já desenvolvidas" />
+      <Title title="Projetos" subTitle="Veja soluções já desenvolvidas." />
       <section className={styles.group_projects}>
         <FeaturedProject className={styles.bannerFeatured} image={projectActive.image}>
           <article className={styles.badFeatured}>
