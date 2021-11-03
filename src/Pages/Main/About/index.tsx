@@ -5,9 +5,9 @@ import Title from '../../../Components/Title'
 function About() {
     return (
         <main className={Styled.content_about} id="sobre">
-            <Title title="Sobre mim" subTitle="Um resumo sobre mim"/>
+            <Title title="Sobre mim" subTitle="Um breve resumo" />
             <article className={Styled.about}>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <p>Me chamo Fabiano Pereira, sou Desenvolvedor Web a quase dois anos, comecei com python mais migrei para Javascript e atualmente as tecnologias que utilizo são: Javascript, Bootstrap, React JS, Typescript, Next JS e Versionamento de código( Git ). Sou esforçado em cumprir minhas metas e  atualmente moro em Minas Gerais. Os trabalhos que costumo fazer são a criação de landing pages para jovens da DSB e afiliados da Hotmart, Eduzz e Monetizze. Também tenho desenvolvido projetos pessoais incríveis e busco a cada dia evoluir mais como <strong>#DEV</strong>.</p>
                 <ButtonPrimary>
                     Download Cv
                 </ButtonPrimary>

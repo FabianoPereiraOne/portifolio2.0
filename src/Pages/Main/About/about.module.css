@@ -12,7 +12,8 @@
 
 .content_about .about {
   width: 90%;
-  height: 80vh;
+  min-height: 80vh;
+  max-width: 1500px;
 
   display: flex;
   flex-direction: column;
@@ -25,17 +26,17 @@
   background-size: 30rem;
 }
 
-.content_about .about strong {
-  margin-top: 1rem;
-  font-size: 2rem;
-  color: var(--black-light);
-  text-transform: uppercase;
-}
-
 .content_about .about p {
   margin-top: 0.5rem;
   color: var(--gray-dark);
   max-width: 50%;
+  text-align: justify;
+  font-size: 1.2rem;
+}
+
+.content_about .about p strong {
+  font-size: 1.2rem;
+  color: var(--orange-light);
 }
 
 .content_about .about button {
@@ -43,6 +44,12 @@
 }
 
 @media screen and (min-width: 601px) and (max-width: 1200px) {
+  .content_about {
+    background: url(../../../assets/foto.png);
+    background-position: 90% 3rem;
+    background-repeat: no-repeat;
+    background-size: 10rem;
+  }
   .content_about .about {
     background: none;
   }
@@ -51,7 +58,7 @@
   }
   .content_about .about p {
     max-width: 80%;
-    text-align: center;
+    margin-top: 2rem;
   }
   .content_about .about button {
     margin-top: 4rem;
@@ -60,7 +67,8 @@
 
 @media screen and (max-width: 601px) {
   .content_about {
-    padding: 0 1rem;
+    background: none;
+    padding: 1rem;
   }
 
   .content_about .about {
@@ -81,8 +89,7 @@
 
   .content_about .about p {
     max-width: 100%;
-    text-align: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
   .content_about .about button {
     margin-top: 4rem;
