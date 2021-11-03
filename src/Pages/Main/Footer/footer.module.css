@@ -8,6 +8,7 @@
     padding: 1rem 4rem;
     background-color: var(--black-normal);
     flex-wrap: wrap;
+    overflow-x: hidden;
 }
 
 .content_footer .menu_links{
@@ -145,7 +146,7 @@
 
 @media screen and (max-width: 300px){
     .content_footer{
-        padding: 1rem 2rem;
+        padding: 3rem 2rem;
         gap: 1rem;
     }
 
@@ -178,5 +179,6 @@
 
     .content_footer .group_copy span{
         font-size: 0.9rem;
+        text-align: center;
     }
 }
