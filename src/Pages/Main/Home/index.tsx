@@ -4,21 +4,20 @@ import logo from "../../../assets/logo.svg"
 import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { ProgressBar, ButtonPrimary } from '../../../Components/Global'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function Inicio() {
-
     const [progress, setProgress] = useState(0)
     const [toggleMenu, setToggleMenu] = useState(false)
+    const textAnimationUpRef = useRef<HTMLParagraphElement>(null)
 
     function handleScroll(progress: number) {
         setProgress(progress)
     }
 
     function toggleAnimationCss() {
-        const textUp = document.querySelector('#textUp')
-        if (textUp) {
-            textUp.classList.toggle('home_text_up__8bs_B')
+        if (textAnimationUpRef.current !== null) {
+            textAnimationUpRef.current.classList.toggle(Styled.text_up)
         }
     }
 
@@ -73,8 +72,8 @@ function Inicio() {
             </header>
             <section className={Styled.section_banner_default}>
                 <h1>Fabiano Pereira</h1>
-                <p id="textUp" className={Styled.text_up}>|  <span style={{ '--delay': 0 } as React.CSSProperties}>D</span>
-                    <span className={Styled.text_up} style={{ '--delay': 1 } as React.CSSProperties}>e</span>
+                <p ref={textAnimationUpRef} className={Styled.text_up}>|  <span style={{ '--delay': 0 } as React.CSSProperties}>D</span>
+                    <span style={{ '--delay': 1 } as React.CSSProperties}>e</span>
                     <span style={{ '--delay': 2 } as React.CSSProperties}>s</span>
                     <span style={{ '--delay': 3 } as React.CSSProperties}>e</span>
                     <span style={{ '--delay': 4 } as React.CSSProperties}>n</span>
