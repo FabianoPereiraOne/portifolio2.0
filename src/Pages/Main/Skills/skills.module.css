@@ -21,6 +21,10 @@
     margin-top: 5rem;
 }
 
+.content_skills .content_progress_skills .skill_group{
+    width: 15rem;
+}
+
 .content_skills .content_progress_skills .skill_group p{
     text-transform: uppercase;
     font-weight: 500;
@@ -32,5 +36,9 @@
 @media screen and (max-width: 601px){
     .content_skills{
         padding: 3rem 0;
+    }
+
+    .content_skills .content_progress_skills .skill_group{
+        width: 80%;
     }
 }

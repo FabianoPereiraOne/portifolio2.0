@@ -190,6 +190,15 @@
   #btnNext {
     right: -2.5rem;
   }
+
+  .container_empty {
+    width: 80%;
+    height: 20rem;
+  }
+
+  .container_empty p {
+    font-size: 1.2rem;
+  }
 }
 
 @media screen and (max-width: 450px) {

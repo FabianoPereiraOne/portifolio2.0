@@ -1,0 +1,34 @@
+.container_empty {
+  width: 30rem;
+  height: 30rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container_empty img {
+  max-width: 100%;
+  width: 25rem;
+  height: 25rem;
+}
+
+.container_empty p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--black-light);
+  text-align: center;
+  margin-top: -4rem;
+}
+
+@media screen and (max-width: 600px) {
+  .container_empty {
+    width: 80%;
+    height: 20rem;
+  }
+
+  .container_empty p {
+    font-size: 1.2rem;
+  }
+}

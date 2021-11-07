@@ -1,61 +1,30 @@
-import { ContainerProgressBar, SkillProgressBar } from '../../../Components/Global'
 import Styled from './skills.module.css'
 import Title from '../../../Components/Title'
+import { ContainerProgressBar, SkillProgressBar } from '../../../Components/Global'
+import { usePortfolioContext } from '../../../contexts'
+import { Empty } from '../../../Components/Empty'
 
 function Skills() {
+    const useContext = usePortfolioContext()
+
     return (
         <section className={Styled.content_skills} id="habilidades">
-            <Title title="Habilidades" subTitle="Principais tecnologias utilizadas."/>
-            <div className={Styled.content_progress_skills}>
-                <div className={Styled.skill_group}>
-                    <p>HTML 5</p>
-                    <ContainerProgressBar className={Styled.content_progress}>
-                        <SkillProgressBar value={70} className={Styled.progress} />
-                    </ContainerProgressBar>
+            <Title title="Habilidades" subTitle="Principais tecnologias utilizadas." />
+            {useContext.skills.length > 0 ? (
+                <div className={Styled.content_progress_skills}>
+                    {useContext.skills.length > 0 && useContext.skills.map((skill, index) => {
+                        return (
+                            <div key={index.toString()} className={Styled.skill_group}>
+                                <p>{skill.name}</p>
+                                <ContainerProgressBar className={Styled.content_progress}>
+                                    <SkillProgressBar value={skill.value} className={Styled.progress} />
+                                </ContainerProgressBar>
+                            </div>
+                        )
+                    })}
                 </div>
-                <div className={Styled.skill_group}>
-                    <p>CSS 3</p>
-                    <ContainerProgressBar className={Styled.content_progress}>
-                        <SkillProgressBar value={70} className={Styled.progress} />
-                    </ContainerProgressBar>
-                </div>
-                <div className={Styled.skill_group}>
-                    <p>Javascript</p>
-                    <ContainerProgressBar className={Styled.content_progress}>
-                        <SkillProgressBar value={70} className={Styled.progress} />
-                    </ContainerProgressBar>
-                </div>
-                <div className={Styled.skill_group}>
-                    <p>Bootstrap</p>
-                    <ContainerProgressBar className={Styled.content_progress}>
-                        <SkillProgressBar value={50} className={Styled.progress} />
-                    </ContainerProgressBar>
-                </div>
-                <div className={Styled.skill_group}>
-                    <p>React Js</p>
-                    <ContainerProgressBar className={Styled.content_progress}>
-                        <SkillProgressBar value={70} className={Styled.progress} />
-                    </ContainerProgressBar>
-                </div>
-                <div className={Styled.skill_group}>
-                    <p>TypeScript</p>
-                    <ContainerProgressBar className={Styled.content_progress}>
-                        <SkillProgressBar value={30} className={Styled.progress} />
-                    </ContainerProgressBar>
-                </div>
-                <div className={Styled.skill_group}>
-                    <p>Next JS</p>
-                    <ContainerProgressBar className={Styled.content_progress}>
-                        <SkillProgressBar value={10} className={Styled.progress} />
-                    </ContainerProgressBar>
-                </div>
-                <div className={Styled.skill_group}>
-                    <p>Git</p>
-                    <ContainerProgressBar className={Styled.content_progress}>
-                        <SkillProgressBar value={60} className={Styled.progress} />
-                    </ContainerProgressBar>
-                </div>
-            </div>
+
+            ) : <Empty message="Nenhuma habilidade disponivel." />}
         </section>
     )
 }

@@ -1,6 +1,7 @@
 export type ProjectProps = {
     name: string,
-    image: string,
+    imageSmall: string,
+    imageLarge: string,
     link: string,
     description: string,
     isActive: boolean,

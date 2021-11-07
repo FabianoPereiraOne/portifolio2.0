@@ -40,11 +40,12 @@ export const ButtonPrimary = styled.button`
 `
 
 export const ContainerProgressBar = styled.div`
-width: 15rem;
+width: 100%;
 height: 1rem;
 background-color: var(--white-normal);
 border-radius: 2rem;
 display: inline-block;
+
 `
 
 export const SkillProgressBar = styled.div<SkillProgressBarProps>`

@@ -1,100 +1,98 @@
 import { createContext, useContext, useState } from 'react'
 import { ProjectProps } from '../types/ProjectProps'
 import * as Types from '../types/contextTypes'
-const happy = "https://firebasestorage.googleapis.com/v0/b/portfolio-87cf8.appspot.com/o/Testes%2Fhappy.png?alt=media&token=c3be9831-eccf-477d-824c-95a53e3043c2"
-const onePage = "https://firebasestorage.googleapis.com/v0/b/portfolio-87cf8.appspot.com/o/Testes%2FonePage.png?alt=media&token=52673bd9-1446-4674-a8bd-33dc9a6982ca"
-const quark = "https://firebasestorage.googleapis.com/v0/b/portfolio-87cf8.appspot.com/o/Testes%2Fquark.png?alt=media&token=dd85fcdf-639c-4834-990c-0261c8f06d04"
-const podcastr = "https://firebasestorage.googleapis.com/v0/b/portfolio-87cf8.appspot.com/o/Testes%2Fpodcastr.png?alt=media&token=c908c7f0-f4ab-4805-8c8d-c1a09f180fa8"
-const google_glass = "https://firebasestorage.googleapis.com/v0/b/portfolio-87cf8.appspot.com/o/Testes%2Fgoogle-glass.png?alt=media&token=4df17149-3869-469a-94b6-66ec48115e91"
+import * as Datas from '../data'
 
 
 export const PortfolioContext = createContext({} as Types.PortfolioContextTypes)
 
 export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) => {
-    const [projects, setProjects] = useState<ProjectProps[]>([
-        {
-            name: 'Happy',
-            image: happy,
-            link: '',
-            description: '',
-            isActive: false,
-            id: 'fsfdbsfdsbfbusb'
-        },
-        {
-            name: 'OnePage',
-            image: onePage,
-            link: '',
-            description: '',
-            isActive: false,
-            id: 'fsfdbfffdfsfdsbfbusb'
-        },
-        {
-            name: 'Quark',
-            image: quark,
-            link: '',
-            description: '',
-            isActive: false,
-            id: 'fsfdbsfjjjjdsbfbusb'
-        },
-        {
-            name: 'Happy',
-            image: happy,
-            link: '',
-            description: '',
-            isActive: false,
-            id: '4dsfdfds4d'
-        },
-        {
-            name: 'OnePage',
-            image: onePage,
-            link: '',
-            description: '',
-            isActive: false,
-            id: '54fdsfsfdsfd'
-        },
-        {
-            name: 'Quark',
-            image: quark,
-            link: '',
-            description: '',
-            isActive: false,
-            id: 'dsfdsfhyrewew'
-        },
-        {
-            name: 'Podcastr',
-            image: podcastr,
-            link: 'https://www.youtube.com.br',
-            description: 'Next JS, TypeScript, Javascript',
-            isActive: true,
-            id: 'fsfdbsfdsdsfds8bfbusb'
-        },
-        {
-            name: 'Google Glass',
-            image: google_glass,
-            link: '',
-            description: '',
-            isActive: false,
-            id: 'edsafgfdcacdsac'
-        },
-        {
-            name: 'Google Glass',
-            image: google_glass,
-            link: '',
-            description: '',
-            isActive: false,
-            id: '54848dsaadsad'
-        },
-        {
-            name: 'Google Glass',
-            image: podcastr,
-            link: '',
-            description: '',
-            isActive: false,
-            id: 'fsdfdsfsfd'
-        }
-    ])
+    const [projects, setProjects] = useState<ProjectProps[]>([{
+        id: '1',
+        description: 'Javascript',
+        imageSmall: Datas.GoogleGlass.imageSmall,
+        imageLarge: Datas.GoogleGlass.imageLarge,
+        name: 'Google Glass',
+        isActive: false,
+        link: 'https://google-glass-fabianopereiraone.vercel.app/'
+    }, {
+        id: '2',
+        description: 'Javascript e Next JS',
+        imageSmall: Datas.PodCastr.imageSmall,
+        imageLarge: Datas.PodCastr.imageLarge,
+        name: 'Podcastr',
+        isActive: true,
+        link: 'https://podcastr-fabianopereiraone.vercel.app/'
+    }, {
+        id: '3',
+        description: 'Javascript e Bootstrap',
+        imageSmall: Datas.OnePage.imageSmall,
+        imageLarge: Datas.OnePage.imageLarge,
+        name: 'OnePage',
+        isActive: false,
+        link: 'https://one-page-fabianopereiraone.vercel.app/'
+    }, {
+        id: '4',
+        description: 'Javascript e React JS',
+        imageSmall: Datas.LandingPage.imageSmall,
+        imageLarge: Datas.LandingPage.imageLarge,
+        name: 'Landing Page',
+        isActive: false,
+        link: 'https://www.psicologojosemaria.com.br/'
+    }, {
+        id: '5',
+        description: 'Javascript e React JS',
+        imageSmall: Datas.Dashboard.imageSmall,
+        imageLarge: Datas.Dashboard.imageLarge,
+        name: 'Dashboard',
+        isActive: false,
+        link: 'https://dashboard-fabianopereiraone.vercel.app/'
+    }, {
+        id: '6',
+        description: 'Javascript e React JS',
+        imageSmall: Datas.BlogXis.imageSmall,
+        imageLarge: Datas.BlogXis.imageLarge,
+        name: 'Blog Xis',
+        isActive: false,
+        link: 'https://anapolispsicologia.com/projetoxis/'
+    }, {
+        id: '7',
+        description: 'Javascript',
+        imageSmall: Datas.HotelParaiso.imageSmall,
+        imageLarge: Datas.HotelParaiso.imageLarge,
+        name: 'Hotel Paraiso',
+        isActive: false,
+        link: 'https://hotel-paraiso-fabianopereiraone.vercel.app/'
+    }])
+    // eslint-disable-next-line
+    const [skills, setSkills] = useState<Types.SkillsTypes[]>([{
+        name: 'Html 5',
+        value: 80
+    }, {
+        name: 'Css 3',
+        value: 60
+    }, {
+        name: 'Javascript',
+        value: 60
+    }, {
+        name: 'React JS',
+        value: 70
+    }, {
+        name: 'Bootstrap 4',
+        value: 80
+    }, {
+        name: 'Typescript',
+        value: 50
+    }, {
+        name: 'Next JS',
+        value: 30
+    }, {
+        name: 'Git',
+        value: 50
+    }])
     // eslint-disable-next-line
     const [projectWidth, setProjectWidth] = useState<number>(0)
+    const [projectActive, setProjectActive ] =useState<ProjectProps>({} as ProjectProps)
 
     const handleActiveProjectFromCarousel = (project: ProjectProps) => {
         const resultRemoveProjectActive = handleRemoveProjectActive()
@@ -107,7 +105,8 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             if (project.isActive) {
                 return {
                     name: project.name,
-                    image: project.image,
+                    imageSmall: project.imageSmall,
+                    imageLarge: project.imageLarge,
                     link: project.link,
                     description: project.description,
                     isActive: false,
@@ -124,12 +123,14 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
     const handleAddProjectActive = (list: ProjectProps[], newProject: ProjectProps) => {
         const newListProjects = list.map((project) => {
             if (project.id.includes(newProject.id)) {
+                setProjectActive(project)
                 return {
                     name: project.name,
-                    image: project.image,
+                    imageSmall: project.imageSmall,
+                    imageLarge: project.imageLarge,
                     link: project.link,
                     description: project.description,
-                    isActive: true,
+                    isActive: false,
                     id: project.id
                 }
             } else {
@@ -140,30 +141,21 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
         return newListProjects
     }
 
-    const handleGetActive = (Array: ProjectProps[]) => {
-
-        let activeElement = {
-            name: '',
-            image: '',
-            link: '',
-            description: '',
-            isActive: false,
-            id: ''
-        }
-
-        Array.forEach((project) => {
+    const handleGetActive = () => {
+        projects.forEach((project) => {
             if (project.isActive) {
-                activeElement = project
+                setProjectActive(project)
             }
         })
 
-        return activeElement
     }
 
     return (
         <PortfolioContext.Provider value={{
             projects,
             projectWidth,
+            skills,
+            projectActive,
             handleActiveProjectFromCarousel,
             handleGetActive
         }}>
