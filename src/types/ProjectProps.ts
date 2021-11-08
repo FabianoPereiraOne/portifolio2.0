@@ -2,8 +2,8 @@ export type ProjectProps = {
     name: string,
     imageSmall: string,
     imageLarge: string,
-    link: string,
     description: string,
+    skills: string,
     isActive: boolean,
     id: string
 }

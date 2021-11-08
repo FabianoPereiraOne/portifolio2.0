@@ -8,6 +8,7 @@ import { FeaturedProject } from '../../../Components/Global'
 import { usePortfolioContext } from '../../../contexts'
 import { useEffect, useRef } from 'react'
 import { Empty } from '../../../Components/Empty';
+import { Link } from 'react-router-dom'
 
 
 function Projects() {
@@ -35,9 +36,9 @@ function Projects() {
             <article className={styles.badFeatured}>
               <div className={styles.content_title}>
                 <h3>{useContext.projectActive.name}</h3>
-                <p>{useContext.projectActive.description}</p>
+                <p>{useContext.projectActive.skills}</p>
               </div>
-              <a rel="noreferrer" target="_blank" href={useContext.projectActive.link}>Saiba mais</a>
+              <Link to="/#">Saiba mais</Link>
             </article>
           </FeaturedProject>
 

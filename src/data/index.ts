@@ -12,6 +12,10 @@ import onePageLarge from '../assets/one-page-large.png'
 import onePageSmall from '../assets/one-page-small.png'
 import podcastrLarge from '../assets/podcastr-large.png'
 import podcastrSmall from '../assets/podcastr-small.png'
+import happyLarge from '../assets/happy-large.png'
+import happySmall from '../assets/happy-small.png'
+import quarkLarge from '../assets/quark-large.png'
+import quarkSmall from '../assets/quark-small.png'
 
 export const BlogXis = {
     imageSmall: blogXisSmall,
@@ -40,4 +44,12 @@ export const OnePage = {
 export const PodCastr = {
     imageSmall: podcastrSmall,
     imageLarge: podcastrLarge,
+}
+export const Happy = {
+    imageSmall: happySmall,
+    imageLarge: happyLarge,
+}
+export const Quark = {
+    imageSmall: quarkSmall,
+    imageLarge: quarkLarge,
 }

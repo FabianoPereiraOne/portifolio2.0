@@ -9,60 +9,76 @@ export const PortfolioContext = createContext({} as Types.PortfolioContextTypes)
 export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) => {
     const [projects, setProjects] = useState<ProjectProps[]>([{
         id: '1',
-        description: 'Javascript',
+        skills: 'Javascript',
+        description: '',
         imageSmall: Datas.GoogleGlass.imageSmall,
         imageLarge: Datas.GoogleGlass.imageLarge,
         name: 'Google Glass',
         isActive: false,
-        link: 'https://google-glass-fabianopereiraone.vercel.app/'
     }, {
         id: '2',
-        description: 'Javascript e Next JS',
+        skills: 'Javascript e Next JS',
+        description: '',
         imageSmall: Datas.PodCastr.imageSmall,
         imageLarge: Datas.PodCastr.imageLarge,
         name: 'Podcastr',
         isActive: true,
-        link: 'https://podcastr-fabianopereiraone.vercel.app/'
     }, {
         id: '3',
-        description: 'Javascript e Bootstrap',
+        skills: 'Javascript e Bootstrap',
+        description: '',
         imageSmall: Datas.OnePage.imageSmall,
         imageLarge: Datas.OnePage.imageLarge,
         name: 'OnePage',
         isActive: false,
-        link: 'https://one-page-fabianopereiraone.vercel.app/'
     }, {
         id: '4',
-        description: 'Javascript e React JS',
+        skills: 'Javascript e React JS',
+        description: '',
         imageSmall: Datas.LandingPage.imageSmall,
         imageLarge: Datas.LandingPage.imageLarge,
         name: 'Landing Page',
         isActive: false,
-        link: 'https://www.psicologojosemaria.com.br/'
     }, {
         id: '5',
-        description: 'Javascript e React JS',
+        skills: 'Javascript e Bootstrap',
+        description: '',
         imageSmall: Datas.Dashboard.imageSmall,
         imageLarge: Datas.Dashboard.imageLarge,
         name: 'Dashboard',
         isActive: false,
-        link: 'https://dashboard-fabianopereiraone.vercel.app/'
     }, {
         id: '6',
+        skills: '',
         description: 'Javascript e React JS',
         imageSmall: Datas.BlogXis.imageSmall,
         imageLarge: Datas.BlogXis.imageLarge,
         name: 'Blog Xis',
         isActive: false,
-        link: 'https://anapolispsicologia.com/projetoxis/'
     }, {
         id: '7',
-        description: 'Javascript',
+        skills: 'Javascript',
+        description: '',
         imageSmall: Datas.HotelParaiso.imageSmall,
         imageLarge: Datas.HotelParaiso.imageLarge,
         name: 'Hotel Paraiso',
         isActive: false,
-        link: 'https://hotel-paraiso-fabianopereiraone.vercel.app/'
+    }, {
+        id: '8',
+        skills: 'Node JS',
+        description: '',
+        imageSmall: Datas.Happy.imageSmall,
+        imageLarge: Datas.Happy.imageLarge,
+        name: 'Happy',
+        isActive: false,
+    }, {
+        id: '9',
+        skills: 'Javascript e React JS',
+        description: '',
+        imageSmall: Datas.Quark.imageSmall,
+        imageLarge: Datas.Quark.imageLarge,
+        name: 'Quark Atendimentos',
+        isActive: false,
     }])
     // eslint-disable-next-line
     const [skills, setSkills] = useState<Types.SkillsTypes[]>([{
@@ -107,8 +123,8 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
                     name: project.name,
                     imageSmall: project.imageSmall,
                     imageLarge: project.imageLarge,
-                    link: project.link,
                     description: project.description,
+                    skills: project.skills,
                     isActive: false,
                     id: project.id
                 }
@@ -128,9 +144,9 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
                     name: project.name,
                     imageSmall: project.imageSmall,
                     imageLarge: project.imageLarge,
-                    link: project.link,
                     description: project.description,
                     isActive: false,
+                    skills: project.skills,
                     id: project.id
                 }
             } else {
