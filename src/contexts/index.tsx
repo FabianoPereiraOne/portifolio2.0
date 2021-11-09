@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import { ProjectProps } from '../types/ProjectProps'
+import {getAuth,signInWithEmailAndPassword } from 'firebase/auth'
 import * as Types from '../types/contextTypes'
 import * as Datas from '../data'
 
@@ -108,6 +109,7 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
     }])
     // eslint-disable-next-line
     const [projectWidth, setProjectWidth] = useState<number>(0)
+    const [signed, setSigned] = useState<boolean>(false)
     const [projectActive, setProjectActive ] =useState<ProjectProps>({} as ProjectProps)
 
     const handleActiveProjectFromCarousel = (project: ProjectProps) => {
@@ -166,14 +168,26 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
 
     }
 
+    const handleSigin =  (email:string, password:string) => {
+        signInWithEmailAndPassword(getAuth(), email, password)
+        .then(()=>{
+            alert('up')
+        })
+        .catch((error)=>{
+            console.log(error.code)
+        })
+    }
+
     return (
         <PortfolioContext.Provider value={{
             projects,
             projectWidth,
             skills,
             projectActive,
+            signed,
             handleActiveProjectFromCarousel,
-            handleGetActive
+            handleGetActive,
+            handleSigin
         }}>
             {children}
         </PortfolioContext.Provider>

@@ -1,22 +1,29 @@
 import { Route, Redirect } from 'react-router-dom'
+import { usePortfolioContext } from '../contexts'
 
 type Props = {
     component: any,
     isPrivate: boolean,
     exact: boolean,
     path: string,
+    lockRepeatLogin?: boolean
 }
 
 function Router({
     component: Component,
     isPrivate,
+    lockRepeatLogin,
     ...rest
 }:Props){
+    const useContext = usePortfolioContext()
 
-    const signed = false
 
-    if(!signed && isPrivate){
-        return <Redirect to="/private/login"/>
+    if(!useContext.signed && isPrivate){
+        return <Redirect to="/login"/>
+    }
+
+    if(lockRepeatLogin && useContext.signed){
+        return <Redirect to="/dashboard"/>
     }
 
     return(

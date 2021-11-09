@@ -5,8 +5,10 @@ export type PortfolioContextTypes = {
     projectWidth: number;
     skills: SkillsTypes[];
     projectActive: ProjectProps;
+    signed: boolean;
     handleActiveProjectFromCarousel: ( project:ProjectProps )=> void;
     handleGetActive:()=> void;
+    handleSigin: (email:string, password:string)=> void;
 }
 
 export type portfolioProviderTypes = {
