@@ -7,7 +7,9 @@ function About() {
         <main className={Styled.content_about} id="sobre">
             <Title title="Sobre mim" subTitle="Um breve resumo." />
             <article className={Styled.about}>
-                <p>Me chamo Fabiano Pereira, sou Desenvolvedor Web a quase dois anos, comecei com python mais migrei para Javascript e atualmente as tecnologias que utilizo são: Javascript, Bootstrap, React JS, Typescript, Next JS e Versionamento de código( Git ). Sou esforçado em cumprir minhas metas e  atualmente moro em Minas Gerais. Os trabalhos que costumo fazer são a criação de landing pages para jovens da DSB e afiliados da Hotmart, Eduzz e Monetizze. Também tenho desenvolvido projetos pessoais incríveis e busco a cada dia evoluir mais como <strong>#DEV</strong>.</p>
+                <p>Sou Fabiano Pereira, trabalho como Developer FrontEnd meu diferencial é que sou esforçado e atento ao que me foi proposto, tenho experiencia na criação de Landing Pages, Dashboards, Websites e Sistemas intermediários, bastante solicitados por afiliados de hotmart, eduzz e monetizze. Meu principal foco é em melhorar a entrega dos Websites e Sistemas com a inclusão do modelo clean code, melhor segurança e um site mais adaptável aos diversos dispositivos existentes.
+
+                <cite>A arte de programar consiste na arte de organizar e dominar a complexidade".</cite><i>Dijkstra</i></p>
                 <ButtonPrimary>
                     Download Cv
                 </ButtonPrimary>
