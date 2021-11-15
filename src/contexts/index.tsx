@@ -109,6 +109,7 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
     }])
     // eslint-disable-next-line
     const [projectWidth, setProjectWidth] = useState<number>(0)
+    // eslint-disable-next-line
     const [signed, setSigned] = useState<boolean>(false)
     const [projectActive, setProjectActive ] =useState<ProjectProps>({} as ProjectProps)
 
