@@ -1,8 +1,9 @@
 import { createContext, useContext, useState } from 'react'
 import { ProjectProps } from '../types/ProjectProps'
-import {getAuth,signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import * as Types from '../types/contextTypes'
 import * as Datas from '../data'
+import { toast } from 'react-toastify'
 
 
 export const PortfolioContext = createContext({} as Types.PortfolioContextTypes)
@@ -111,7 +112,7 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
     const [projectWidth, setProjectWidth] = useState<number>(0)
     // eslint-disable-next-line
     const [signed, setSigned] = useState<boolean>(false)
-    const [projectActive, setProjectActive ] =useState<ProjectProps>({} as ProjectProps)
+    const [projectActive, setProjectActive] = useState<ProjectProps>({} as ProjectProps)
 
     const handleActiveProjectFromCarousel = (project: ProjectProps) => {
         const resultRemoveProjectActive = handleRemoveProjectActive()
@@ -169,14 +170,15 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
 
     }
 
-    const handleSigin =  (email:string, password:string) => {
+    const handleSigin = (email: string, password: string) => {
         signInWithEmailAndPassword(getAuth(), email, password)
-        .then(()=>{
-            alert('up')
-        })
-        .catch((error)=>{
-            console.log(error.code)
-        })
+            .then(() => {
+                toast.error("Logado com sucesso")
+            })
+            .catch((error) => {
+                console.log(error)
+                toast.error("Acesso negado.")
+            })
     }
 
     return (
