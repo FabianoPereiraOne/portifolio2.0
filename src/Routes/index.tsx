@@ -1,8 +1,8 @@
 import { BrowserRouter, Switch } from 'react-router-dom'
 import { Login } from '../Pages/Login'
-import { Dashboard } from '../data'
-import Router from './Router'
+import { Dashboard } from '../Pages/Dashboard'
 import Main from '../Pages/Main'
+import Router from './Router'
 
 function Routes(){
     return(

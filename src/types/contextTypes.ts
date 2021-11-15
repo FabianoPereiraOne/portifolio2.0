@@ -6,9 +6,11 @@ export type PortfolioContextTypes = {
     skills: SkillsTypes[];
     projectActive: ProjectProps;
     signed: boolean;
+    loading: boolean;
     handleActiveProjectFromCarousel: ( project:ProjectProps )=> void;
     handleGetActive:()=> void;
     handleSigin: (email:string, password:string)=> void;
+    setLoading: (state:boolean)=> void;
 }
 
 export type portfolioProviderTypes = {

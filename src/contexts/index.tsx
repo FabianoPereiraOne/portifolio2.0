@@ -112,6 +112,7 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
     const [projectWidth, setProjectWidth] = useState<number>(0)
     // eslint-disable-next-line
     const [signed, setSigned] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
     const [projectActive, setProjectActive] = useState<ProjectProps>({} as ProjectProps)
 
     const handleActiveProjectFromCarousel = (project: ProjectProps) => {
@@ -173,10 +174,13 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
     const handleSigin = (email: string, password: string) => {
         signInWithEmailAndPassword(getAuth(), email, password)
             .then(() => {
-                toast.error("Logado com sucesso")
+                setLoading(true)
+                setSigned(true)
+                toast.success("Logado com sucesso")
             })
             .catch((error) => {
                 console.log(error)
+                setLoading(false)
                 toast.error("Acesso negado.")
             })
     }
@@ -188,9 +192,11 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             skills,
             projectActive,
             signed,
+            loading,
             handleActiveProjectFromCarousel,
             handleGetActive,
-            handleSigin
+            handleSigin,
+            setLoading,
         }}>
             {children}
         </PortfolioContext.Provider>

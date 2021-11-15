@@ -1,0 +1,124 @@
+.container_login {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--white-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.container_center {
+  max-width: 1200px;
+  width: 70%;
+  height: 35rem;
+  display: flex;
+}
+
+.container_technology {
+  width: 50%;
+  height: 100%;
+  background-color: var(--white-normal);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container_technology img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.form {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blue-normal);
+}
+
+.form h2 {
+  font-size: 2rem;
+  color: var(--white-normal);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.form p {
+  font-size: 1rem;
+  color: var(--white-normal);
+  font-weight: 400;
+  max-width: 50%;
+  text-align: center;
+}
+
+.form input {
+  margin-top: 2rem;
+  width: 80%;
+  height: 3rem;
+  background-color: var(--blue-light);
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  color: var(--white-normal);
+  font-size: 1rem;
+  outline: none;
+}
+
+.form input:focus {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: var(--white-normal);
+}
+
+.form input::-webkit-input-placeholder {
+  color: var(--white-normal);
+}
+
+.form button {
+  margin-top: 2rem;
+  width: 50%;
+  height: 3rem;
+  color: var(--blue-normal);
+  background-color: var(--white-normal);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0.2rem;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.form button:hover {
+  background-color: var(--blue-dark);
+  color: var(--white-normal);
+}
+
+@media screen and (min-width: 601px) and (max-width: 1080px) {
+  .container_technology {
+    display: none;
+  }
+  .form {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 601px) {
+  .container_login {
+    padding: 0.5rem;
+  }
+
+  .container_center {
+    width: 90%;
+  }
+  .container_technology {
+    display: none;
+  }
+  .form {
+    width: 100%;
+  }
+}
