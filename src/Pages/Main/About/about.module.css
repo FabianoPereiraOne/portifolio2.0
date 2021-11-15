@@ -34,6 +34,11 @@
   font-size: 1.2rem;
 }
 
+.content_about .about p  small{
+  margin-left: 0.5rem;
+  color: var(--blue-normal);
+}
+
 .content_about .about p strong {
   font-size: 1.2rem;
   color: var(--orange-light);
