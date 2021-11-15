@@ -57,10 +57,10 @@ function Inicio() {
                     <p>Fabiano Pereira</p>
                 </Link>
                 <nav className={Styled.nav}>
-                    <Scroll.Link onClick={() => handleScroll(0)} to="inicio" smooth={true}>Inicio</Scroll.Link>
-                    <Scroll.Link onClick={() => handleScroll(19)} to="sobre" smooth={true}>Sobre</Scroll.Link>
-                    <Scroll.Link onClick={() => handleScroll(49)} to="habilidades" smooth={true}>Habilidades</Scroll.Link>
-                    <Scroll.Link onClick={() => handleScroll(82.6)} to="projetos" smooth={true}>Projetos</Scroll.Link>
+                    <Scroll.Link onMouseEnter={() => handleScroll(0)} to="inicio" smooth={true}>Inicio</Scroll.Link>
+                    <Scroll.Link onMouseEnter={() => handleScroll(19)} to="sobre" smooth={true}>Sobre</Scroll.Link>
+                    <Scroll.Link onMouseEnter={() => handleScroll(49)} to="habilidades" smooth={true}>Habilidades</Scroll.Link>
+                    <Scroll.Link onMouseEnter={() => handleScroll(82.6)} to="projetos" smooth={true}>Projetos</Scroll.Link>
                     <span className={Styled.progress_bar}>
                         <ProgressBar progressValue={progress} />
                     </span>

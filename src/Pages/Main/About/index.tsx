@@ -7,7 +7,7 @@ function About() {
         <main className={Styled.content_about} id="sobre">
             <Title title="Sobre mim" subTitle="Um breve resumo." />
             <article className={Styled.about}>
-                <p>Sou Fabiano Pereira, trabalho como Developer FrontEnd, meu diferencial é que sou esforçado e atento ao que me foi proposto, tenho experiencia na criação de Landing Pages, Dashboards, Websites e Sistemas intermediários, bastante solicitados por afiliados de hotmart, eduzz e monetizze. Meu principal foco é em melhorar a entrega dos Websites e Sistemas deixando-os mais modernos, seguros e responsivos.
+                <p>Sou Fabiano Pereira, trabalho como Developer Front End, meu diferencial é que sou esforçado e atento ao que me foi proposto, tenho experiencia na criação de Landing Pages, Dashboards, Websites e Sistemas intermediários, bastante solicitados por afiliados de hotmart, eduzz e monetizze. Meu principal foco é em melhorar a entrega dos Websites e Sistemas deixando-os mais modernos, seguros e responsivos.
                 </p>
 
                 <p>
