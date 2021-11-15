@@ -18,7 +18,7 @@
 .env.test.local
 .env.production.local
 .react-app-env.d.ts
-.env
+.env.*
 
 
 npm-debug.log*
