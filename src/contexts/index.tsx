@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import { ProjectProps } from '../types/ProjectProps'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword,getAuth } from 'firebase/auth'
 import * as Types from '../types/contextTypes'
 import * as Datas from '../data'
 import { toast } from 'react-toastify'
