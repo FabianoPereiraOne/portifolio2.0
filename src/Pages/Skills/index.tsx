@@ -5,6 +5,7 @@ export const Skills = () =>{
     return (
         <>
             <Sidebar/>
+            <h1>Pagina de skills</h1>
         </>
     )
 }

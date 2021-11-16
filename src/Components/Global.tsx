@@ -73,3 +73,12 @@ overflow: hidden;
   height 40vh;
 }
 `
+
+export const ButtonImage = styled.button<{ background:string }>`
+  width: 10rem;
+  height: 6rem;
+  background: url(${ props => props.background});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+`

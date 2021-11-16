@@ -23,7 +23,7 @@ function Router({
     }
 
     if(lockRepeatLogin && useContext.signed){
-        return <Redirect to="/dashboard"/>
+        return <Redirect to="/dashboard/projects"/>
     }
 
     return(

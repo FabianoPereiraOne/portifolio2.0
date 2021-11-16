@@ -1,0 +1,44 @@
+.header {
+  width: 100%;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 2rem;
+}
+
+.button_menu,
+.button_sign_out {
+  border: none;
+  background: none;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.button_menu:hover svg,
+.button_sign_out:hover svg {
+  color: var(--blue-light);
+}
+
+.button_menu svg,
+.button_sign_out svg {
+  color: var(--blue-normal);
+  font-size: 2rem;
+}
+
+.button_menu {
+  display: none;
+}
+
+@media screen and (max-width: 601px) {
+  .header {
+    justify-content: space-between;
+  }
+  .button_menu {
+    display: inline-block;
+  }
+}
