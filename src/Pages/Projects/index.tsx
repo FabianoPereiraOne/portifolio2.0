@@ -5,6 +5,7 @@ import { usePortfolioContext } from '../../contexts'
 import { toast } from 'react-toastify'
 import { FormEvent, useState } from 'react'
 import { ButtonImage } from '../../Components/Global'
+import * as types from '../../types/global'
 
 export const Projects = () => {
     const useContext = usePortfolioContext()
@@ -12,22 +13,26 @@ export const Projects = () => {
     const [description, setDescription] = useState('')
     const [capaLocalUrl, setCapaLocalUrl] = useState('')
     const [fileCapa, setFileCapa] = useState<null | React.ChangeEvent<HTMLInputElement>>(null)
+    const [loading, setLoading] = useState(false)
 
     const handleValidationAddProject = (e: FormEvent) => {
         e.preventDefault()
         if (name.length > 0 && description.length > 0 && fileCapa !== null && fileCapa.target.files !== null) {
+            const fileType = fileCapa.target.files[0].type
 
-            if (fileCapa.target.files[0].type === 'image/png' || fileCapa.target.files[0].type === 'image/jpg' || fileCapa.target.files[0].type === 'image/jpeg') {
+            if (handleInspectFileTypeAsAccepted(fileType)) {
+
+                setLoading(true)
+
                 useContext.handleAddProject({
                     name,
                     description,
                     file: fileCapa
+                }).finally(() => {
+                    setLoading(false)
                 })
 
-                setName('')
-                setDescription('')
-                setCapaLocalUrl('')
-                setFileCapa(null)
+                handleClearStates()
             } else {
                 toast.info('Formato invalido! [PNG | JPG]')
             }
@@ -37,10 +42,34 @@ export const Projects = () => {
         }
     }
 
+    const handleClearStates = () => {
+        setName('')
+        setDescription('')
+        setCapaLocalUrl('')
+        setFileCapa(null)
+    }
+
+    const handleInspectFileTypeAsAccepted = (type: string) => {
+        const acceptedTypes: types.AcceptedTypes = {
+            'image/png': true,
+            'image/jpg': true,
+            'image/jpeg': true,
+        }
+
+        if (acceptedTypes[type]) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     const handleSaveFileCapaAndLocalUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            setCapaLocalUrl(URL.createObjectURL(e.target.files[0]))
+        const files = e.target.files
+        if (files !== null && files[0] !== null && handleInspectFileTypeAsAccepted(files[0].type)) {
+            setCapaLocalUrl(URL.createObjectURL(files[0]))
             setFileCapa(e)
+        } else {
+            toast.info('Formato invalido! [PNG | JPG]')
         }
     }
 
@@ -79,7 +108,7 @@ export const Projects = () => {
                 <textarea value={description} onChange={e => setDescription(e.target.value)} />
 
                 <button type="submit">
-                    Adicionar
+                    {loading ? 'Adicionando...' : 'Adicionar'}
                 </button>
             </form>
         </section>

@@ -12,6 +12,7 @@ export const Sidebar = () => {
 
     useEffect(() => {
         setPageActive(history.location.pathname)
+        // eslint-disable-next-line
     }, [])
 
     return (

@@ -213,14 +213,16 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             id: docRef.id,
             capaSmall,
             capaLarge,
-            skills: '',
+            skills: null,
             isActive: false,
+            created: new Date()
         })
             .then(() => {
-                console.log('adicionado')
+                toast.success("Adicionado com sucesso!")
             })
             .catch((error) => {
                 console.log(error)
+                toast.error("Erro ao adicionar!")
             })
     }
 
@@ -242,7 +244,7 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
 
             return handleUploadImage(image, 'capaSmall', id, 'projects')
         } else {
-            return ''
+            return null
         }
     }
 

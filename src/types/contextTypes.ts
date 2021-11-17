@@ -14,7 +14,7 @@ export type PortfolioContextTypes = {
     setLoading: (state:boolean)=> void;
     setToggleMenu: (state:boolean)=> void;
     handleSignOut: ()=> void;
-    handleAddProject: (preProject:preProjectProps)=> void
+    handleAddProject: (preProject:preProjectProps)=> Promise<void>
 }
 
 export type portfolioProviderTypes = {
