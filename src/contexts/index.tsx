@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 import { ProjectProps } from '../types/ProjectProps'
 import { signInWithEmailAndPassword, getAuth, signOut } from 'firebase/auth'
-import { getFirestore, collection, setDoc, doc } from 'firebase/firestore'
+import { getFirestore, collection, setDoc, doc, onSnapshot, query, orderBy } from 'firebase/firestore'
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import * as Types from '../types/contextTypes'
 import * as Datas from '../data'
@@ -85,31 +85,46 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
         name: 'Quark Atendimentos',
         isActive: false,
     }])
-    // eslint-disable-next-line
     const [skills, setSkills] = useState<Types.SkillsTypes[]>([{
         name: 'Html 5',
-        value: 80
+        value: 80,
+        checked: false,
+        id: 'dsad'
     }, {
         name: 'Css 3',
-        value: 60
+        value: 60,
+        checked: false,
+        id: 'dsaddsdd'
     }, {
         name: 'Javascript',
-        value: 60
+        value: 60,
+        checked: false,
+        id: 'dsgfgf1dsfad'
     }, {
         name: 'React JS',
-        value: 70
+        value: 70,
+        checked: false,
+        id: 'dseracdada'
     }, {
         name: 'Bootstrap 4',
-        value: 80
+        value: 80,
+        checked: false,
+        id: 'dsaddsadsamm'
     }, {
         name: 'Typescript',
-        value: 50
+        value: 50,
+        checked: false,
+        id: 'dsaddadsun'
     }, {
         name: 'Next JS',
-        value: 30
+        value: 30,
+        checked: false,
+        id: 'dsytvfvd'
     }, {
         name: 'Git',
-        value: 50
+        value: 50,
+        checked: false,
+        id: 'dsadokcdmd'
     }])
     // eslint-disable-next-line
     const [projectWidth, setProjectWidth] = useState<number>(0)
@@ -213,7 +228,7 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             id: docRef.id,
             capaSmall,
             capaLarge,
-            skills: null,
+            skills: preProject.skills,
             isActive: false,
             created: new Date()
         })
@@ -262,6 +277,19 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
         return url
     }
 
+    const handleGetProjects = async () => {
+        //Ponto de parada
+
+        const projectsRef = query(collection(getFirestore(), 'projects'), orderBy('date', 'desc'))
+        onSnapshot(projectsRef, snapshot => {
+            const projects = snapshot.docs.map((snapshot) => {
+                return snapshot.data()
+            })
+
+            console.log(projects)
+        })
+    }
+
     return (
         <PortfolioContext.Provider value={{
             projects,
@@ -277,7 +305,9 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             setLoading,
             setToggleMenu,
             handleSignOut,
-            handleAddProject
+            handleAddProject,
+            handleGetProjects,
+            setSkills
         }}>
             {children}
         </PortfolioContext.Provider>

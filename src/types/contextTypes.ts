@@ -14,7 +14,9 @@ export type PortfolioContextTypes = {
     setLoading: (state:boolean)=> void;
     setToggleMenu: (state:boolean)=> void;
     handleSignOut: ()=> void;
-    handleAddProject: (preProject:preProjectProps)=> Promise<void>
+    handleAddProject: (preProject:preProjectProps)=> Promise<void>;
+    handleGetProjects: ()=> Promise<void>;
+    setSkills: (state:SkillsTypes[])=> void
 }
 
 export type portfolioProviderTypes = {
@@ -23,11 +25,14 @@ export type portfolioProviderTypes = {
 
 export type SkillsTypes = {
     name: string,
-    value: number
+    value: number,
+    checked: boolean
+    id: string
 }
 
 export type preProjectProps = {
     name: string,
     description: string,
-    file: React.ChangeEvent<HTMLInputElement>
+    file: React.ChangeEvent<HTMLInputElement>,
+    skills: null | string[]
 }

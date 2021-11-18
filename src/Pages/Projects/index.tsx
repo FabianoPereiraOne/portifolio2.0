@@ -3,9 +3,18 @@ import { Sidebar } from '../../Components/Sidebar'
 import { Header } from '../../Components/Header'
 import { usePortfolioContext } from '../../contexts'
 import { toast } from 'react-toastify'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useState, useEffect } from 'react'
 import { ButtonImage } from '../../Components/Global'
 import * as types from '../../types/global'
+import * as typesContext from '../../types/contextTypes'
+import * as fi from 'react-icons/fi'
+
+type Skills = {
+    [name: string]: {
+        name: string,
+        checked: boolean
+    }
+}
 
 export const Projects = () => {
     const useContext = usePortfolioContext()
@@ -15,30 +24,58 @@ export const Projects = () => {
     const [fileCapa, setFileCapa] = useState<null | React.ChangeEvent<HTMLInputElement>>(null)
     const [loading, setLoading] = useState(false)
 
+    useEffect(() => {
+        useContext.handleGetProjects()
+    }, [])
+
     const handleValidationAddProject = (e: FormEvent) => {
         e.preventDefault()
+
         if (name.length > 0 && description.length > 0 && fileCapa !== null && fileCapa.target.files !== null) {
             const fileType = fileCapa.target.files[0].type
+            const skills = handleGetSkillsChecked()
 
-            if (handleInspectFileTypeAsAccepted(fileType)) {
+            console.log(skills)
+            // if (handleInspectFileTypeAsAccepted(fileType)) {
 
-                setLoading(true)
+            //     setLoading(true)
+            //     useContext.handleAddProject({
+            //         name,
+            //         description,
+            //         file: fileCapa,
+            //         skills,
+            //     }).finally(() => {
+            //         setLoading(false)
+            //     })
 
-                useContext.handleAddProject({
-                    name,
-                    description,
-                    file: fileCapa
-                }).finally(() => {
-                    setLoading(false)
-                })
-
-                handleClearStates()
-            } else {
-                toast.info('Formato invalido! [PNG | JPG]')
-            }
+            //     handleClearStates()
+            // } else {
+            //     toast.info('Formato invalido! [PNG | JPG]')
+            // }
 
         } else {
             toast.info('Preencha todos os dados!')
+        }
+    }
+
+    const handleGetSkillsChecked = () => {
+
+        if (useContext.skills.length > 0) {
+            let skills: Array<string> = []
+
+            useContext.skills.forEach((skill) => {
+                if (skill.checked) {
+                    skills.push(skill.name)
+                }
+            })
+
+            if (skills.length > 0) {
+                return skills
+            } else {
+                return null
+            }
+        } else {
+            return null
         }
     }
 
@@ -78,6 +115,23 @@ export const Projects = () => {
         setFileCapa(null)
     }
 
+    const handleToggleChecked = (skillClick: typesContext.SkillsTypes) => {
+        const newListSkills = useContext.skills.map((skill: typesContext.SkillsTypes) => {
+            if (skill.id === skillClick.id) {
+                return {
+                    name: skill.name,
+                    value: skill.value,
+                    checked: !skill.checked,
+                    id: skill.id
+                }
+            } else {
+                return skill
+            }
+        })
+
+        useContext.setSkills(newListSkills)
+    }
+
     return (
         <section className={styles.container_projects}>
             <Sidebar />
@@ -105,6 +159,24 @@ export const Projects = () => {
                     </ul> */}
                 </div>
                 <input type="text" value={name} onChange={e => setName(e.target.value)} />
+                <button type="button" className={styles.button_action_skills}>
+                    Skills
+                    <fi.FiChevronDown />
+                </button>
+
+                <div className={styles.skills_wrapper}>
+                    {useContext.skills.length > 0 ?
+                        useContext.skills.map((skill, index) => {
+                            return (
+                                <label key={index.toString()} className={styles.skills}>
+                                    <input type="checkbox" checked={skill.checked}
+                                        onChange={() => handleToggleChecked(skill)} />
+                                    <span>{skill.name}</span>
+                                </label>
+                            )
+                        })
+                        : <span>Nenhuma skill</span>}
+                </div>
                 <textarea value={description} onChange={e => setDescription(e.target.value)} />
 
                 <button type="submit">
