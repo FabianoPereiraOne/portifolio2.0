@@ -4,7 +4,6 @@ import { signInWithEmailAndPassword, getAuth, signOut } from 'firebase/auth'
 import { getFirestore, collection, setDoc, doc, onSnapshot, query, orderBy } from 'firebase/firestore'
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import * as Types from '../types/contextTypes'
-import * as Datas from '../data'
 import { toast } from 'react-toastify'
 import convert from 'image-file-resize';
 
@@ -12,79 +11,7 @@ import convert from 'image-file-resize';
 export const PortfolioContext = createContext({} as Types.PortfolioContextTypes)
 
 export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) => {
-    const [projects, setProjects] = useState<ProjectProps[]>([{
-        id: '1',
-        skills: 'Javascript',
-        description: '',
-        imageSmall: Datas.GoogleGlass.imageSmall,
-        imageLarge: Datas.GoogleGlass.imageLarge,
-        name: 'Google Glass',
-        isActive: false,
-    }, {
-        id: '2',
-        skills: 'Javascript e Next JS',
-        description: '',
-        imageSmall: Datas.PodCastr.imageSmall,
-        imageLarge: Datas.PodCastr.imageLarge,
-        name: 'Podcastr',
-        isActive: true,
-    }, {
-        id: '3',
-        skills: 'Javascript e Bootstrap',
-        description: '',
-        imageSmall: Datas.OnePage.imageSmall,
-        imageLarge: Datas.OnePage.imageLarge,
-        name: 'OnePage',
-        isActive: false,
-    }, {
-        id: '4',
-        skills: 'Javascript e React JS',
-        description: '',
-        imageSmall: Datas.LandingPage.imageSmall,
-        imageLarge: Datas.LandingPage.imageLarge,
-        name: 'Landing Page',
-        isActive: false,
-    }, {
-        id: '5',
-        skills: 'Javascript e Bootstrap',
-        description: '',
-        imageSmall: Datas.Dashboard.imageSmall,
-        imageLarge: Datas.Dashboard.imageLarge,
-        name: 'Dashboard',
-        isActive: false,
-    }, {
-        id: '6',
-        skills: '',
-        description: 'Javascript e React JS',
-        imageSmall: Datas.BlogXis.imageSmall,
-        imageLarge: Datas.BlogXis.imageLarge,
-        name: 'Blog Xis',
-        isActive: false,
-    }, {
-        id: '7',
-        skills: 'Javascript',
-        description: '',
-        imageSmall: Datas.HotelParaiso.imageSmall,
-        imageLarge: Datas.HotelParaiso.imageLarge,
-        name: 'Hotel Paraiso',
-        isActive: false,
-    }, {
-        id: '8',
-        skills: 'Node JS',
-        description: '',
-        imageSmall: Datas.Happy.imageSmall,
-        imageLarge: Datas.Happy.imageLarge,
-        name: 'Happy',
-        isActive: false,
-    }, {
-        id: '9',
-        skills: 'Javascript e React JS',
-        description: '',
-        imageSmall: Datas.Quark.imageSmall,
-        imageLarge: Datas.Quark.imageLarge,
-        name: 'Quark Atendimentos',
-        isActive: false,
-    }])
+    const [projects, setProjects] = useState<ProjectProps[]>([])
     const [skills, setSkills] = useState<Types.SkillsTypes[]>([{
         name: 'Html 5',
         value: 80,
@@ -128,11 +55,11 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
     }])
     // eslint-disable-next-line
     const [projectWidth, setProjectWidth] = useState<number>(0)
-    // eslint-disable-next-line
     const [signed, setSigned] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
     const [projectActive, setProjectActive] = useState<ProjectProps>({} as ProjectProps)
     const [toggleMenu, setToggleMenu] = useState(false)
+    const [load, setLoad] = useState<boolean>(true)
 
     const handleActiveProjectFromCarousel = (project: ProjectProps) => {
         const resultRemoveProjectActive = handleRemoveProjectActive()
@@ -278,15 +205,21 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
     }
 
     const handleGetProjects = async () => {
-        //Ponto de parada
-
-        const projectsRef = query(collection(getFirestore(), 'projects'), orderBy('date', 'desc'))
+        const projectsRef = query(collection(getFirestore(), 'projects'), orderBy('created', 'desc'))
         onSnapshot(projectsRef, snapshot => {
-            const projects = snapshot.docs.map((snapshot) => {
-                return snapshot.data()
+            const listProjects: ProjectProps[] = snapshot.docs.map((snapshot) => {
+                return {
+                    id: snapshot.data().id,
+                    skills: snapshot.data().skills,
+                    description: snapshot.data().description,
+                    imageSmall: snapshot.data().imageSmall,
+                    imageLarge: snapshot.data().imageLarge,
+                    name: snapshot.data().name,
+                    isActive: snapshot.data().isActive,
+                }
             })
 
-            console.log(projects)
+            setProjects(listProjects)
         })
     }
 
@@ -299,6 +232,7 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             signed,
             loading,
             toggleMenu,
+            load,
             handleActiveProjectFromCarousel,
             handleGetActive,
             handleSigin,
@@ -307,7 +241,8 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             handleSignOut,
             handleAddProject,
             handleGetProjects,
-            setSkills
+            setSkills,
+            setLoad
         }}>
             {children}
         </PortfolioContext.Provider>

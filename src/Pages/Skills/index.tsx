@@ -1,11 +1,14 @@
-//import styles from './styles.module.css'
+import styles from './styles.module.css'
 import { Sidebar } from '../../Components/Sidebar'
+import { Container, ContainerFlexForm } from '../../Components/Global'
 
-export const Skills = () =>{
+export const Skills = () => {
     return (
-        <>
-            <Sidebar/>
-            <h1>Pagina de skills</h1>
-        </>
+        <Container>
+            <Sidebar />
+            <ContainerFlexForm>
+                <h1>COnteudo aqui</h1>
+            </ContainerFlexForm>
+        </Container>
     )
 }

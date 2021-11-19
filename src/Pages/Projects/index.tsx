@@ -4,17 +4,11 @@ import { Header } from '../../Components/Header'
 import { usePortfolioContext } from '../../contexts'
 import { toast } from 'react-toastify'
 import { FormEvent, useState, useEffect } from 'react'
-import { ButtonImage } from '../../Components/Global'
+import { ButtonImage, Container,ContainerFlexForm} from '../../Components/Global'
 import * as types from '../../types/global'
 import * as typesContext from '../../types/contextTypes'
 import * as fi from 'react-icons/fi'
-
-type Skills = {
-    [name: string]: {
-        name: string,
-        checked: boolean
-    }
-}
+import { ProjectProps } from '../../types/ProjectProps'
 
 export const Projects = () => {
     const useContext = usePortfolioContext()
@@ -26,6 +20,7 @@ export const Projects = () => {
 
     useEffect(() => {
         useContext.handleGetProjects()
+            .finally(() => useContext.setLoad(false))
     }, [])
 
     const handleValidationAddProject = (e: FormEvent) => {
@@ -35,23 +30,22 @@ export const Projects = () => {
             const fileType = fileCapa.target.files[0].type
             const skills = handleGetSkillsChecked()
 
-            console.log(skills)
-            // if (handleInspectFileTypeAsAccepted(fileType)) {
+            if (handleInspectFileTypeAsAccepted(fileType)) {
 
-            //     setLoading(true)
-            //     useContext.handleAddProject({
-            //         name,
-            //         description,
-            //         file: fileCapa,
-            //         skills,
-            //     }).finally(() => {
-            //         setLoading(false)
-            //     })
+                setLoading(true)
+                useContext.handleAddProject({
+                    name,
+                    description,
+                    file: fileCapa,
+                    skills,
+                }).finally(() => {
+                    setLoading(false)
+                })
 
-            //     handleClearStates()
-            // } else {
-            //     toast.info('Formato invalido! [PNG | JPG]')
-            // }
+                handleClearStates()
+            } else {
+                toast.info('Formato invalido! [PNG | JPG]')
+            }
 
         } else {
             toast.info('Preencha todos os dados!')
@@ -84,6 +78,19 @@ export const Projects = () => {
         setDescription('')
         setCapaLocalUrl('')
         setFileCapa(null)
+        const newListSkills = useContext.skills.map((skill) => {
+            if (skill.checked) {
+                return {
+                    name: skill.name,
+                    value: skill.value,
+                    checked: false,
+                    id: skill.id
+                }
+            } else {
+                return skill
+            }
+        })
+        useContext.setSkills(newListSkills)
     }
 
     const handleInspectFileTypeAsAccepted = (type: string) => {
@@ -132,10 +139,14 @@ export const Projects = () => {
         useContext.setSkills(newListSkills)
     }
 
+    if (useContext.load) {
+        return <h1>Carregando...</h1>
+    }
+
     return (
-        <section className={styles.container_projects}>
+        <Container>
             <Sidebar />
-            <form className={styles.container_actions} onSubmit={handleValidationAddProject}>
+            <ContainerFlexForm onSubmit={handleValidationAddProject}>
                 <Header />
                 <div className={styles.container_capa_and_views}>
                     {capaLocalUrl.length > 0 ?
@@ -147,16 +158,16 @@ export const Projects = () => {
                                 <input type="file" onChange={handleSaveFileCapaAndLocalUrl} />
                             </label>
                         )}
-                    {/* <ul className={styles.views_projects}>
+                    <ul className={styles.views_projects}>
                         {useContext.projects.map((project: ProjectProps, index: number) => {
                             return (
-                                <li>
+                                <li key={index.toString()}>
                                     <p>{project.name}</p>
                                     <button>Trash</button>
                                 </li>
                             )
                         })}
-                    </ul> */}
+                    </ul>
                 </div>
                 <input type="text" value={name} onChange={e => setName(e.target.value)} />
                 <button type="button" className={styles.button_action_skills}>
@@ -182,7 +193,7 @@ export const Projects = () => {
                 <button type="submit">
                     {loading ? 'Adicionando...' : 'Adicionar'}
                 </button>
-            </form>
-        </section>
+            </ContainerFlexForm>
+        </Container>
     )
 }

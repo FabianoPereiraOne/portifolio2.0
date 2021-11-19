@@ -82,3 +82,18 @@ export const ButtonImage = styled.button<{ background:string }>`
   background-size: cover;
   background-repeat: no-repeat;
 `
+
+export const Container = styled.section`
+display: flex;
+width: 100%;
+min-height: 100vh;
+`
+export const ContainerFlexDiv = styled.div`
+flex: 1;
+min-height: 100vh;
+`
+
+export const ContainerFlexForm = styled.form`
+flex: 1;
+min-height: 100vh;
+`

@@ -1,13 +1,15 @@
 import { ProjectProps } from "./ProjectProps"
+import { DocumentData } from 'firebase/firestore'
 
 export type PortfolioContextTypes = {
-    projects: ProjectProps[];
+    projects: ProjectProps[]
     projectWidth: number;
     skills: SkillsTypes[];
     projectActive: ProjectProps;
     signed: boolean;
     loading: boolean;
     toggleMenu: boolean;
+    load: boolean;
     handleActiveProjectFromCarousel: ( project:ProjectProps )=> void;
     handleGetActive:()=> void;
     handleSigin: (email:string, password:string)=> void;
@@ -16,7 +18,8 @@ export type PortfolioContextTypes = {
     handleSignOut: ()=> void;
     handleAddProject: (preProject:preProjectProps)=> Promise<void>;
     handleGetProjects: ()=> Promise<void>;
-    setSkills: (state:SkillsTypes[])=> void
+    setSkills: (state:SkillsTypes[])=> void;
+    setLoad: (state:boolean)=> void
 }
 
 export type portfolioProviderTypes = {
