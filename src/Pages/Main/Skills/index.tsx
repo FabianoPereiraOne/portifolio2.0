@@ -17,7 +17,7 @@ function Skills() {
                             <div key={index.toString()} className={Styled.skill_group}>
                                 <p>{skill.name}</p>
                                 <ContainerProgressBar className={Styled.content_progress}>
-                                    <SkillProgressBar value={skill.value} className={Styled.progress} />
+                                    <SkillProgressBar value={skill.progress} className={Styled.progress} />
                                 </ContainerProgressBar>
                             </div>
                         )

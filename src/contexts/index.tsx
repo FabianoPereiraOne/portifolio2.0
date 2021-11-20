@@ -12,47 +12,7 @@ export const PortfolioContext = createContext({} as Types.PortfolioContextTypes)
 
 export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) => {
     const [projects, setProjects] = useState<ProjectProps[]>([])
-    const [skills, setSkills] = useState<Types.SkillsTypes[]>([{
-        name: 'Html 5',
-        value: 80,
-        checked: false,
-        id: 'dsad'
-    }, {
-        name: 'Css 3',
-        value: 60,
-        checked: false,
-        id: 'dsaddsdd'
-    }, {
-        name: 'Javascript',
-        value: 60,
-        checked: false,
-        id: 'dsgfgf1dsfad'
-    }, {
-        name: 'React JS',
-        value: 70,
-        checked: false,
-        id: 'dseracdada'
-    }, {
-        name: 'Bootstrap 4',
-        value: 80,
-        checked: false,
-        id: 'dsaddsadsamm'
-    }, {
-        name: 'Typescript',
-        value: 50,
-        checked: false,
-        id: 'dsaddadsun'
-    }, {
-        name: 'Next JS',
-        value: 30,
-        checked: false,
-        id: 'dsytvfvd'
-    }, {
-        name: 'Git',
-        value: 50,
-        checked: false,
-        id: 'dsadokcdmd'
-    }])
+    const [skills, setSkills] = useState<Types.SkillsTypes[]>([])
     // eslint-disable-next-line
     const [projectWidth, setProjectWidth] = useState<number>(0)
     const [signed, setSigned] = useState<boolean>(false)
@@ -206,21 +166,65 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
 
     const handleGetProjects = async () => {
         const projectsRef = query(collection(getFirestore(), 'projects'), orderBy('created', 'desc'))
-        onSnapshot(projectsRef, snapshot => {
-            const listProjects: ProjectProps[] = snapshot.docs.map((snapshot) => {
-                return {
-                    id: snapshot.data().id,
-                    skills: snapshot.data().skills,
-                    description: snapshot.data().description,
-                    imageSmall: snapshot.data().imageSmall,
-                    imageLarge: snapshot.data().imageLarge,
-                    name: snapshot.data().name,
-                    isActive: snapshot.data().isActive,
-                }
-            })
+        try {
+            onSnapshot(projectsRef, snapshot => {
+                const listProjects: ProjectProps[] = snapshot.docs.map((snapshot) => {
+                    return {
+                        id: snapshot.data().id,
+                        skills: snapshot.data().skills,
+                        description: snapshot.data().description,
+                        imageSmall: snapshot.data().imageSmall,
+                        imageLarge: snapshot.data().imageLarge,
+                        name: snapshot.data().name,
+                        isActive: snapshot.data().isActive,
+                    }
+                })
 
-            setProjects(listProjects)
+                setProjects(listProjects)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleAddSkill = async (name: string, progress: number) => {
+        const skillRef = doc(collection(getFirestore(), 'skills'))
+
+        await setDoc(skillRef, {
+            name: name,
+            progress: progress,
+            checked: false,
+            created: new Date(),
+            id: skillRef.id
         })
+            .then(() => {
+                toast.success("Adicionada com sucesso!")
+            })
+            .catch((error) => {
+                console.log(error)
+                toast.error('Erro ao adicionar skill!')
+            })
+    }
+
+    const handleGetSkills = async () => {
+        const skillsRef = query(collection(getFirestore(), 'skills'), orderBy('created', 'desc'))
+        try {
+            await onSnapshot(skillsRef, (snapshot) => {
+                const skills: Types.SkillsTypes[] = snapshot.docs.map((skill) => {
+                    return {
+                        name: skill.data().name,
+                        progress: skill.data().progress,
+                        checked: skill.data().checked,
+                        created: skill.data().created,
+                        id: skill.data().id
+                    }
+                })
+
+                setSkills(skills)
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -242,7 +246,9 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             handleAddProject,
             handleGetProjects,
             setSkills,
-            setLoad
+            setLoad,
+            handleAddSkill,
+            handleGetSkills
         }}>
             {children}
         </PortfolioContext.Provider>

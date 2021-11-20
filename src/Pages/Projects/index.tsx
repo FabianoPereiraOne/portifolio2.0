@@ -4,7 +4,7 @@ import { Header } from '../../Components/Header'
 import { usePortfolioContext } from '../../contexts'
 import { toast } from 'react-toastify'
 import { FormEvent, useState, useEffect } from 'react'
-import { ButtonImage, Container,ContainerFlexForm} from '../../Components/Global'
+import { ButtonImage, Container, ContainerFlexForm } from '../../Components/Global'
 import * as types from '../../types/global'
 import * as typesContext from '../../types/contextTypes'
 import * as fi from 'react-icons/fi'
@@ -19,8 +19,10 @@ export const Projects = () => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        useContext.setLoad(true)
         useContext.handleGetProjects()
             .finally(() => useContext.setLoad(false))
+        // eslint-disable-next-line
     }, [])
 
     const handleValidationAddProject = (e: FormEvent) => {
@@ -82,8 +84,9 @@ export const Projects = () => {
             if (skill.checked) {
                 return {
                     name: skill.name,
-                    value: skill.value,
+                    progress: skill.progress,
                     checked: false,
+                    created: skill.created,
                     id: skill.id
                 }
             } else {
@@ -127,8 +130,9 @@ export const Projects = () => {
             if (skill.id === skillClick.id) {
                 return {
                     name: skill.name,
-                    value: skill.value,
+                    progress: skill.progress,
                     checked: !skill.checked,
+                    created: skill.created,
                     id: skill.id
                 }
             } else {

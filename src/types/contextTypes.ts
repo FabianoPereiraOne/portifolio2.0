@@ -1,5 +1,4 @@
 import { ProjectProps } from "./ProjectProps"
-import { DocumentData } from 'firebase/firestore'
 
 export type PortfolioContextTypes = {
     projects: ProjectProps[]
@@ -19,7 +18,9 @@ export type PortfolioContextTypes = {
     handleAddProject: (preProject:preProjectProps)=> Promise<void>;
     handleGetProjects: ()=> Promise<void>;
     setSkills: (state:SkillsTypes[])=> void;
-    setLoad: (state:boolean)=> void
+    setLoad: (state:boolean)=> void;
+    handleAddSkill: (name:string, progress:number)=> Promise<void>;
+    handleGetSkills: ()=> Promise<void>
 }
 
 export type portfolioProviderTypes = {
@@ -28,8 +29,9 @@ export type portfolioProviderTypes = {
 
 export type SkillsTypes = {
     name: string,
-    value: number,
-    checked: boolean
+    progress: number,
+    checked: boolean,
+    created: Date
     id: string
 }
 
