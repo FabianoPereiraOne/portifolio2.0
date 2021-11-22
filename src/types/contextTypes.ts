@@ -20,7 +20,11 @@ export type PortfolioContextTypes = {
     setSkills: (state:SkillsTypes[])=> void;
     setLoad: (state:boolean)=> void;
     handleAddSkill: (name:string, progress:number)=> Promise<void>;
-    handleGetSkills: ()=> Promise<void>
+    handleGetSkills: ()=> Promise<void>;
+    handleDeleteDoc: (collect:string,id:string)=> Promise<void>;
+    setProjectWidth: (state:number)=> void;
+    handleDeleteImage: (collect:string, id:string,name: string)=> void;
+    handleDeleteProject: (project:ProjectProps)=> void
 }
 
 export type portfolioProviderTypes = {

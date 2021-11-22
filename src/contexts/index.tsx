@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from 'react'
 import { ProjectProps } from '../types/ProjectProps'
 import { signInWithEmailAndPassword, getAuth, signOut } from 'firebase/auth'
-import { getFirestore, collection, setDoc, doc, onSnapshot, query, orderBy } from 'firebase/firestore'
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
+import { getFirestore, collection, setDoc, doc, onSnapshot, query, orderBy, deleteDoc } from 'firebase/firestore'
+import { getDownloadURL, getStorage, ref, uploadBytes, deleteObject } from 'firebase/storage'
 import * as Types from '../types/contextTypes'
 import { toast } from 'react-toastify'
 import convert from 'image-file-resize';
@@ -13,7 +13,6 @@ export const PortfolioContext = createContext({} as Types.PortfolioContextTypes)
 export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) => {
     const [projects, setProjects] = useState<ProjectProps[]>([])
     const [skills, setSkills] = useState<Types.SkillsTypes[]>([])
-    // eslint-disable-next-line
     const [projectWidth, setProjectWidth] = useState<number>(0)
     const [signed, setSigned] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
@@ -227,6 +226,30 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
         }
     }
 
+    const handleDeleteDoc = async (collect: string, id: string) => {
+        const docRef = doc(collection(getFirestore(), collect), id)
+        await deleteDoc(docRef)
+            .then(() => toast.success("Deletado com sucesso!"))
+            .catch((error) => {
+                console.log(error)
+                toast.error("Erro ao deletar!")
+            })
+    }
+
+    const handleDeleteImage = async (collect: string, id: string, name: string) => {
+        const imageRef = ref(getStorage(), `${collect}/${id}/${name}`)
+        await deleteObject(imageRef)
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const handleDeleteProject = async (project: ProjectProps) => {
+        await handleDeleteImage('projects', project.id, 'capaLarge')
+        await handleDeleteImage('projects', project.id, 'capaSmall')
+        await handleDeleteDoc('projects', project.id)
+    }
+
     return (
         <PortfolioContext.Provider value={{
             projects,
@@ -248,7 +271,11 @@ export const PortfolioProvider = ({ children }: Types.portfolioProviderTypes) =>
             setSkills,
             setLoad,
             handleAddSkill,
-            handleGetSkills
+            handleGetSkills,
+            handleDeleteDoc,
+            setProjectWidth,
+            handleDeleteImage,
+            handleDeleteProject
         }}>
             {children}
         </PortfolioContext.Provider>

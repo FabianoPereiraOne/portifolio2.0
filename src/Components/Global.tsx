@@ -74,13 +74,30 @@ overflow: hidden;
 }
 `
 
-export const ButtonImage = styled.button<{ background:string }>`
-  width: 10rem;
-  height: 6rem;
-  background: url(${ props => props.background});
+export const ButtonImage = styled.button<{ background: string }>`
+  width: 15rem;
+  height: 100%;
+  background: url(${props => props.background});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  font-size: 2rem;
+  color: var(--gray-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg{
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &:hover svg{
+    opacity: 1;
+  }
 `
 
 export const Container = styled.section`
@@ -96,4 +113,5 @@ min-height: 100vh;
 export const ContainerFlexForm = styled.form`
 flex: 1;
 min-height: 100vh;
+padding: 0 2rem;
 `

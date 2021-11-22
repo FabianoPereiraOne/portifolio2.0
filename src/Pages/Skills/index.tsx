@@ -46,6 +46,10 @@ export const Skills = () => {
         setProgress(0)
     }
 
+    const handleDeleteSkill = (skill: SkillsTypes) => {
+        useContext.handleDeleteDoc('skills', skill.id)
+    }
+
     if (useContext.load) {
         return <h1>Carregando...</h1>
     }
@@ -76,7 +80,7 @@ export const Skills = () => {
                         return (
                             <li key={index.toString()}>
                                 <p>{skill.name}</p>
-                                <button>Trash</button>
+                                <button type="button" onClick={() => handleDeleteSkill(skill)}>Trash</button>
                             </li>
                         )
                     })}

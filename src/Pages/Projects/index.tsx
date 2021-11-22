@@ -7,7 +7,7 @@ import { FormEvent, useState, useEffect } from 'react'
 import { ButtonImage, Container, ContainerFlexForm } from '../../Components/Global'
 import * as types from '../../types/global'
 import * as typesContext from '../../types/contextTypes'
-import * as fi from 'react-icons/fi'
+import * as Fi from 'react-icons/fi'
 import { ProjectProps } from '../../types/ProjectProps'
 
 export const Projects = () => {
@@ -24,6 +24,11 @@ export const Projects = () => {
             .finally(() => useContext.setLoad(false))
         // eslint-disable-next-line
     }, [])
+
+    const handleDeleteCapa = () => {
+        setCapaLocalUrl('')
+        setFileCapa(null)
+    }
 
     const handleValidationAddProject = (e: FormEvent) => {
         e.preventDefault()
@@ -120,10 +125,6 @@ export const Projects = () => {
         }
     }
 
-    const handleDeleteCapa = () => {
-        setCapaLocalUrl('')
-        setFileCapa(null)
-    }
 
     const handleToggleChecked = (skillClick: typesContext.SkillsTypes) => {
         const newListSkills = useContext.skills.map((skill: typesContext.SkillsTypes) => {
@@ -155,11 +156,12 @@ export const Projects = () => {
                 <div className={styles.container_capa_and_views}>
                     {capaLocalUrl.length > 0 ?
                         (
-                            <ButtonImage onClick={handleDeleteCapa} background={capaLocalUrl} type="button">Trocar</ButtonImage>
+                            <ButtonImage onClick={handleDeleteCapa} background={capaLocalUrl} type="button"><Fi.FiRepeat /></ButtonImage>
                         )
                         : (
                             <label className={styles.upload_capa}>
-                                <input type="file" onChange={handleSaveFileCapaAndLocalUrl} />
+                                <input type="file" hidden onChange={handleSaveFileCapaAndLocalUrl} />
+                                <Fi.FiPlus />
                             </label>
                         )}
                     <ul className={styles.views_projects}>
@@ -167,7 +169,7 @@ export const Projects = () => {
                             return (
                                 <li key={index.toString()}>
                                     <p>{project.name}</p>
-                                    <button>Trash</button>
+                                    <button type="button" onClick={() => useContext.handleDeleteProject(project)}>Trash</button>
                                 </li>
                             )
                         })}
@@ -176,7 +178,7 @@ export const Projects = () => {
                 <input type="text" value={name} onChange={e => setName(e.target.value)} />
                 <button type="button" className={styles.button_action_skills}>
                     Skills
-                    <fi.FiChevronDown />
+                    <Fi.FiChevronDown />
                 </button>
 
                 <div className={styles.skills_wrapper}>
