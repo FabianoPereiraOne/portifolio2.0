@@ -76,7 +76,7 @@ overflow: hidden;
 
 export const ButtonImage = styled.button<{ background: string }>`
   width: 15rem;
-  height: 100%;
+  height: 10rem;
   background: url(${props => props.background});
   background-position: center;
   background-size: cover;

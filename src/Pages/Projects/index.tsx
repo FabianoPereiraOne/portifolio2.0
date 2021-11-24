@@ -4,7 +4,7 @@ import { Header } from '../../Components/Header'
 import { usePortfolioContext } from '../../contexts'
 import { toast } from 'react-toastify'
 import { FormEvent, useState, useEffect } from 'react'
-import { ButtonImage, Container, ContainerFlexForm } from '../../Components/Global'
+import { ButtonImage, Container, ContainerFlexDiv } from '../../Components/Global'
 import * as types from '../../types/global'
 import * as typesContext from '../../types/contextTypes'
 import * as Fi from 'react-icons/fi'
@@ -17,6 +17,7 @@ export const Projects = () => {
     const [capaLocalUrl, setCapaLocalUrl] = useState('')
     const [fileCapa, setFileCapa] = useState<null | React.ChangeEvent<HTMLInputElement>>(null)
     const [loading, setLoading] = useState(false)
+    const [divWrapperSkill, setDivWrapperSkills] = useState(false)
 
     useEffect(() => {
         useContext.setLoad(true)
@@ -151,55 +152,66 @@ export const Projects = () => {
     return (
         <Container>
             <Sidebar />
-            <ContainerFlexForm onSubmit={handleValidationAddProject}>
+            <ContainerFlexDiv>
                 <Header />
-                <div className={styles.container_capa_and_views}>
-                    {capaLocalUrl.length > 0 ?
-                        (
-                            <ButtonImage onClick={handleDeleteCapa} background={capaLocalUrl} type="button"><Fi.FiRepeat /></ButtonImage>
-                        )
-                        : (
-                            <label className={styles.upload_capa}>
-                                <input type="file" hidden onChange={handleSaveFileCapaAndLocalUrl} />
-                                <Fi.FiPlus />
-                            </label>
-                        )}
-                    <ul className={styles.views_projects}>
-                        {useContext.projects.map((project: ProjectProps, index: number) => {
-                            return (
-                                <li key={index.toString()}>
-                                    <p>{project.name}</p>
-                                    <button type="button" onClick={() => useContext.handleDeleteProject(project)}>Trash</button>
-                                </li>
+                <div className={styles.container_view_and_form}>
+                    <form className={styles.form} onSubmit={handleValidationAddProject}>
+                        {capaLocalUrl.length > 0 ?
+                            (
+                                <ButtonImage onClick={handleDeleteCapa} background={capaLocalUrl} type="button"><Fi.FiRepeat /></ButtonImage>
                             )
-                        })}
-                    </ul>
-                </div>
-                <input type="text" value={name} onChange={e => setName(e.target.value)} />
-                <button type="button" className={styles.button_action_skills}>
-                    Skills
-                    <Fi.FiChevronDown />
-                </button>
-
-                <div className={styles.skills_wrapper}>
-                    {useContext.skills.length > 0 ?
-                        useContext.skills.map((skill, index) => {
-                            return (
-                                <label key={index.toString()} className={styles.skills}>
-                                    <input type="checkbox" checked={skill.checked}
-                                        onChange={() => handleToggleChecked(skill)} />
-                                    <span>{skill.name}</span>
+                            : (
+                                <label className={styles.upload_capa}>
+                                    <input type="file" hidden onChange={handleSaveFileCapaAndLocalUrl} />
+                                    <Fi.FiPlus />
                                 </label>
-                            )
-                        })
-                        : <span>Nenhuma skill</span>}
-                </div>
-                <textarea value={description} onChange={e => setDescription(e.target.value)} />
+                            )}
+                        <input placeholder="Nome do projeto" type="text" value={name} onChange={e => setName(e.target.value)} />
+                        <button type="button" className={styles.button_action_skills} onClick={() => setDivWrapperSkills(true)}>
+                            Selecione uma habilidade
+                            <Fi.FiChevronDown />
+                        </button>
 
-                <button type="submit">
-                    {loading ? 'Adicionando...' : 'Adicionar'}
-                </button>
-            </ContainerFlexForm>
+                        {divWrapperSkill && (
+                            <div className={styles.skills_wrapper}>
+                                <button type="button" className={styles.skills_wrapper_button_close} onClick={() => setDivWrapperSkills(false)}>
+                                    <Fi.FiChevronUp />
+                                </button>
+                                {useContext.skills.length > 0 ?
+                                    useContext.skills.map((skill, index) => {
+                                        return (
+                                            <label key={index.toString()} className={styles.skills}>
+                                                <input type="checkbox" checked={skill.checked}
+                                                    onChange={() => handleToggleChecked(skill)} />
+                                                <p>{skill.name}</p>
+                                            </label>
+                                        )
+                                    })
+                                    : <span>Nenhuma skill</span>}
+                            </div>
+                        )}
+                        <textarea placeholder="Descrição do projeto" value={description} onChange={e => setDescription(e.target.value)} />
+
+                        <button type="submit">
+                            {loading ? 'Adicionando...' : 'Adicionar'}
+                        </button>
+                    </form>
+                    <div className={styles.container_view}>
+                        <ul className={styles.container_li}>
+                            {useContext.projects.length > 0 ?
+                                useContext.projects.map((project: ProjectProps, index: number) => {
+                                    return (
+                                        <li key={index.toString()} className={styles.row_project}>
+                                            <p>{project.name}</p>
+                                            <button onClick={() => useContext.handleDeleteDoc('projects', project.id)}><Fi.FiTrash /></button>
+                                        </li>
+                                    )
+                                })
+                                : <span>Nenhum projeto</span>}
+                        </ul>
+                    </div>
+                </div>
+            </ContainerFlexDiv>
         </Container>
     )
 }
