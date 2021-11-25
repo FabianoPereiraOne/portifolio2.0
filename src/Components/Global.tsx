@@ -1,24 +1,24 @@
 import styled from 'styled-components'
 
 type progress = {
-  progressValue: number;
-  as?: React.ElementType | keyof JSX.IntrinsicElements;
-};
+  progressValue: number
+  as?: React.ElementType | keyof JSX.IntrinsicElements
+}
 
 type SkillProgressBarProps = {
-  value: number;
-  as?: React.ElementType | keyof JSX.IntrinsicElements;
-};
+  value: number
+  as?: React.ElementType | keyof JSX.IntrinsicElements
+}
 
 export const ProgressBar = styled.span<progress>`
-    width: 4rem;
-    height: 100%;
-    border-radius: 1rem;
-    background-color: var(--blue-normal);
-    position: absolute;
-    left: ${props => props.progressValue}%;
-    top: 0;
-    transition: 0.35s;
+  width: 4rem;
+  height: 100%;
+  border-radius: 1rem;
+  background-color: var(--blue-normal);
+  position: absolute;
+  left: ${props => props.progressValue}%;
+  top: 0;
+  transition: 0.35s;
 `
 
 export const ButtonPrimary = styled.button`
@@ -40,23 +40,22 @@ export const ButtonPrimary = styled.button`
 `
 
 export const ContainerProgressBar = styled.div`
-width: 100%;
-height: 1rem;
-background-color: var(--white-normal);
-border-radius: 2rem;
-display: inline-block;
-
+  width: 100%;
+  height: 1rem;
+  background-color: var(--white-normal);
+  border-radius: 2rem;
+  display: inline-block;
 `
 
 export const SkillProgressBar = styled.div<SkillProgressBarProps>`
-width: ${props => props.value}%;
-height: 100%;
-background-color: var(--blue-light);
-border-radius: 2rem;
+  width: ${props => props.value}%;
+  height: 100%;
+  background-color: var(--blue-light);
+  border-radius: 2rem;
 `
 export const FeaturedProject = styled.div<{
-  image: string,
-  as?: React.ElementType | keyof JSX.IntrinsicElements;
+  image: string
+  as?: React.ElementType | keyof JSX.IntrinsicElements
 }>`
 width: 80%;
 max-width: 1254px;
@@ -90,28 +89,45 @@ export const ButtonImage = styled.button<{ background: string }>`
   align-items: center;
   justify-content: center;
 
-  & svg{
+  & svg {
     opacity: 0;
     transition: opacity 0.3s;
   }
 
-  &:hover svg{
+  &:hover svg {
     opacity: 1;
+  }
+
+  @media screen and (max-width: 400px) {
+    & {
+      width: 100%;
+    }
   }
 `
 
 export const Container = styled.section`
-display: flex;
-width: 100%;
-min-height: 100vh;
+  display: flex;
+  width: 100%;
+  height: 100vh;
 `
 export const ContainerFlexDiv = styled.div`
-flex: 1;
-min-height: 100vh;
+  flex: 1;
+  min-height: 100vh;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--blue-normal);
+    border-radius: 0.2rem;
+  }
 `
 
 export const ContainerFlexForm = styled.form`
-flex: 1;
-min-height: 100vh;
-padding: 0 2rem;
+  flex: 1;
+  min-height: 100vh;
+  overflow-y: auto;
 `

@@ -60,6 +60,13 @@
   align-items: center;
 }
 
+.container_anchor a:focus {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: var(--blue-dark);
+  border: none;
+}
+
 .container_anchor a svg {
   margin-right: 0.3rem;
   font-size: 1.3rem;

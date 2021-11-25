@@ -121,7 +121,7 @@
 .section_banner_default p {
   font-size: 1.5rem;
   text-transform: uppercase;
-  color: var(--orange-light);
+  color: var(--red-normal);
   z-index: 2;
   text-align: center;
   font-weight: 500;

@@ -7,7 +7,7 @@
 --black-light: #403C3A;
 --black-normal: #25201E;
 --black-dark: #0D0A09;
---orange-light: #DB8F2C;
+--red-normal: #DB8F2C;
 --orange-normal: #C27613;
 --orange-dark: #A85F00;
 --white-light: #FFFEFE;
