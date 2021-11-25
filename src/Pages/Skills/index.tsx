@@ -1,91 +1,109 @@
 import styles from './styles.module.css'
 import { Sidebar } from '../../Components/Sidebar'
-import { Container, ContainerFlexDiv } from '../../Components/Global'
+import {
+  Container,
+  ContainerFlexDiv,
+  ContainerRowColumn,
+  PanelViewDark,
+  RowDatas
+} from '../../Components/Global'
 import { FormEvent, useState, useEffect } from 'react'
 import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css';
+import 'rc-slider/assets/index.css'
 import { usePortfolioContext } from '../../contexts'
 import { SkillsTypes } from '../../types/contextTypes'
 import { toast } from 'react-toastify'
+import { Header } from '../../Components/Header'
+import * as Fi from 'react-icons/fi'
 
 export const Skills = () => {
-    const [name, setName] = useState('')
-    const [progress, setProgress] = useState(0)
-    const [loading, setLoading] = useState(false)
-    const useContext = usePortfolioContext()
+  const [name, setName] = useState('')
+  const [progress, setProgress] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const useContext = usePortfolioContext()
 
+  useEffect(() => {
+    useContext.setLoad(true)
+    useContext.handleGetSkills().finally(() => useContext.setLoad(false))
+    // eslint-disable-next-line
+  }, [])
 
-    useEffect(() => {
-        useContext.setLoad(true)
-        useContext.handleGetSkills()
-            .finally(() => useContext.setLoad(false))
-        // eslint-disable-next-line
-    }, [])
-
-
-    const handleProcessAddSkill = (e: FormEvent) => {
-        e.preventDefault()
-        if (name.length > 0) {
-            handleClearStates()
-            setLoading(true)
-            useContext.handleAddSkill(name, progress)
-                .finally(() => {
-                    setLoading(false)
-                })
-        } else {
-            toast.info("Preencha todos os campos!")
-        }
+  const handleProcessAddSkill = (e: FormEvent) => {
+    e.preventDefault()
+    if (name.length > 0) {
+      handleClearStates()
+      setLoading(true)
+      useContext.handleAddSkill(name, progress).finally(() => {
+        setLoading(false)
+      })
+    } else {
+      toast.info('Preencha todos os campos!')
     }
+  }
 
-    const handleUpdateProgress = (positonDragged: number) => {
-        setProgress(positonDragged)
-    }
+  const handleUpdateProgress = (positonDragged: number) => {
+    setProgress(positonDragged)
+  }
 
-    const handleClearStates = () => {
-        setName('')
-        setProgress(0)
-    }
+  const handleClearStates = () => {
+    setName('')
+    setProgress(0)
+  }
 
-    const handleDeleteSkill = (skill: SkillsTypes) => {
-        useContext.handleDeleteDoc('skills', skill.id)
-    }
+  const handleDeleteSkill = (skill: SkillsTypes) => {
+    useContext.handleDeleteDoc('skills', skill.id)
+  }
 
-    if (useContext.load) {
-        return <h1>Carregando...</h1>
-    }
+  if (useContext.load) {
+    return <h1>Carregando...</h1>
+  }
 
-    return (
-        <Container>
-            <Sidebar />
-            <ContainerFlexDiv>
-                <form className={styles.action_add_skills} onSubmit={handleProcessAddSkill}>
-                    <input type="text" value={name} onChange={e => setName(e.target.value)} />
-                    <div>
-                        <Slider
-                            max={100}
-                            value={progress}
-                            onChange={handleUpdateProgress}
-                            trackStyle={{ background: '#2c9ddb' }}
-                            railStyle={{ background: '#2c9ddb' }}
-                            handleStyle={{ borderColor: '#1484c1', borderWidth: 4 }}
-                        />
-                        <span>{progress}%</span>
-                    </div>
-                    <button type="submit">{
-                        loading ? 'Adicionando...' : 'Adicionar'
-                    }</button>
-                </form>
-                <ul className={styles.views_skills}>
-                    {useContext.skills.map((skill: SkillsTypes, index: number) => {
-                        return (
-                            <li key={index.toString()}>
-                                <p>{skill.name}</p>
-                                <button type="button" onClick={() => handleDeleteSkill(skill)}>Trash</button>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </ContainerFlexDiv>
-        </Container>
-    )
+  return (
+    <Container>
+      <Sidebar />
+      <ContainerFlexDiv>
+        <Header />
+        <ContainerRowColumn>
+          <form className={styles.form} onSubmit={handleProcessAddSkill}>
+            <input
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+            <div>
+              <Slider
+                max={100}
+                value={progress}
+                onChange={handleUpdateProgress}
+                trackStyle={{ background: '#2c9ddb' }}
+                railStyle={{ background: '#2c9ddb' }}
+                handleStyle={{ borderColor: '#1484c1', borderWidth: 4 }}
+              />
+              <span>{progress}%</span>
+            </div>
+            <button type="submit">
+              {loading ? 'Adicionando...' : 'Adicionar'}
+            </button>
+          </form>
+          <div className={styles.container_ul}>
+            <PanelViewDark className={styles.views_skills}>
+              {useContext.skills.map((skill: SkillsTypes, index: number) => {
+                return (
+                  <RowDatas key={index.toString()}>
+                    <p>{skill.name}</p>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteSkill(skill)}
+                    >
+                      <Fi.FiTrash />
+                    </button>
+                  </RowDatas>
+                )
+              })}
+            </PanelViewDark>
+          </div>
+        </ContainerRowColumn>
+      </ContainerFlexDiv>
+    </Container>
+  )
 }

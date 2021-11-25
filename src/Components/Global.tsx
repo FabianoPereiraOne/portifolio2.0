@@ -131,3 +131,85 @@ export const ContainerFlexForm = styled.form`
   min-height: 100vh;
   overflow-y: auto;
 `
+
+export const PanelViewDark = styled.ul`
+  width: 100%;
+  height: 80vh;
+  background-color: var(--black-normal);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.2rem;
+  overflow-y: auto;
+  gap: 0.5rem;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--blue-light);
+    border-radius: 0.2rem;
+  }
+
+  & span {
+    color: var(--white-light);
+    margin: auto;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+`
+
+export const ContainerRowColumn = styled.section`
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 6rem);
+  padding: 0 2rem;
+  gap: 2rem;
+  margin-top: 1rem;
+
+  @media screen and (max-width: 1080px) {
+    & {
+      flex-direction: column;
+    }
+  }
+`
+
+export const RowDatas = styled.li`
+  & {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  & p {
+    max-width: 25rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--white-normal);
+    text-transform: capitalize;
+    font-size: 1.1rem;
+  }
+
+  & button {
+    width: 3rem;
+    height: 2rem;
+    border: none;
+    background-color: var(--black-light);
+    font-size: 1.5rem;
+    color: var(--white-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.2rem;
+    transition: 0.3s;
+  }
+
+  & button:hover {
+    background-color: var(--blue-dark);
+  }
+`

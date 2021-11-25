@@ -7,7 +7,10 @@ import { FormEvent, useState, useEffect } from 'react'
 import {
   ButtonImage,
   Container,
-  ContainerFlexDiv
+  ContainerFlexDiv,
+  ContainerRowColumn,
+  PanelViewDark,
+  RowDatas
 } from '../../Components/Global'
 import * as types from '../../types/global'
 import * as typesContext from '../../types/contextTypes'
@@ -169,7 +172,7 @@ export const Projects = () => {
       <Sidebar />
       <ContainerFlexDiv>
         <Header />
-        <div className={styles.container_view_and_form}>
+        <ContainerRowColumn>
           <form className={styles.form} onSubmit={handleValidationAddProject}>
             {capaLocalUrl.length > 0 ? (
               <ButtonImage
@@ -245,12 +248,12 @@ export const Projects = () => {
             </button>
           </form>
           <div className={styles.container_view}>
-            <ul className={styles.container_li}>
+            <PanelViewDark className={styles.container_li}>
               {useContext.projects.length > 0 ? (
                 useContext.projects.map(
                   (project: ProjectProps, index: number) => {
                     return (
-                      <li key={index.toString()} className={styles.row_project}>
+                      <RowDatas key={index.toString()}>
                         <p>{project.name}</p>
                         <button
                           onClick={() =>
@@ -259,16 +262,16 @@ export const Projects = () => {
                         >
                           <Fi.FiTrash />
                         </button>
-                      </li>
+                      </RowDatas>
                     )
                   }
                 )
               ) : (
                 <span>Nenhum projeto</span>
               )}
-            </ul>
+            </PanelViewDark>
           </div>
-        </div>
+        </ContainerRowColumn>
       </ContainerFlexDiv>
     </Container>
   )

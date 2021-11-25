@@ -4,13 +4,19 @@ import { usePortfolioContext } from '../../contexts'
 import styles from './styles.module.css'
 
 function Project({ project }: Types.ProjectParams) {
-    const useContext = usePortfolioContext()
+  const useContext = usePortfolioContext()
 
-    return (
-        <div className={styles.container_card_carousel} onClick={() => useContext.handleActiveProjectFromCarousel(project)}>
-            <CG.ProjectCard width={useContext.projectWidth} image={project.imageSmall} />
-        </div>
-    )
+  return (
+    <div
+      className={styles.container_card_carousel}
+      onClick={() => useContext.handleActiveProjectFromCarousel(project)}
+    >
+      <CG.ProjectCard
+        width={useContext.projectWidth}
+        image={project.capaSmall}
+      />
+    </div>
+  )
 }
 
 export default Project

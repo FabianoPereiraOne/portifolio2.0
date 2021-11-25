@@ -1,7 +1,7 @@
 export type ProjectProps = {
     name: string,
-    imageSmall: string,
-    imageLarge: string,
+    capaSmall: string,
+    capaLarge: string,
     description: string,
     skills: string,
     isActive: boolean,
