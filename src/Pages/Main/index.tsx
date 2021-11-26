@@ -13,6 +13,7 @@ function Main() {
 
   useEffect(() => {
     app()
+    useContext.handleGetSkills()
     useContext.handleGetProjects().finally(() => {
       setLoading(false)
     })

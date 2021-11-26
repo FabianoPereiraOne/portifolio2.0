@@ -231,16 +231,15 @@ export const InputText = styled.input`
   }
 `
 
-export const TextArea = styled.input`
+export const TextArea = styled.textarea`
   width: 100%;
-  height: 3rem;
+  height: 10rem;
   border: 1px solid var(--gray-normal);
   border-radius: 0.2rem;
   padding: 1rem;
   font-size: 1.1rem;
   color: var(--gray-normal);
   resize: none;
-  height: 10rem;
 
   &:focus {
     outline-style: solid;

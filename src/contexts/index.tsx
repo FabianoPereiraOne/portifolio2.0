@@ -246,7 +246,7 @@ export const PortfolioProvider = ({
       id: skillRef.id
     })
       .then(() => {
-        toast.success('Adicionada com sucesso!')
+        toast.success('Adicionado com sucesso!')
       })
       .catch(error => {
         console.log(error)
