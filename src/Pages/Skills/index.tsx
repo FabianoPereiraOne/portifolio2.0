@@ -9,16 +9,22 @@ import { SkillsTypes } from '../../types/contextTypes'
 import { toast } from 'react-toastify'
 import { Header } from '../../Components/Header'
 import * as Fi from 'react-icons/fi'
+import { Loading } from '../../Components/Loading'
 
 export const Skills = () => {
   const [name, setName] = useState('')
   const [progress, setProgress] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [load, setLoad] = useState({
+    add: false,
+    get: false,
+    delete: false
+  })
   const useContext = usePortfolioContext()
 
   useEffect(() => {
-    useContext.setLoad(true)
-    useContext.handleGetSkills().finally(() => useContext.setLoad(false))
+    setLoading(true)
+    useContext.handleGetSkills().finally(() => setLoading(false))
     // eslint-disable-next-line
   }, [])
 
@@ -26,9 +32,9 @@ export const Skills = () => {
     e.preventDefault()
     if (name.length > 0) {
       handleClearStates()
-      setLoading(true)
+      setLoad({ ...load, add: true })
       useContext.handleAddSkill(name, progress).finally(() => {
-        setLoading(false)
+        setLoad({ ...load, add: false })
       })
     } else {
       toast.info('Preencha todos os campos!')
@@ -48,8 +54,8 @@ export const Skills = () => {
     useContext.handleDeleteDoc('skills', skill.id)
   }
 
-  if (useContext.load) {
-    return <h1>Carregando...</h1>
+  if (loading) {
+    return <Loading />
   }
 
   return (
@@ -78,7 +84,7 @@ export const Skills = () => {
               <p aria-label="Porcentagem da habilidade">{progress}%</p>
             </div>
             <CG.ButtonSubmit type="submit">
-              {loading ? 'Adicionando...' : 'Adicionar'}
+              {load.add ? 'Adicionando...' : 'Adicionar'}
             </CG.ButtonSubmit>
           </form>
           <div className={styles.container_ul}>

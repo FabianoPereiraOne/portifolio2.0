@@ -25,6 +25,7 @@ export type PortfolioContextTypes = {
     setProjectWidth: (state:number)=> void;
     handleDeleteImage: (collect:string, id:string,name: string)=> void;
     handleDeleteProject: (project:ProjectProps)=> void;
+    handleToggleChecked: (skillClick: SkillsTypes)=> void
 }
 
 export type portfolioProviderTypes = {

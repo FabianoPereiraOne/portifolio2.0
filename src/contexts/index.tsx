@@ -305,6 +305,24 @@ export const PortfolioProvider = ({
     await handleDeleteDoc('projects', project.id)
   }
 
+  const handleToggleChecked = (skillClick: Types.SkillsTypes) => {
+    const newListSkills = skills.map((skill: Types.SkillsTypes) => {
+      if (skill.id === skillClick.id) {
+        return {
+          name: skill.name,
+          progress: skill.progress,
+          checked: !skill.checked,
+          created: skill.created,
+          id: skill.id
+        }
+      } else {
+        return skill
+      }
+    })
+
+    setSkills(newListSkills)
+  }
+
   return (
     <PortfolioContext.Provider
       value={{
@@ -331,7 +349,8 @@ export const PortfolioProvider = ({
         handleDeleteDoc,
         setProjectWidth,
         handleDeleteImage,
-        handleDeleteProject
+        handleDeleteProject,
+        handleToggleChecked
       }}
     >
       {children}

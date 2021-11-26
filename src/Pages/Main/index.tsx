@@ -6,6 +6,7 @@ import Footer from './Footer'
 import { useEffect, useState } from 'react'
 import { usePortfolioContext } from '../../contexts'
 import { app } from '../../services/firebase'
+import { Loading } from '../../Components/Loading'
 
 function Main() {
   const useContext = usePortfolioContext()
@@ -22,7 +23,7 @@ function Main() {
   }, [])
 
   if (loading) {
-    return <span>Carregando...</span>
+    return <Loading />
   }
 
   return (

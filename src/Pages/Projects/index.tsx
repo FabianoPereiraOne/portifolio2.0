@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 import { FormEvent, useState, useEffect } from 'react'
 import * as CG from '../../Components/Global'
 import * as types from '../../types/global'
-import * as typesContext from '../../types/contextTypes'
 import * as Fi from 'react-icons/fi'
 import { ProjectProps } from '../../types/ProjectProps'
+import { Loading } from '../../Components/Loading'
 
 export const Projects = () => {
   const useContext = usePortfolioContext()
@@ -19,10 +19,15 @@ export const Projects = () => {
     useState<null | React.ChangeEvent<HTMLInputElement>>(null)
   const [loading, setLoading] = useState(false)
   const [divWrapperSkill, setDivWrapperSkills] = useState(false)
+  const [load, setLoad] = useState({
+    add: false,
+    get: false,
+    delete: false
+  })
 
   useEffect(() => {
-    useContext.setLoad(true)
-    useContext.handleGetProjects().finally(() => useContext.setLoad(false))
+    setLoading(true)
+    useContext.handleGetProjects().finally(() => setLoading(false))
     // eslint-disable-next-line
   }, [])
 
@@ -44,7 +49,7 @@ export const Projects = () => {
       const skills = handleGetSkillsChecked()
 
       if (handleInspectFileTypeAsAccepted(fileType)) {
-        setLoading(true)
+        setLoad({ ...load, add: true })
         useContext
           .handleAddProject({
             name,
@@ -53,7 +58,7 @@ export const Projects = () => {
             skills
           })
           .finally(() => {
-            setLoading(false)
+            setLoad({ ...load, add: false })
           })
 
         handleClearStates()
@@ -136,28 +141,8 @@ export const Projects = () => {
     }
   }
 
-  const handleToggleChecked = (skillClick: typesContext.SkillsTypes) => {
-    const newListSkills = useContext.skills.map(
-      (skill: typesContext.SkillsTypes) => {
-        if (skill.id === skillClick.id) {
-          return {
-            name: skill.name,
-            progress: skill.progress,
-            checked: !skill.checked,
-            created: skill.created,
-            id: skill.id
-          }
-        } else {
-          return skill
-        }
-      }
-    )
-
-    useContext.setSkills(newListSkills)
-  }
-
-  if (useContext.load) {
-    return <h1>Carregando...</h1>
+  if (loading) {
+    return <Loading />
   }
 
   return (
@@ -218,7 +203,7 @@ export const Projects = () => {
                         <input
                           type="checkbox"
                           checked={skill.checked}
-                          onChange={() => handleToggleChecked(skill)}
+                          onChange={() => useContext.handleToggleChecked(skill)}
                         />
                         <p>{skill.name}</p>
                       </label>
@@ -237,7 +222,7 @@ export const Projects = () => {
             />
 
             <CG.ButtonSubmit type="submit">
-              {loading ? 'Adicionando...' : 'Adicionar'}
+              {load.add ? 'Adicionando...' : 'Adicionar'}
             </CG.ButtonSubmit>
           </form>
           <div className={styles.container_view}>
@@ -249,9 +234,9 @@ export const Projects = () => {
                       <CG.RowDatas key={index.toString()}>
                         <p>{project.name}</p>
                         <button
-                          onClick={() =>
+                          onClick={() => {
                             useContext.handleDeleteDoc('projects', project.id)
-                          }
+                          }}
                         >
                           <Fi.FiTrash />
                         </button>
