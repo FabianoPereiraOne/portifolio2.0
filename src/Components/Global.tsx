@@ -164,10 +164,11 @@ export const PanelViewDark = styled.ul`
 export const ContainerRowColumn = styled.section`
   display: flex;
   width: 100%;
+  max-width: 1500px;
   min-height: calc(100vh - 6rem);
   padding: 0 2rem;
   gap: 2rem;
-  margin-top: 1rem;
+  margin: 1rem auto;
 
   @media screen and (max-width: 1080px) {
     & {
@@ -212,4 +213,62 @@ export const RowDatas = styled.li`
   & button:hover {
     background-color: var(--blue-dark);
   }
+`
+export const InputText = styled.input`
+  width: 100%;
+  height: 3rem;
+  border: 1px solid var(--gray-normal);
+  border-radius: 0.2rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+  color: var(--gray-normal);
+
+  &:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: var(--blue-light);
+    border: none;
+  }
+`
+
+export const TextArea = styled.input`
+  width: 100%;
+  height: 3rem;
+  border: 1px solid var(--gray-normal);
+  border-radius: 0.2rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+  color: var(--gray-normal);
+  resize: none;
+  height: 10rem;
+
+  &:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: var(--blue-light);
+    border: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--black-normal);
+    border-radius: 0.2rem;
+  }
+`
+
+export const ButtonSubmit = styled.button`
+  width: 80%;
+  height: 3rem;
+  background-color: var(--red-normal);
+  margin: 0 auto;
+  border: none;
+  border-radius: 0.2rem;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: var(--white-normal);
+  font-weight: 600;
 `

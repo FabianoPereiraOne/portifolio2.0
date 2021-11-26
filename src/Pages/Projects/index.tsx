@@ -4,14 +4,7 @@ import { Header } from '../../Components/Header'
 import { usePortfolioContext } from '../../contexts'
 import { toast } from 'react-toastify'
 import { FormEvent, useState, useEffect } from 'react'
-import {
-  ButtonImage,
-  Container,
-  ContainerFlexDiv,
-  ContainerRowColumn,
-  PanelViewDark,
-  RowDatas
-} from '../../Components/Global'
+import * as CG from '../../Components/Global'
 import * as types from '../../types/global'
 import * as typesContext from '../../types/contextTypes'
 import * as Fi from 'react-icons/fi'
@@ -168,20 +161,20 @@ export const Projects = () => {
   }
 
   return (
-    <Container>
+    <CG.Container>
       <Sidebar />
-      <ContainerFlexDiv>
+      <CG.ContainerFlexDiv>
         <Header />
-        <ContainerRowColumn>
+        <CG.ContainerRowColumn>
           <form className={styles.form} onSubmit={handleValidationAddProject}>
             {capaLocalUrl.length > 0 ? (
-              <ButtonImage
+              <CG.ButtonImage
                 onClick={handleDeleteCapa}
                 background={capaLocalUrl}
                 type="button"
               >
                 <Fi.FiRepeat />
-              </ButtonImage>
+              </CG.ButtonImage>
             ) : (
               <label className={styles.upload_capa}>
                 <input
@@ -192,7 +185,7 @@ export const Projects = () => {
                 <Fi.FiPlus />
               </label>
             )}
-            <input
+            <CG.InputText
               placeholder="Nome do projeto"
               aria-label="Preencha com o nome do projeto"
               type="text"
@@ -236,24 +229,24 @@ export const Projects = () => {
                 )}
               </div>
             )}
-            <textarea
+            <CG.TextArea
               placeholder="Descrição do projeto"
               value={description}
               tabIndex={2}
               onChange={e => setDescription(e.target.value)}
             />
 
-            <button type="submit">
+            <CG.ButtonSubmit type="submit">
               {loading ? 'Adicionando...' : 'Adicionar'}
-            </button>
+            </CG.ButtonSubmit>
           </form>
           <div className={styles.container_view}>
-            <PanelViewDark className={styles.container_li}>
+            <CG.PanelViewDark className={styles.container_li}>
               {useContext.projects.length > 0 ? (
                 useContext.projects.map(
                   (project: ProjectProps, index: number) => {
                     return (
-                      <RowDatas key={index.toString()}>
+                      <CG.RowDatas key={index.toString()}>
                         <p>{project.name}</p>
                         <button
                           onClick={() =>
@@ -262,17 +255,17 @@ export const Projects = () => {
                         >
                           <Fi.FiTrash />
                         </button>
-                      </RowDatas>
+                      </CG.RowDatas>
                     )
                   }
                 )
               ) : (
                 <span>Nenhum projeto</span>
               )}
-            </PanelViewDark>
+            </CG.PanelViewDark>
           </div>
-        </ContainerRowColumn>
-      </ContainerFlexDiv>
-    </Container>
+        </CG.ContainerRowColumn>
+      </CG.ContainerFlexDiv>
+    </CG.Container>
   )
 }

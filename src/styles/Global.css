@@ -32,8 +32,8 @@
 
   /* Sizes */
   --size-xl: clamp(3rem, 4rem, 5rem);
-  --size-md: clamp(1.5rem, 2rem, 2.5rem);
-  --size-sm: clamp(0.75rem, 1.1rem, 1.4rem);
+  --size-md: clamp(1.3rem, 1.5rem, 2rem);
+  --size-sm: clamp(0.75rem, 1.1rem, 1.2rem);
 }
 
 a {

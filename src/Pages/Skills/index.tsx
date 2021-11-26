@@ -1,12 +1,6 @@
 import styles from './styles.module.css'
 import { Sidebar } from '../../Components/Sidebar'
-import {
-  Container,
-  ContainerFlexDiv,
-  ContainerRowColumn,
-  PanelViewDark,
-  RowDatas
-} from '../../Components/Global'
+import * as CG from '../../Components/Global'
 import { FormEvent, useState, useEffect } from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
@@ -59,18 +53,20 @@ export const Skills = () => {
   }
 
   return (
-    <Container>
+    <CG.Container>
       <Sidebar />
-      <ContainerFlexDiv>
+      <CG.ContainerFlexDiv>
         <Header />
-        <ContainerRowColumn>
+        <CG.ContainerRowColumn>
           <form className={styles.form} onSubmit={handleProcessAddSkill}>
-            <input
+            <CG.InputText
+              tabIndex={1}
+              placeholder="Nome da habilidade"
               type="text"
               value={name}
               onChange={e => setName(e.target.value)}
             />
-            <div>
+            <div className={styles.container_progress}>
               <Slider
                 max={100}
                 value={progress}
@@ -79,17 +75,17 @@ export const Skills = () => {
                 railStyle={{ background: '#2c9ddb' }}
                 handleStyle={{ borderColor: '#1484c1', borderWidth: 4 }}
               />
-              <span>{progress}%</span>
+              <p aria-label="Porcentagem da habilidade">{progress}%</p>
             </div>
-            <button type="submit">
+            <CG.ButtonSubmit type="submit">
               {loading ? 'Adicionando...' : 'Adicionar'}
-            </button>
+            </CG.ButtonSubmit>
           </form>
           <div className={styles.container_ul}>
-            <PanelViewDark className={styles.views_skills}>
+            <CG.PanelViewDark className={styles.views_skills}>
               {useContext.skills.map((skill: SkillsTypes, index: number) => {
                 return (
-                  <RowDatas key={index.toString()}>
+                  <CG.RowDatas key={index.toString()}>
                     <p>{skill.name}</p>
                     <button
                       type="button"
@@ -97,13 +93,13 @@ export const Skills = () => {
                     >
                       <Fi.FiTrash />
                     </button>
-                  </RowDatas>
+                  </CG.RowDatas>
                 )
               })}
-            </PanelViewDark>
+            </CG.PanelViewDark>
           </div>
-        </ContainerRowColumn>
-      </ContainerFlexDiv>
-    </Container>
+        </CG.ContainerRowColumn>
+      </CG.ContainerFlexDiv>
+    </CG.Container>
   )
 }
