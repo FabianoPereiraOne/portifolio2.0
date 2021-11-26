@@ -6,9 +6,10 @@ import technology from '../../assets/technology.svg'
 import styles from './styles.module.css'
 
 export const Login = () => {
-  const useContext = usePortfolioContext()
+  const { handleSigin } = usePortfolioContext()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     app()
@@ -16,13 +17,14 @@ export const Login = () => {
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault()
-    useContext.setLoading(true)
+    setLoading(true)
 
     if (email.length > 0 && password.length > 0) {
-      useContext.handleSigin(email, password)
+      handleSigin(email, password).finally(() => {
+        setLoading(false)
+      })
     } else {
       toast.info('Preencha todos os campos!')
-      useContext.setLoading(false)
     }
 
     setEmail('')
@@ -57,9 +59,7 @@ export const Login = () => {
             onChange={e => setPassword(e.target.value)}
             type="password"
           />
-          <button type="submit">
-            {useContext.loading ? 'Acessando...' : 'Acessar'}
-          </button>
+          <button type="submit">{loading ? 'Acessando...' : 'Acessar'}</button>
         </form>
       </div>
     </section>

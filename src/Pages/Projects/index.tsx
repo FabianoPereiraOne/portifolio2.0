@@ -1,12 +1,12 @@
 import styles from './styles.module.css'
+import * as Fi from 'react-icons/fi'
+import * as types from '../../types/global'
+import * as CG from '../../Components/Global'
 import { Sidebar } from '../../Components/Sidebar'
 import { Header } from '../../Components/Header'
 import { usePortfolioContext } from '../../contexts'
 import { toast } from 'react-toastify'
 import { FormEvent, useState, useEffect } from 'react'
-import * as CG from '../../Components/Global'
-import * as types from '../../types/global'
-import * as Fi from 'react-icons/fi'
 import { ProjectProps } from '../../types/ProjectProps'
 import { Loading } from '../../Components/Loading'
 
@@ -15,8 +15,7 @@ export const Projects = () => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [capaLocalUrl, setCapaLocalUrl] = useState('')
-  const [fileCapa, setFileCapa] =
-    useState<null | React.ChangeEvent<HTMLInputElement>>(null)
+  const [fileCapa, setFileCapa] = useState<types.FileType>(null)
   const [loading, setLoading] = useState(false)
   const [divWrapperSkill, setDivWrapperSkills] = useState(false)
   const [load, setLoad] = useState({
@@ -27,6 +26,7 @@ export const Projects = () => {
 
   useEffect(() => {
     setLoading(true)
+    useContext.handleGetSkills()
     useContext.handleGetProjects().finally(() => setLoading(false))
     // eslint-disable-next-line
   }, [])

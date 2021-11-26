@@ -11,10 +11,10 @@ export type PortfolioContextTypes = {
     load: boolean;
     handleActiveProjectFromCarousel: ( project:ProjectProps )=> void;
     handleGetActive:()=> void;
-    handleSigin: (email:string, password:string)=> void;
+    handleSigin: (email:string, password:string)=> Promise<void>;
     setLoading: (state:boolean)=> void;
     setToggleMenu: (state:boolean)=> void;
-    handleSignOut: ()=> void;
+    handleSignOut: ()=> Promise<void>;
     handleAddProject: (preProject:preProjectProps)=> Promise<void>;
     handleGetProjects: ()=> Promise<void>;
     setSkills: (state:SkillsTypes[])=> void;

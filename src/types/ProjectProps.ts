@@ -3,8 +3,9 @@ export type ProjectProps = {
     capaSmall: string,
     capaLarge: string,
     description: string,
-    skills: string,
+    skills: Array<string>,
     isActive: boolean,
+    created: Date,
     id: string
 }
 

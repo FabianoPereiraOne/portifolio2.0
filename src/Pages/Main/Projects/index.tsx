@@ -11,12 +11,12 @@ import { Empty } from '../../../Components/Empty'
 import { Link } from 'react-router-dom'
 
 function Projects() {
-  const useContext = usePortfolioContext()
+  const { handleGetActive, projects, projectActive } = usePortfolioContext()
   const btn = useRef<HTMLButtonElement>(null)
   const gliderRef = useRef<GliderMethods>(null)
 
   useEffect(() => {
-    useContext.handleGetActive()
+    handleGetActive()
     const timeInterval = setInterval(() => btn.current?.click(), 10000)
 
     return () => {
@@ -28,16 +28,26 @@ function Projects() {
   return (
     <section className={styles.content_projects} id="projetos">
       <Title title="Projetos" subTitle="Veja soluções já desenvolvidas." />
-      {useContext.projects.length > 0 ? (
+      {projects.length > 0 ? (
         <section className={styles.group_projects}>
           <FeaturedProject
             className={styles.bannerFeatured}
-            image={useContext.projectActive.capaLarge}
+            image={projectActive.capaLarge}
           >
             <article className={styles.badFeatured}>
               <div className={styles.content_title}>
-                <h3>{useContext.projectActive.name}</h3>
-                <p>{useContext.projectActive.skills}</p>
+                <h3>{projectActive.name}</h3>
+                <p aria-label="Habilidades utilizadas nesse projeto">
+                  {projectActive.skills.map(
+                    (nameSkill: string, index: number) => {
+                      return (
+                        <span key={index.toString()}>
+                          {nameSkill} <small>|</small>
+                        </span>
+                      )
+                    }
+                  )}
+                </p>
               </div>
               <Link to="/#">Saiba mais</Link>
             </article>
@@ -88,8 +98,8 @@ function Projects() {
                 ]}
               >
                 <div className="glider-track">
-                  {useContext.projects.length > 0
-                    ? useContext.projects.map((project, index: number) => {
+                  {projects.length > 0
+                    ? projects.map((project, index: number) => {
                         return <Project key={index} project={project} />
                       })
                     : ''}

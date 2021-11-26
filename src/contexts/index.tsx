@@ -57,6 +57,7 @@ export const PortfolioProvider = ({
           description: project.description,
           skills: project.skills,
           isActive: false,
+          created: project.created,
           id: project.id
         }
       } else {
@@ -81,6 +82,7 @@ export const PortfolioProvider = ({
           description: project.description,
           isActive: false,
           skills: project.skills,
+          created: project.created,
           id: project.id
         }
       } else {
@@ -99,8 +101,8 @@ export const PortfolioProvider = ({
     })
   }
 
-  const handleSigin = (email: string, password: string) => {
-    signInWithEmailAndPassword(getAuth(), email, password)
+  const handleSigin = async (email: string, password: string) => {
+    await signInWithEmailAndPassword(getAuth(), email, password)
       .then(() => {
         setLoading(false)
         setSigned(true)
@@ -109,12 +111,12 @@ export const PortfolioProvider = ({
       .catch(error => {
         console.log(error)
         setLoading(false)
-        toast.error('Acesso snegado!')
+        toast.error('Acesso negado!')
       })
   }
 
-  const handleSignOut = () => {
-    signOut(getAuth())
+  const handleSignOut = async () => {
+    await signOut(getAuth())
       .then(() => {
         toast.success('Deslogado com sucesso!')
         setSigned(false)
@@ -217,6 +219,7 @@ export const PortfolioProvider = ({
               capaSmall: snapshot.data().capaSmall,
               capaLarge: snapshot.data().capaLarge,
               name: snapshot.data().name,
+              created: snapshot.data().created,
               isActive: index === 0 ? true : snapshot.data().isActive
             }
 

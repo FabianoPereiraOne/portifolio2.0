@@ -45,7 +45,7 @@
 }
 
 .content_footer .menu_links li a:hover {
-  color: var(--red-normal);
+  color: var(--red-light);
 }
 
 .content_footer .group_copy {

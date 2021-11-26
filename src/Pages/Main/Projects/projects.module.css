@@ -69,6 +69,14 @@
   max-height: 3rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  gap: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.content_projects .group_projects .badFeatured .content_title p span small {
+  color: var(--black-light);
 }
 
 .content_projects .group_projects .badFeatured a {
