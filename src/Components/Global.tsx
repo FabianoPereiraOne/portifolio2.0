@@ -26,7 +26,7 @@ export const ButtonPrimary = styled.button`
   height: 3rem;
   font-size: 1.3rem;
   text-transform: uppercase;
-  color: var(--white-light);
+  color: var(--white-normal);
   text-align: center;
   border-radius: 0.2rem;
   transition: 0.3s;
@@ -154,7 +154,7 @@ export const PanelViewDark = styled.ul`
   }
 
   & span {
-    color: var(--white-light);
+    color: var(--white-normal);
     margin: auto;
     font-size: 1.3rem;
     font-weight: 500;
@@ -202,7 +202,7 @@ export const RowDatas = styled.li`
     border: none;
     background-color: var(--black-light);
     font-size: 1.5rem;
-    color: var(--white-light);
+    color: var(--white-normal);
     display: flex;
     align-items: center;
     justify-content: center;

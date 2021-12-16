@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 4rem 3rem;
-  background-color: var(--white-light);
+  background-color: var(--white-normal);
 
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@
   font-size: 1.2rem;
 }
 
-.content_about .about p  small{
+.content_about .about p small {
   margin-left: 0.5rem;
   color: var(--blue-normal);
 }

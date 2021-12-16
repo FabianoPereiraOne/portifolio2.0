@@ -41,7 +41,7 @@
 
 .button_action_skills:hover {
   background: var(--blue-light);
-  color: var(--white-light);
+  color: var(--white-normal);
   border: none;
 }
 
@@ -73,7 +73,7 @@
 .skills_wrapper span {
   margin: auto;
   font-size: var(--size-sm);
-  color: var(--white-light);
+  color: var(--white-normal);
 }
 
 .skills {
@@ -113,7 +113,7 @@
   border: none;
   background: var(--blue-normal);
   border-radius: 0.2rem;
-  color: var(--white-light);
+  color: var(--white-normal);
   cursor: pointer;
   transition: background 0.3s;
 }

@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background-color: var(--white-light);
+  background-color: var(--white-normal);
 }
 
 .container p {

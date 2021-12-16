@@ -1,19 +1,14 @@
 --blue-light: #2C9DDB;
 --blue-normal: #1484C1;
 --blue-dark: #006DA8;
---gray-light: #DDDDDD;
---gray-normal: #7C7B7B;
---gray-dark: #635959;
+--green-light: #4EFF21;
+--green-normal: #42D91C;
+--green-dark: #36B317;
+--white-normal: #FFFEFE;
+--white-dark: #F2F2F2;
+--gray: #DDDDDD
 --black-light: #403C3A;
 --black-normal: #25201E;
---black-dark: #0D0A09;
---red-normal: #DB8F2C;
---orange-normal: #C27613;
---orange-dark: #A85F00;
---white-light: #FFFEFE;
---white-normal: F3F2F2
+--black-dark:#0D0A09;
 
---gradient-blue: linear-gradient(90deg, rgba(219,143,44,1)
-0%, rgba(194,118,19,1) 35%, rgba(168,95,0,1) 100%);
---gradient-orange:linear-gradient(90deg, rgba(44,157,219,1
-) 0%, rgba(20,132,193,1) 35%, rgba(0,109,168,1) 100%);
+--gradient-blue: 90deg, #45ADE6 0%, #0092E0 50.83%, #006DA8 99.79%;
