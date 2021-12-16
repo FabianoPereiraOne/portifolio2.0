@@ -135,6 +135,7 @@
   animation-name: fadInText;
   animation-duration: 10s;
   animation-fill-mode: forwards;
+  transition: 0.3s ease;
 }
 
 .content_text_code .key_green:first-of-type {
@@ -155,6 +156,7 @@
   animation-fill-mode: forwards;
   text-align: center;
   opacity: 0;
+  transition: 0.3s ease;
 }
 
 @keyframes fadInText {

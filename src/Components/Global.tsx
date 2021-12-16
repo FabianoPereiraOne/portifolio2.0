@@ -271,3 +271,42 @@ export const ButtonSubmit = styled.button`
   color: var(--white-normal);
   font-weight: 600;
 `
+export const CardSkill = styled.article`
+  width: 8rem;
+  height: 8rem;
+  background: linear-gradient(
+    180deg,
+    var(--blue-light) 30%,
+    var(--blue-normal) 70%,
+    var(--blue-dark) 99.79%
+  );
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-normal);
+  padding: 1rem;
+  gap: 0.2rem;
+  border-radius: 0.3rem;
+  transition: 1s ease;
+  & svg {
+    font-size: 2.5rem;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: linear-gradient(
+      180deg,
+      var(--blue-light) 40%,
+      var(--blue-normal) 80%,
+      var(--blue-dark) 100%
+    );
+  }
+`
+export const SkillName = styled.p`
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  pointer-events: none;
+`
