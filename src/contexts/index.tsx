@@ -9,7 +9,13 @@ import {
   onSnapshot,
   query,
   orderBy,
-  deleteDoc
+  deleteDoc,
+  limit,
+  getDocs,
+  startAfter,
+  DocumentData,
+  QueryDocumentSnapshot,
+  QuerySnapshot
 } from 'firebase/firestore'
 import {
   getDownloadURL,
@@ -29,9 +35,13 @@ export const PortfolioProvider = ({
 }: Types.portfolioProviderTypes) => {
   const [projects, setProjects] = useState<ProjectProps[]>([])
   const [skills, setSkills] = useState<Types.SkillsTypes[]>([])
+  const [lastProject, setLastProject] = useState<
+    QueryDocumentSnapshot<DocumentData>
+  >({} as QueryDocumentSnapshot<DocumentData>)
   const [projectWidth, setProjectWidth] = useState<number>(0)
   const [signed, setSigned] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
+  const [isEmpty, setIsEmpty] = useState<boolean>(false)
   const [projectActive, setProjectActive] = useState<ProjectProps>(
     {} as ProjectProps
   )
@@ -206,36 +216,51 @@ export const PortfolioProvider = ({
   const handleGetProjects = async () => {
     const projectsRef = query(
       collection(getFirestore(), 'projects'),
-      orderBy('created', 'desc')
+      orderBy('created', 'desc'),
+      limit(6)
     )
-    try {
-      onSnapshot(projectsRef, snapshot => {
-        const listProjects: ProjectProps[] = snapshot.docs.map(
-          (snapshot, index: number) => {
-            const project = {
-              id: snapshot.data().id,
-              skills: snapshot.data().skills,
-              description: snapshot.data().description,
-              capaSmall: snapshot.data().capaSmall,
-              capaLarge: snapshot.data().capaLarge,
-              name: snapshot.data().name,
-              created: snapshot.data().created,
-              isActive: index === 0 ? true : snapshot.data().isActive
-            }
 
-            if (index === 0) {
-              setProjectActive(project)
-            }
+    getDocs(projectsRef)
+      .then(snapshot => updateState(snapshot))
+      .catch(error => console.log(error))
+  }
 
-            return project
-          }
-        )
+  const updateState = (snapshot: QuerySnapshot<DocumentData>) => {
+    const isEmpty = snapshot.size !== 0
+    if (isEmpty) {
+      const listProjects = snapshot.docs.map(project => {
+        const modelProject = {
+          id: project.data().id,
+          skills: project.data().skills,
+          description: project.data().description,
+          capaSmall: project.data().capaSmall,
+          capaLarge: project.data().capaLarge,
+          name: project.data().name,
+          created: project.data().created,
+          isActive: false
+        }
 
-        setProjects(listProjects)
+        return modelProject
       })
-    } catch (error) {
-      console.log(error)
+
+      setProjects(internalValue => [...internalValue, ...listProjects])
+      setLastProject(snapshot.docs[snapshot.docs.length - 1])
+    } else {
+      setIsEmpty(true)
     }
+  }
+
+  const handleLoadMore = async () => {
+    const projectsRef = query(
+      collection(getFirestore(), 'projects'),
+      orderBy('created', 'desc'),
+      startAfter(lastProject),
+      limit(6)
+    )
+
+    getDocs(projectsRef)
+      .then(snapshot => updateState(snapshot))
+      .catch(error => console.log(error))
   }
 
   const handleAddSkill = async (name: string, progress: number) => {
@@ -337,6 +362,7 @@ export const PortfolioProvider = ({
         loading,
         toggleMenu,
         load,
+        isEmpty,
         handleActiveProjectFromCarousel,
         handleGetActive,
         handleSigin,
@@ -353,7 +379,8 @@ export const PortfolioProvider = ({
         setProjectWidth,
         handleDeleteImage,
         handleDeleteProject,
-        handleToggleChecked
+        handleToggleChecked,
+        handleLoadMore
       }}
     >
       {children}

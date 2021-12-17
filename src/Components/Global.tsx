@@ -301,3 +301,24 @@ export const SkillName = styled.p`
   font-weight: 400;
   pointer-events: none;
 `
+export const ButtonMore = styled.button<{ isEmpty: boolean }>`
+  background: ${props =>
+    props.isEmpty
+      ? 'var(--gray-normal)'
+      : `linear-gradient(
+        90deg,
+        rgba(44, 157, 219, 1) 0%,
+        rgba(20, 132, 193, 1) 35%,
+        rgba(0, 109, 168, 1) 100%
+      );`};
+  pointer-events: ${props => (props.isEmpty ? 'none' : 'all')};
+  width: 13rem;
+  height: 3rem;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--white-normal);
+  text-align: center;
+  border-radius: 0.2rem;
+  transition: 0.3s;
+  border: none;
+`
