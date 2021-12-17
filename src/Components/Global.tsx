@@ -287,21 +287,12 @@ export const CardSkill = styled.article`
   justify-content: center;
   color: var(--white-normal);
   padding: 1rem;
-  gap: 0.2rem;
+  gap: 0.5rem;
   border-radius: 0.3rem;
   transition: 1s ease;
   & svg {
     font-size: 2.5rem;
     pointer-events: none;
-  }
-
-  &:hover {
-    background: linear-gradient(
-      180deg,
-      var(--blue-light) 40%,
-      var(--blue-normal) 80%,
-      var(--blue-dark) 100%
-    );
   }
 `
 export const SkillName = styled.p`

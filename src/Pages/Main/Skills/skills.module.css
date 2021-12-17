@@ -13,17 +13,28 @@
 .content_skills .content_progress_skills {
   width: 100%;
   min-height: 50vh;
-  max-width: 1500px;
+  max-width: 900px;
   margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem;
+  justify-content: space-around;
+}
 
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  justify-content: center;
+@media screen and (min-width: 769px) and (max-width: 900px) {
+  .content_skills .content_progress_skills {
+    gap: 4rem;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 769px) {
+  .content_skills .content_progress_skills {
+    gap: 1rem;
+  }
 }
 
 @media screen and (max-width: 601px) {
   .content_skills {
-    padding: 3rem 0;
+    padding: 3rem 1rem;
   }
 }
