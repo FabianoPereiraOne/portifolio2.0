@@ -9,15 +9,18 @@ import { app } from '../../services/firebase'
 import { Loading } from '../../Components/Loading'
 
 function Main() {
-  const useContext = usePortfolioContext()
+  const { handleGetProjects, setProjects } = usePortfolioContext()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     app()
-    useContext.handleGetSkills()
-    useContext.handleGetProjects().finally(() => {
+    handleGetProjects().finally(() => {
       setLoading(false)
     })
+
+    return () => {
+      setProjects([])
+    }
 
     // eslint-disable-next-line
   }, [])

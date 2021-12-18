@@ -2,9 +2,10 @@ import { BrowserRouter, Switch } from 'react-router-dom'
 import { Login } from '../Pages/Login'
 import { Skills } from '../Pages/Skills'
 import { Projects } from '../Pages/Projects'
-import Main from '../Pages/Main'
-import Router from './Router'
 import { Error } from '../Pages/Error'
+import { Project } from '../Pages/Project'
+import Router from './Router'
+import Main from '../Pages/Main'
 
 function Routes() {
   return (
@@ -29,6 +30,12 @@ function Routes() {
           path="/dashboard/projects"
           isPrivate={true}
           component={Projects}
+        />
+        <Router
+          exact
+          path="/projects/:id"
+          isPrivate={false}
+          component={Project}
         />
         <Router path="*" isPrivate={false} component={Error} />
       </Switch>

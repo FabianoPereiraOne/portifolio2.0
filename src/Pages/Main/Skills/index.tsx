@@ -1,12 +1,9 @@
 import Styled from './skills.module.css'
 import Title from '../../../Components/Title'
-//import { usePortfolioContext } from '../../../contexts'
 import * as CG from '../../../Components/Global'
 import * as si from 'react-icons/si'
 
 function Skills() {
-  //const { skills } = usePortfolioContext()
-
   return (
     <section className={Styled.content_skills} id="habilidades">
       <Title

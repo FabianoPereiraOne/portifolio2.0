@@ -9,13 +9,11 @@ import { ProjectProps } from '../../../types/ProjectProps'
 import { ButtonMore } from '../../../Components/Global'
 
 function Projects() {
-  const { handleGetActive, projects, handleLoadMore, isEmpty } =
-    usePortfolioContext()
+  const { projects, handleLoadMore, isEmpty } = usePortfolioContext()
   const btn = useRef<HTMLButtonElement>(null)
   const [loadMore, setLoadMore] = useState(false)
 
   useEffect(() => {
-    handleGetActive()
     const timeInterval = setInterval(() => btn.current?.click(), 10000)
 
     return () => {

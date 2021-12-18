@@ -15,7 +15,8 @@ import {
   startAfter,
   DocumentData,
   QueryDocumentSnapshot,
-  QuerySnapshot
+  QuerySnapshot,
+  getDoc
 } from 'firebase/firestore'
 import {
   getDownloadURL,
@@ -34,6 +35,7 @@ export const PortfolioProvider = ({
   children
 }: Types.portfolioProviderTypes) => {
   const [projects, setProjects] = useState<ProjectProps[]>([])
+  const [project, setProject] = useState<ProjectProps>({} as ProjectProps)
   const [skills, setSkills] = useState<Types.SkillsTypes[]>([])
   const [lastProject, setLastProject] = useState<
     QueryDocumentSnapshot<DocumentData>
@@ -42,74 +44,8 @@ export const PortfolioProvider = ({
   const [signed, setSigned] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [isEmpty, setIsEmpty] = useState<boolean>(false)
-  const [projectActive, setProjectActive] = useState<ProjectProps>(
-    {} as ProjectProps
-  )
   const [toggleMenu, setToggleMenu] = useState(false)
   const [load, setLoad] = useState<boolean>(true)
-
-  const handleActiveProjectFromCarousel = (project: ProjectProps) => {
-    const resultRemoveProjectActive = handleRemoveProjectActive()
-    const resultAddProjectActive = handleAddProjectActive(
-      resultRemoveProjectActive,
-      project
-    )
-    setProjects(resultAddProjectActive)
-  }
-
-  const handleRemoveProjectActive = () => {
-    const newListProjects = projects.map(project => {
-      if (project.isActive) {
-        return {
-          name: project.name,
-          capaSmall: project.capaSmall,
-          capaLarge: project.capaLarge,
-          description: project.description,
-          skills: project.skills,
-          isActive: false,
-          created: project.created,
-          id: project.id
-        }
-      } else {
-        return project
-      }
-    })
-
-    return newListProjects
-  }
-
-  const handleAddProjectActive = (
-    list: ProjectProps[],
-    newProject: ProjectProps
-  ) => {
-    const newListProjects = list.map(project => {
-      if (project.id.includes(newProject.id)) {
-        setProjectActive(project)
-        return {
-          name: project.name,
-          capaSmall: project.capaSmall,
-          capaLarge: project.capaLarge,
-          description: project.description,
-          isActive: false,
-          skills: project.skills,
-          created: project.created,
-          id: project.id
-        }
-      } else {
-        return project
-      }
-    })
-
-    return newListProjects
-  }
-
-  const handleGetActive = () => {
-    projects.forEach(project => {
-      if (project.isActive) {
-        setProjectActive(project)
-      }
-    })
-  }
 
   const handleSigin = async (email: string, password: string) => {
     await signInWithEmailAndPassword(getAuth(), email, password)
@@ -158,7 +94,6 @@ export const PortfolioProvider = ({
       capaSmall,
       capaLarge,
       skills: preProject.skills,
-      isActive: false,
       created: new Date()
     })
       .then(() => {
@@ -236,8 +171,7 @@ export const PortfolioProvider = ({
           capaSmall: project.data().capaSmall,
           capaLarge: project.data().capaLarge,
           name: project.data().name,
-          created: project.data().created,
-          isActive: false
+          created: project.data().created
         }
 
         return modelProject
@@ -351,20 +285,37 @@ export const PortfolioProvider = ({
     setSkills(newListSkills)
   }
 
+  const handleGetProject = async (id: string) => {
+    const docRef = doc(getFirestore(), 'projects', id)
+    await getDoc(docRef)
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          setProject({
+            name: snapshot.data().name,
+            capaSmall: snapshot.data().capaSmall,
+            capaLarge: snapshot.data().capaLarge,
+            description: snapshot.data().description,
+            skills: snapshot.data().skills,
+            created: snapshot.data().created,
+            id: snapshot.data().id
+          })
+        }
+      })
+      .catch(error => console.log(error))
+  }
+
   return (
     <PortfolioContext.Provider
       value={{
         projects,
         projectWidth,
         skills,
-        projectActive,
         signed,
         loading,
         toggleMenu,
         load,
         isEmpty,
-        handleActiveProjectFromCarousel,
-        handleGetActive,
+        project,
         handleSigin,
         setLoading,
         setToggleMenu,
@@ -380,7 +331,9 @@ export const PortfolioProvider = ({
         handleDeleteImage,
         handleDeleteProject,
         handleToggleChecked,
-        handleLoadMore
+        handleLoadMore,
+        handleGetProject,
+        setProjects
       }}
     >
       {children}

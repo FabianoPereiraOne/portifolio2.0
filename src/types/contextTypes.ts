@@ -4,14 +4,12 @@ export type PortfolioContextTypes = {
   projects: ProjectProps[]
   projectWidth: number
   skills: SkillsTypes[]
-  projectActive: ProjectProps
   signed: boolean
   loading: boolean
   toggleMenu: boolean
   load: boolean
   isEmpty: boolean
-  handleActiveProjectFromCarousel: (project: ProjectProps) => void
-  handleGetActive: () => void
+  project: ProjectProps
   handleSigin: (email: string, password: string) => Promise<void>
   setLoading: (state: boolean) => void
   setToggleMenu: (state: boolean) => void
@@ -28,6 +26,8 @@ export type PortfolioContextTypes = {
   handleDeleteProject: (project: ProjectProps) => void
   handleToggleChecked: (skillClick: SkillsTypes) => void
   handleLoadMore: () => Promise<void>
+  handleGetProject: (id: string) => Promise<void>
+  setProjects: (state: ProjectProps[]) => void
 }
 
 export type portfolioProviderTypes = {

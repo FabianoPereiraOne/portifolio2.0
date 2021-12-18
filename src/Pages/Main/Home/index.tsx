@@ -10,7 +10,7 @@ function Inicio() {
   const [progress, setProgress] = useState(0)
   const [toggleMenu, setToggleMenu] = useState(false)
   // eslint-disable-next-line
-  const [textCode, setTextCode] = useState('Desenvolvedor FrontEnd')
+  const [textCode, setTextCode] = useState('Desenvolvedor Front-End')
   const textAnimationUpRef = useRef<HTMLParagraphElement>(null)
   const printerCode = useRef<HTMLParagraphElement>(null)
 
@@ -30,9 +30,10 @@ function Inicio() {
     time: number,
     indice: number
   ) => {
-    if (element.current !== null && indice < text.length) {
+    const valueCurrent = element.current
+    if (valueCurrent !== null) {
       setTimeout(() => {
-        element.current!.textContent += text.charAt(indice)
+        valueCurrent.textContent += text.charAt(indice)
         indice++
         handleCodeText(element, text, time, indice)
       }, time)
@@ -47,7 +48,10 @@ function Inicio() {
 
   useEffect(() => {
     const interval = setInterval(toggleAnimationCss, 5000)
-    setTimeout(() => handleCodeText(printerCode, textCode, 100, 0), 2000)
+    const codeAnimationTimeOut = setTimeout(
+      () => handleCodeText(printerCode, textCode, 100, 0),
+      2000
+    )
     const intervalCodeText = setInterval(() => {
       handleClearCode(printerCode)
       handleCodeText(printerCode, textCode, 100, 0)
@@ -56,6 +60,7 @@ function Inicio() {
     return () => {
       clearInterval(interval)
       clearInterval(intervalCodeText)
+      clearTimeout(codeAnimationTimeOut)
     }
     // eslint-disable-next-line
   }, [])
