@@ -99,7 +99,6 @@ export const Projects = () => {
       if (skill.checked) {
         return {
           name: skill.name,
-          progress: skill.progress,
           checked: false,
           created: skill.created,
           id: skill.id

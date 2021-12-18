@@ -3,8 +3,10 @@ export type ProjectProps = {
   capaSmall: string
   capaLarge: string
   description: string
-  skills: Array<string>
+  skills: string[]
   created: Date
+  duration: number
+  gallery: string[]
   id: string
 }
 

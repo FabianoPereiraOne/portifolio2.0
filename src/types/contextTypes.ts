@@ -36,7 +36,6 @@ export type portfolioProviderTypes = {
 
 export type SkillsTypes = {
   name: string
-  progress: number
   checked: boolean
   created: Date
   id: string

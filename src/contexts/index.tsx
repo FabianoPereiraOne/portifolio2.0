@@ -171,6 +171,8 @@ export const PortfolioProvider = ({
           capaSmall: project.data().capaSmall,
           capaLarge: project.data().capaLarge,
           name: project.data().name,
+          duration: project.data().duration,
+          gallery: project.data().gallery,
           created: project.data().created
         }
 
@@ -272,7 +274,6 @@ export const PortfolioProvider = ({
       if (skill.id === skillClick.id) {
         return {
           name: skill.name,
-          progress: skill.progress,
           checked: !skill.checked,
           created: skill.created,
           id: skill.id
@@ -297,6 +298,8 @@ export const PortfolioProvider = ({
             description: snapshot.data().description,
             skills: snapshot.data().skills,
             created: snapshot.data().created,
+            duration: snapshot.data().duration,
+            gallery: snapshot.data().gallery,
             id: snapshot.data().id
           })
         }
