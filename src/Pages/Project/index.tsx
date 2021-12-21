@@ -15,7 +15,8 @@ import {
   Slider,
   Slide,
   ButtonBack,
-  ButtonNext
+  ButtonNext,
+  Image
 } from 'pure-react-carousel'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import { app } from '../../services/firebase'
@@ -50,18 +51,29 @@ export const Project = () => {
         className={styles.container_carousel}
       >
         <CarouselProvider
-          naturalSlideWidth={0}
-          naturalSlideHeight={0}
+          naturalSlideWidth={100}
+          naturalSlideHeight={100}
           totalSlides={project.gallery.length}
           dragEnabled={false}
+          touchEnabled={true}
+          orientation={'horizontal'}
           className={styles.carousel_provider}
+          isIntrinsicHeight={true}
         >
           <Slider>
             {project.gallery &&
               project.gallery.map((image: string, index: number) => {
                 return (
-                  <Slide index={index} className={styles.slide}>
-                    <img src={image} alt={`Imagem ${index}`} />
+                  <Slide
+                    key={index.toString()}
+                    index={index}
+                    className={styles.slide}
+                  >
+                    <Image
+                      hasMasterSpinner={false}
+                      src={image}
+                      alt={project.name}
+                    />
                   </Slide>
                 )
               })}

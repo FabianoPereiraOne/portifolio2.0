@@ -88,7 +88,7 @@
 .button_slider:first-of-type {
   position: absolute;
   left: 3rem;
-  top: 25%;
+  top: 50%;
   z-index: 2;
   transform: translate(-50%, -50%);
 }
@@ -96,7 +96,7 @@
 .button_slider:last-of-type {
   position: absolute;
   right: 0;
-  top: 25%;
+  top: 50%;
   z-index: 2;
   transform: translate(-50%, -50%);
 }
@@ -130,6 +130,7 @@
   margin-top: 1rem;
   color: var(--black-light);
   font-size: 1.2rem;
+  max-width: 1500px;
 }
 
 .container_skills {
@@ -211,9 +212,7 @@
   }
 
   .container_carousel {
-    min-height: 15rem;
     width: 100%;
-    background-color: #006da8;
   }
 
   .about,
@@ -222,8 +221,20 @@
     width: 100%;
   }
 
+  .container_skills .content {
+    justify-content: center;
+  }
+
+  .container_skills .content p {
+    font-size: 1.1rem;
+  }
+
   .link_project {
     font-size: 1.3rem;
+  }
+
+  .button_slider {
+    display: none;
   }
 }
 

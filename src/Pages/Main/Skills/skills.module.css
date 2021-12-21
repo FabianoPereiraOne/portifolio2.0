@@ -37,4 +37,8 @@
   .content_skills {
     padding: 3rem 1rem;
   }
+
+  .content_skills .content_progress_skills {
+    gap: 1rem;
+  }
 }
