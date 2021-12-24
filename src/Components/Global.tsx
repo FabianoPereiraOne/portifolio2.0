@@ -73,8 +73,11 @@ overflow: hidden;
 }
 `
 
-export const ButtonImage = styled.button<{ background: string }>`
-  width: 15rem;
+export const ButtonImage = styled.button<{
+  background: string
+  width?: number
+}>`
+  width: ${props => (props.width ? `${props.width}rem` : '15rem')};
   height: 10rem;
   background: url(${props => props.background});
   background-position: center;
@@ -214,14 +217,14 @@ export const RowDatas = styled.li`
     background-color: var(--blue-dark);
   }
 `
-export const InputText = styled.input`
-  width: 100%;
+export const InputText = styled.input<{ width?: number }>`
+  width: ${props => (props.width ? `${props.width}rem` : '100%')};
   height: 3rem;
   border: 1px solid var(--gray-normal);
   border-radius: 0.2rem;
   padding: 1rem;
   font-size: 1.1rem;
-  color: var(--gray-normal);
+  color: var(--black-light);
 
   &:focus {
     outline-style: solid;
@@ -231,14 +234,14 @@ export const InputText = styled.input`
   }
 `
 
-export const TextArea = styled.textarea`
-  width: 100%;
+export const TextArea = styled.textarea<{ width?: number }>`
+  width: ${props => (props.width ? `${props.width}rem` : '100%')};
   height: 10rem;
   border: 1px solid var(--gray-normal);
   border-radius: 0.2rem;
   padding: 1rem;
   font-size: 1.1rem;
-  color: var(--gray-normal);
+  color: var(--black-light);
   resize: none;
 
   &:focus {
@@ -262,7 +265,7 @@ export const TextArea = styled.textarea`
 export const ButtonSubmit = styled.button`
   width: 80%;
   height: 3rem;
-  background-color: var(--red-normal);
+  background-color: var(--blue-normal);
   margin: 0 auto;
   border: none;
   border-radius: 0.2rem;
@@ -321,4 +324,22 @@ export const ButtonMore = styled.button<{ isEmpty: boolean }>`
   border-radius: 0.2rem;
   transition: 0.3s;
   border: none;
+`
+export const LabelUpload = styled.label<{ width?: number }>`
+  width: ${props => (props.width ? `${props.width}rem` : '15rem')};
+  height: 10rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--gray-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--black-light);
+  cursor: pointer;
+
+  @media screen and (max-width: 400px) {
+    & {
+      width: 100%;
+    }
+  }
 `

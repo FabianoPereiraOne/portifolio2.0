@@ -8,7 +8,7 @@ export type ProjectProps = {
   duration: number
   gallery: string[]
   id: string
-  link: string
+  url: string
 }
 
 export type ProjectParams = {

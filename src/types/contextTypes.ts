@@ -46,4 +46,7 @@ export type preProjectProps = {
   description: string
   file: React.ChangeEvent<HTMLInputElement>
   skills: null | string[]
+  duration: string
+  galleryImagesFile: File[]
+  url: string
 }

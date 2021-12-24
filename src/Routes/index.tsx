@@ -1,6 +1,5 @@
 import { BrowserRouter, Switch } from 'react-router-dom'
 import { Login } from '../Pages/Login'
-import { Skills } from '../Pages/Skills'
 import { Projects } from '../Pages/Projects'
 import { Error } from '../Pages/Error'
 import { Project } from '../Pages/Project'
@@ -18,12 +17,6 @@ function Routes() {
           lockRepeatLogin={true}
           isPrivate={false}
           component={Login}
-        />
-        <Router
-          exact
-          path="/dashboard/skills"
-          isPrivate={true}
-          component={Skills}
         />
         <Router
           exact

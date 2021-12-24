@@ -28,7 +28,7 @@ export const Project = () => {
 
   useEffect(() => {
     app()
-    handleGetProject(id).finally(() => setLoading(false))
+    id && handleGetProject(id).finally(() => setLoading(false))
     // eslint-disable-next-line
   }, [])
 
@@ -53,7 +53,7 @@ export const Project = () => {
         <CarouselProvider
           naturalSlideWidth={100}
           naturalSlideHeight={100}
-          totalSlides={project.gallery.length}
+          totalSlides={project.gallery ? project.gallery.length : 0}
           dragEnabled={false}
           touchEnabled={true}
           orientation={'horizontal'}
@@ -108,7 +108,7 @@ export const Project = () => {
       <a
         rel="noreferrer"
         className={styles.link_project}
-        href={project.link !== null ? project.link : '#'}
+        href={project.url !== null ? project.url : '#'}
         target="_blank"
         aria-label={`Link para ir até o projeto ${project.name}`}
       >

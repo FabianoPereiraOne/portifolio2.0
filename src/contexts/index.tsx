@@ -174,7 +174,7 @@ export const PortfolioProvider = ({
           duration: project.data().duration,
           gallery: project.data().gallery,
           created: project.data().created,
-          link: project.data().link
+          url: project.data().link
         }
 
         return modelProject
@@ -302,7 +302,7 @@ export const PortfolioProvider = ({
             duration: snapshot.data().duration,
             gallery: snapshot.data().gallery,
             id: snapshot.data().id,
-            link: snapshot.data().link
+            url: snapshot.data().link
           })
         }
       })

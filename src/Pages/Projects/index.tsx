@@ -9,12 +9,17 @@ import { toast } from 'react-toastify'
 import { FormEvent, useState, useEffect } from 'react'
 import { ProjectProps } from '../../types/ProjectProps'
 import { Loading } from '../../Components/Loading'
+import { LabelUpload } from '../../Components/Global'
 
 export const Projects = () => {
   const useContext = usePortfolioContext()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
+  const [url, setUrl] = useState('')
+  const [duration, setDuration] = useState('')
+  const [galleryImagesFile, setGalleryImagesFile] = useState<Array<File>>([])
   const [capaLocalUrl, setCapaLocalUrl] = useState('')
+  const [galleryImagesUrl, setGalleryImagesUrl] = useState<Array<string>>([])
   const [fileCapa, setFileCapa] = useState<types.FileType>(null)
   const [loading, setLoading] = useState(false)
   const [divWrapperSkill, setDivWrapperSkills] = useState(false)
@@ -43,28 +48,27 @@ export const Projects = () => {
       name.length > 0 &&
       description.length > 0 &&
       fileCapa !== null &&
-      fileCapa.target.files !== null
+      duration.length > 0 &&
+      galleryImagesFile.length > 0 &&
+      url.length > 0
     ) {
-      const fileType = fileCapa.target.files[0].type
       const skills = handleGetSkillsChecked()
+      setLoad({ ...load, add: true })
+      useContext
+        .handleAddProject({
+          name,
+          description,
+          file: fileCapa,
+          skills,
+          duration,
+          galleryImagesFile,
+          url
+        })
+        .finally(() => {
+          setLoad({ ...load, add: false })
+        })
 
-      if (handleInspectFileTypeAsAccepted(fileType)) {
-        setLoad({ ...load, add: true })
-        useContext
-          .handleAddProject({
-            name,
-            description,
-            file: fileCapa,
-            skills
-          })
-          .finally(() => {
-            setLoad({ ...load, add: false })
-          })
-
-        handleClearStates()
-      } else {
-        toast.info('Formato invalido! [PNG | JPG]')
-      }
+      handleClearStates()
     } else {
       toast.info('Preencha todos os dados!')
     }
@@ -110,33 +114,66 @@ export const Projects = () => {
     useContext.setSkills(newListSkills)
   }
 
-  const handleInspectFileTypeAsAccepted = (type: string) => {
-    const acceptedTypes: types.AcceptedTypes = {
-      'image/png': true,
-      'image/jpg': true,
-      'image/jpeg': true
-    }
+  type ResponseInspect = {
+    response: boolean
+    file: null | File
+  }
 
-    if (acceptedTypes[type]) {
-      return true
+  const handleInspectFileTypeAsAccepted = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): ResponseInspect => {
+    const files = e.target.files
+
+    if (files !== null && files[0] !== null) {
+      const acceptedTypes: types.AcceptedTypes = {
+        'image/png': true,
+        'image/jpg': true,
+        'image/jpeg': true
+      }
+
+      if (acceptedTypes[files[0].type]) {
+        return {
+          response: true,
+          file: files[0]
+        }
+      } else {
+        toast.info('Formato invalido! [PNG | JPG]')
+        return {
+          response: false,
+          file: null
+        }
+      }
     } else {
-      return false
+      toast.info('Erro. Selecione uma imagem!')
+      return {
+        response: false,
+        file: null
+      }
     }
   }
 
   const handleSaveFileCapaAndLocalUrl = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const files = e.target.files
-    if (
-      files !== null &&
-      files[0] !== null &&
-      handleInspectFileTypeAsAccepted(files[0].type)
-    ) {
-      setCapaLocalUrl(URL.createObjectURL(files[0]))
+    const { file, response } = handleInspectFileTypeAsAccepted(e)
+    if (response && file !== null) {
+      setCapaLocalUrl(URL.createObjectURL(file))
       setFileCapa(e)
+    }
+  }
+
+  const handleGallerySaveFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (galleryImagesFile.length < 10 && galleryImagesUrl.length < 10) {
+      const { response, file } = handleInspectFileTypeAsAccepted(e)
+      if (response && file !== null) {
+        setGalleryImagesUrl(internalValue => [
+          URL.createObjectURL(file),
+          ...internalValue
+        ])
+        setGalleryImagesFile(internalValue => [file, ...internalValue])
+      }
     } else {
-      toast.info('Formato invalido! [PNG | JPG]')
+      toast.info('Ops! Limite de 10 imagens.')
     }
   }
 
@@ -160,14 +197,14 @@ export const Projects = () => {
                 <Fi.FiRepeat />
               </CG.ButtonImage>
             ) : (
-              <label className={styles.upload_capa}>
+              <LabelUpload>
                 <input
                   type="file"
                   hidden
                   onChange={handleSaveFileCapaAndLocalUrl}
                 />
                 <Fi.FiPlus />
-              </label>
+              </LabelUpload>
             )}
             <CG.InputText
               placeholder="Nome do projeto"
@@ -213,12 +250,51 @@ export const Projects = () => {
                 )}
               </div>
             )}
+            <CG.InputText
+              placeholder="Digite a url"
+              aria-label="Preencha com a url do projeto"
+              type="text"
+              value={url}
+              tabIndex={2}
+              onChange={e => setUrl(e.target.value)}
+            />
             <CG.TextArea
               placeholder="Descrição do projeto"
               value={description}
-              tabIndex={2}
+              tabIndex={3}
               onChange={e => setDescription(e.target.value)}
             />
+
+            <CG.InputText
+              width={10}
+              placeholder="Duração"
+              aria-label="Preencha com a duração do projeto"
+              type="text"
+              value={duration}
+              tabIndex={4}
+              onChange={e => setDuration(e.target.value)}
+            />
+
+            <div className={styles.container_gallery}>
+              <LabelUpload width={10}>
+                <input type="file" hidden onChange={handleGallerySaveFile} />
+                <Fi.FiPlus />
+              </LabelUpload>
+
+              {galleryImagesUrl.length > 0 &&
+                galleryImagesUrl.map(url => {
+                  return (
+                    <CG.ButtonImage
+                      width={10}
+                      onClick={() => alert('Excluindo...')}
+                      background={url}
+                      type="button"
+                    >
+                      <Fi.FiX />
+                    </CG.ButtonImage>
+                  )
+                })}
+            </div>
 
             <CG.ButtonSubmit type="submit">
               {load.add ? 'Adicionando...' : 'Adicionar'}

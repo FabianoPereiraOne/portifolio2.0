@@ -16,9 +16,6 @@ export const MenuMobile = () => {
       <Link to="/dashboard/projects" onClick={handleUpdateToggleMenu}>
         Projects
       </Link>
-      <Link to="/dashboard/skills" onClick={handleUpdateToggleMenu}>
-        Skills
-      </Link>
     </aside>
   )
 }
