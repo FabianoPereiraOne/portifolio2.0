@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, Redirect } from 'react-router-dom'
 import { Loading } from '../../Components/Loading'
 import { usePortfolioContext } from '../../contexts'
 import styles from './project.module.css'
@@ -28,7 +28,9 @@ export const Project = () => {
 
   useEffect(() => {
     app()
-    id && handleGetProject(id).finally(() => setLoading(false))
+    if (id) {
+      handleGetProject(id).finally(() => setLoading(false))
+    }
     // eslint-disable-next-line
   }, [])
 
@@ -99,7 +101,7 @@ export const Project = () => {
           Tecnologias
         </h4>
         <div className={styles.content}>
-          {project.id &&
+          {project.skills !== null &&
             project.skills.map((skill: string, index: number) => {
               return <p key={index.toString()}>{skill}</p>
             })}

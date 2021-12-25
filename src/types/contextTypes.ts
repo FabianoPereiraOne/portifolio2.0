@@ -1,3 +1,4 @@
+import { GalleryImages } from './global'
 import { ProjectProps } from './ProjectProps'
 
 export type PortfolioContextTypes = {
@@ -18,7 +19,7 @@ export type PortfolioContextTypes = {
   handleGetProjects: () => Promise<void>
   setSkills: (state: SkillsTypes[]) => void
   setLoad: (state: boolean) => void
-  handleAddSkill: (name: string, progress: number) => Promise<void>
+  handleAddSkill: (name: string) => Promise<void>
   handleGetSkills: () => Promise<void>
   handleDeleteDoc: (collect: string, id: string) => Promise<void>
   setProjectWidth: (state: number) => void
@@ -47,6 +48,6 @@ export type preProjectProps = {
   file: React.ChangeEvent<HTMLInputElement>
   skills: null | string[]
   duration: string
-  galleryImagesFile: File[]
+  galleryImages: GalleryImages[]
   url: string
 }

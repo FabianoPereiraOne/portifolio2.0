@@ -28,6 +28,7 @@ import {
 import * as Types from '../types/contextTypes'
 import { toast } from 'react-toastify'
 import convert from 'image-file-resize'
+import { GalleryImages } from '../types/global'
 
 export const PortfolioContext = createContext({} as Types.PortfolioContextTypes)
 
@@ -75,7 +76,6 @@ export const PortfolioProvider = ({
 
   const handleAddProject = async (preProject: Types.preProjectProps) => {
     const docRef = doc(collection(getFirestore(), 'projects'))
-
     const capaSmall = await handleConvertCapaToSmallAndUpload(
       preProject.file,
       docRef.id
@@ -94,7 +94,10 @@ export const PortfolioProvider = ({
       capaSmall,
       capaLarge,
       skills: preProject.skills,
-      created: new Date()
+      created: new Date().toString(),
+      url: preProject.url,
+      duration: preProject.duration,
+      gallery: []
     })
       .then(() => {
         toast.success('Adicionado com sucesso!')
@@ -200,12 +203,11 @@ export const PortfolioProvider = ({
       .catch(error => console.log(error))
   }
 
-  const handleAddSkill = async (name: string, progress: number) => {
+  const handleAddSkill = async (name: string) => {
     const skillRef = doc(collection(getFirestore(), 'skills'))
 
     await setDoc(skillRef, {
       name: name,
-      progress: progress,
       checked: false,
       created: new Date(),
       id: skillRef.id

@@ -1,6 +1,5 @@
 import styles from './styles.module.css'
 import * as Fi from 'react-icons/fi'
-import * as types from '../../types/global'
 import * as CG from '../../Components/Global'
 import { Sidebar } from '../../Components/Sidebar'
 import { Header } from '../../Components/Header'
@@ -10,17 +9,18 @@ import { FormEvent, useState, useEffect } from 'react'
 import { ProjectProps } from '../../types/ProjectProps'
 import { Loading } from '../../Components/Loading'
 import { LabelUpload } from '../../Components/Global'
+import { GalleryImages, FileType, AcceptedTypes } from '../../types/global'
 
 export const Projects = () => {
   const useContext = usePortfolioContext()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [url, setUrl] = useState('')
+  const [skill, setSkill] = useState('')
   const [duration, setDuration] = useState('')
-  const [galleryImagesFile, setGalleryImagesFile] = useState<Array<File>>([])
   const [capaLocalUrl, setCapaLocalUrl] = useState('')
-  const [galleryImagesUrl, setGalleryImagesUrl] = useState<Array<string>>([])
-  const [fileCapa, setFileCapa] = useState<types.FileType>(null)
+  const [galleryImages, setGalleryImages] = useState<GalleryImages[]>([])
+  const [fileCapa, setFileCapa] = useState<FileType>(null)
   const [loading, setLoading] = useState(false)
   const [divWrapperSkill, setDivWrapperSkills] = useState(false)
   const [load, setLoad] = useState({
@@ -49,7 +49,7 @@ export const Projects = () => {
       description.length > 0 &&
       fileCapa !== null &&
       duration.length > 0 &&
-      galleryImagesFile.length > 0 &&
+      galleryImages.length > 0 &&
       url.length > 0
     ) {
       const skills = handleGetSkillsChecked()
@@ -61,7 +61,7 @@ export const Projects = () => {
           file: fileCapa,
           skills,
           duration,
-          galleryImagesFile,
+          galleryImages,
           url
         })
         .finally(() => {
@@ -98,6 +98,9 @@ export const Projects = () => {
     setName('')
     setDescription('')
     setCapaLocalUrl('')
+    setDuration('')
+    setUrl('')
+    setGalleryImages([])
     setFileCapa(null)
     const newListSkills = useContext.skills.map(skill => {
       if (skill.checked) {
@@ -125,7 +128,7 @@ export const Projects = () => {
     const files = e.target.files
 
     if (files !== null && files[0] !== null) {
-      const acceptedTypes: types.AcceptedTypes = {
+      const acceptedTypes: AcceptedTypes = {
         'image/png': true,
         'image/jpg': true,
         'image/jpeg': true
@@ -163,17 +166,39 @@ export const Projects = () => {
   }
 
   const handleGallerySaveFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (galleryImagesFile.length < 10 && galleryImagesUrl.length < 10) {
+    if (galleryImages.length < 10 && galleryImages.length < 10) {
       const { response, file } = handleInspectFileTypeAsAccepted(e)
       if (response && file !== null) {
-        setGalleryImagesUrl(internalValue => [
-          URL.createObjectURL(file),
+        setGalleryImages(internalValue => [
+          {
+            url: URL.createObjectURL(file),
+            file,
+            name: file.name
+          },
           ...internalValue
         ])
-        setGalleryImagesFile(internalValue => [file, ...internalValue])
       }
     } else {
       toast.info('Ops! Limite de 10 imagens.')
+    }
+  }
+
+  const handleDeleteImageGallery = (pos: number) => {
+    const galleryImagesList: GalleryImages[] = []
+    galleryImages.forEach((image: GalleryImages, index: number) => {
+      if (pos !== index) {
+        galleryImagesList.push(image)
+      }
+    })
+
+    setGalleryImages(galleryImagesList)
+  }
+
+  const handlePreAddSkill = () => {
+    if (skill.length > 0) {
+      useContext.handleAddSkill(skill).finally(() => setSkill(''))
+    } else {
+      toast.info('Preencha o campo!')
     }
   }
 
@@ -242,12 +267,28 @@ export const Projects = () => {
                           onChange={() => useContext.handleToggleChecked(skill)}
                         />
                         <p>{skill.name}</p>
+                        <button
+                          onClick={() =>
+                            useContext.handleDeleteDoc('skills', skill.id)
+                          }
+                        >
+                          -
+                        </button>
                       </label>
                     )
                   })
                 ) : (
                   <span>Nenhuma skill</span>
                 )}
+
+                <div>
+                  <input
+                    type="text"
+                    value={skill}
+                    onChange={e => setSkill(e.target.value)}
+                  />
+                  <button onClick={handlePreAddSkill}>+</button>
+                </div>
               </div>
             )}
             <CG.InputText
@@ -281,14 +322,15 @@ export const Projects = () => {
                 <Fi.FiPlus />
               </LabelUpload>
 
-              {galleryImagesUrl.length > 0 &&
-                galleryImagesUrl.map(url => {
+              {galleryImages.length > 0 &&
+                galleryImages.map((image: GalleryImages, pos: number) => {
                   return (
                     <CG.ButtonImage
                       width={10}
-                      onClick={() => alert('Excluindo...')}
-                      background={url}
+                      onClick={() => handleDeleteImageGallery(pos)}
+                      background={image.url}
                       type="button"
+                      key={pos.toString()}
                     >
                       <Fi.FiX />
                     </CG.ButtonImage>

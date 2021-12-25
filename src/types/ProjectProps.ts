@@ -4,7 +4,7 @@ export type ProjectProps = {
   capaLarge: string
   description: string
   skills: string[]
-  created: Date
+  created: string
   duration: number
   gallery: string[]
   id: string
