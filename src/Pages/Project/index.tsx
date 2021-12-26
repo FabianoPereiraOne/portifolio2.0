@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link, Redirect } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { Loading } from '../../Components/Loading'
 import { usePortfolioContext } from '../../contexts'
 import styles from './project.module.css'
