@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Loading } from '../../Components/Loading'
 import { usePortfolioContext } from '../../contexts'
+import { format, parseISO } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 import styles from './project.module.css'
 import {
   FiArrowLeftCircle,
@@ -33,6 +35,11 @@ export const Project = () => {
     }
     // eslint-disable-next-line
   }, [])
+
+  const handleConvertionDate = (date: string) => {
+    const resultDate = format(parseISO(date), 'dd MMM yyyy', { locale: ptBR })
+    return resultDate
+  }
 
   if (loading) {
     return <Loading />
@@ -117,8 +124,8 @@ export const Project = () => {
         Ver projeto
       </a>
       <footer className={styles.footer}>
-        <p>Duração: {project.duration} horas</p>
-        <p>Publicação: {project.created}</p>
+        <p>Duração: {project.duration}</p>
+        <p>Publicação: {handleConvertionDate(project.created)}</p>
       </footer>
     </section>
   )

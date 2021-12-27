@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  position: relative;
 }
 
 .container_img_profile {
@@ -83,6 +84,19 @@
   align-items: center;
   transition: 0.3s;
   background-color: var(--blue-light);
+}
+
+.close_home {
+  position: absolute;
+  right: -3rem;
+  top: 0.5rem;
+  font-size: 2rem;
+  color: var(--green-normal);
+  transition: 0.3s ease;
+}
+
+.close_home:hover {
+  color: var(--green-dark);
 }
 
 @media screen and (max-width: 600px) {

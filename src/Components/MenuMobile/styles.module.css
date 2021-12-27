@@ -38,7 +38,7 @@
   background-color: var(--blue-dark);
 }
 
-.container a {
+.container a:not(:first-of-type) {
   font-size: var(--size-md);
   width: 80%;
   height: 3rem;
@@ -51,6 +51,19 @@
   transition: background-color 0.3s;
 }
 
-.container a:hover {
+.container a:not(:first-of-type):hover {
   background-color: var(--blue-light);
+}
+
+.close_home {
+  position: absolute;
+  left: 2rem;
+  top: 0.5rem;
+  font-size: 2rem;
+  color: var(--white-normal);
+  transition: 0.3s ease;
+}
+
+.close_home:hover {
+  color: var(--green-light);
 }

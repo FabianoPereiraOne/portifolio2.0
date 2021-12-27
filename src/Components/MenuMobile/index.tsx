@@ -10,6 +10,9 @@ export const MenuMobile = () => {
 
   return (
     <aside className={styles.container}>
+      <Link to="/" className={styles.close_home}>
+        <Fi.FiHome />
+      </Link>
       <button type="button" onClick={() => useContext.setToggleMenu(false)}>
         <Fi.FiX />
       </button>

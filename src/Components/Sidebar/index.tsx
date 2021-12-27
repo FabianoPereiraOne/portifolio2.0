@@ -19,6 +19,9 @@ export const Sidebar = () => {
     <>
       {useContext.toggleMenu && <MenuMobile />}
       <aside className={styles.container_sidebar}>
+        <Link to="/" className={styles.close_home}>
+          <FI.FiHome />
+        </Link>
         <div className={styles.container_img_profile}>
           <div className={styles.img_profile}>
             <FI.FiUser />

@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from 'react'
 import { ProjectProps } from '../types/ProjectProps'
 import { signInWithEmailAndPassword, getAuth, signOut } from 'firebase/auth'
+import { format } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 import {
   getFirestore,
   collection,
@@ -105,6 +107,9 @@ export const PortfolioProvider = ({
       docRef.id,
       'projects'
     )
+
+    const resultCreated = format(new Date(), 'yyyy-MM-dd', { locale: ptBR })
+
     await setDoc(docRef, {
       name: preProject.name,
       description: preProject.description,
@@ -112,7 +117,7 @@ export const PortfolioProvider = ({
       capaSmall,
       capaLarge,
       skills: preProject.skills,
-      created: new Date().toString(),
+      created: resultCreated,
       url: preProject.url,
       duration: preProject.duration,
       gallery: gallery
