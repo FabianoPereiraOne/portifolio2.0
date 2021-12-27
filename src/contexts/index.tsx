@@ -6,7 +6,6 @@ import {
   collection,
   setDoc,
   doc,
-  onSnapshot,
   query,
   orderBy,
   deleteDoc,
@@ -16,7 +15,8 @@ import {
   DocumentData,
   QueryDocumentSnapshot,
   QuerySnapshot,
-  getDoc
+  getDoc,
+  onSnapshot
 } from 'firebase/firestore'
 import {
   getDownloadURL,
@@ -76,16 +76,22 @@ export const PortfolioProvider = ({
   const handleAddProject = async (preProject: Types.preProjectProps) => {
     const docRef = doc(collection(getFirestore(), 'projects'))
 
-    const promisesGallery = await preProject.galleryImages.map(datasImg => {
-      const url = handleUploadImage(
-        datasImg.file,
-        datasImg.name,
-        docRef.id,
-        'projects'
-      )
+    const promisesGallery = await preProject.galleryImages.map(
+      async datasImg => {
+        const url = await handleUploadImage(
+          datasImg.file,
+          datasImg.name,
+          docRef.id,
+          'projects'
+        )
 
-      return url
-    })
+        if (url !== null) {
+          return url
+        } else {
+          return ''
+        }
+      }
+    )
 
     const gallery = await Promise.all(promisesGallery)
 
@@ -175,6 +181,35 @@ export const PortfolioProvider = ({
       .catch(error => console.log(error))
   }
 
+  const handleGetOnProjects = async () => {
+    const projectsRef = query(
+      collection(getFirestore(), 'projects'),
+      orderBy('created', 'desc')
+    )
+    try {
+      await onSnapshot(projectsRef, snapshot => {
+        const projects: ProjectProps[] = snapshot.docs.map(project => {
+          return {
+            id: project.data().id,
+            skills: project.data().skills,
+            description: project.data().description,
+            capaSmall: project.data().capaSmall,
+            capaLarge: project.data().capaLarge,
+            name: project.data().name,
+            duration: project.data().duration,
+            gallery: project.data().gallery,
+            created: project.data().created,
+            url: project.data().link
+          }
+        })
+
+        setProjects(projects)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const updateState = (snapshot: QuerySnapshot<DocumentData>) => {
     const isEmpty = snapshot.size !== 0
     if (isEmpty) {
@@ -223,14 +258,10 @@ export const PortfolioProvider = ({
       checked: false,
       created: new Date(),
       id: skillRef.id
+    }).catch(error => {
+      console.log(error)
+      toast.error('Erro ao adicionar skill!')
     })
-      .then(() => {
-        toast.success('Adicionado com sucesso!')
-      })
-      .catch(error => {
-        console.log(error)
-        toast.error('Erro ao adicionar skill!')
-      })
   }
 
   const handleGetSkills = async () => {
@@ -335,6 +366,7 @@ export const PortfolioProvider = ({
         load,
         isEmpty,
         project,
+        handleGetOnProjects,
         handleSigin,
         setLoading,
         setToggleMenu,

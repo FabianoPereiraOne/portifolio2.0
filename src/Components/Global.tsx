@@ -137,7 +137,7 @@ export const ContainerFlexForm = styled.form`
 
 export const PanelViewDark = styled.ul`
   width: 100%;
-  height: 80vh;
+  height: auto;
   background-color: var(--black-normal);
   padding: 1rem;
   display: flex;

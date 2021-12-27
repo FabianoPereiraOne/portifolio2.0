@@ -29,6 +29,7 @@ export type PortfolioContextTypes = {
   handleLoadMore: () => Promise<void>
   handleGetProject: (id: string) => Promise<void>
   setProjects: (state: ProjectProps[]) => void
+  handleGetOnProjects: () => Promise<void>
 }
 
 export type portfolioProviderTypes = {

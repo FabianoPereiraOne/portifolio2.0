@@ -32,7 +32,7 @@ export const Projects = () => {
   useEffect(() => {
     setLoading(true)
     useContext.handleGetSkills()
-    useContext.handleGetProjects().finally(() => setLoading(false))
+    useContext.handleGetOnProjects().finally(() => setLoading(false))
     // eslint-disable-next-line
   }, [])
 
@@ -257,37 +257,45 @@ export const Projects = () => {
                 >
                   <Fi.FiChevronUp />
                 </button>
-                {useContext.skills.length > 0 ? (
-                  useContext.skills.map((skill, index) => {
-                    return (
-                      <label key={index.toString()} className={styles.skills}>
-                        <input
-                          type="checkbox"
-                          checked={skill.checked}
-                          onChange={() => useContext.handleToggleChecked(skill)}
-                        />
-                        <p>{skill.name}</p>
-                        <button
-                          onClick={() =>
-                            useContext.handleDeleteDoc('skills', skill.id)
-                          }
-                        >
-                          -
-                        </button>
-                      </label>
-                    )
-                  })
-                ) : (
-                  <span>Nenhuma skill</span>
-                )}
+                <div className={styles.container_view_skills}>
+                  {useContext.skills.length > 0 ? (
+                    useContext.skills.map((skill, index) => {
+                      return (
+                        <label key={index.toString()} className={styles.skills}>
+                          <input
+                            type="checkbox"
+                            checked={skill.checked}
+                            onChange={() =>
+                              useContext.handleToggleChecked(skill)
+                            }
+                          />
+                          <p>{skill.name}</p>
+                          <button
+                            onClick={() =>
+                              useContext.handleDeleteDoc('skills', skill.id)
+                            }
+                          >
+                            <Fi.FiTrash />
+                          </button>
+                        </label>
+                      )
+                    })
+                  ) : (
+                    <span>Nenhuma skill</span>
+                  )}
+                </div>
 
-                <div>
+                <div className={styles.container_action_add_skills}>
                   <input
                     type="text"
                     value={skill}
+                    placeholder="Habilidade"
+                    maxLength={50}
                     onChange={e => setSkill(e.target.value)}
                   />
-                  <button onClick={handlePreAddSkill}>+</button>
+                  <button type="button" onClick={handlePreAddSkill}>
+                    <Fi.FiPlus />
+                  </button>
                 </div>
               </div>
             )}
@@ -317,25 +325,28 @@ export const Projects = () => {
             />
 
             <div className={styles.container_gallery}>
-              <LabelUpload width={10}>
+              <LabelUpload width={10} className={styles.children}>
                 <input type="file" hidden onChange={handleGallerySaveFile} />
                 <Fi.FiPlus />
               </LabelUpload>
 
-              {galleryImages.length > 0 &&
-                galleryImages.map((image: GalleryImages, pos: number) => {
-                  return (
-                    <CG.ButtonImage
-                      width={10}
-                      onClick={() => handleDeleteImageGallery(pos)}
-                      background={image.url}
-                      type="button"
-                      key={pos.toString()}
-                    >
-                      <Fi.FiX />
-                    </CG.ButtonImage>
-                  )
-                })}
+              <div className={styles.panel_gallery}>
+                {galleryImages.length > 0 &&
+                  galleryImages.map((image: GalleryImages, pos: number) => {
+                    return (
+                      <CG.ButtonImage
+                        className={styles.children}
+                        width={10}
+                        onClick={() => handleDeleteImageGallery(pos)}
+                        background={image.url}
+                        type="button"
+                        key={pos.toString()}
+                      >
+                        <Fi.FiX />
+                      </CG.ButtonImage>
+                    )
+                  })}
+              </div>
             </div>
 
             <CG.ButtonSubmit type="submit">
