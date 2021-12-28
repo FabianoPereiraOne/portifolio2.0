@@ -47,6 +47,10 @@
   color: var(--blue-normal);
   font-size: 1.3rem;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .group_text p {
@@ -83,12 +87,6 @@
   .content_projects {
     padding: 3rem;
   }
-}
-
-@media screen and (min-width: 768px) and (max-width: 900px) {
-}
-
-@media screen and (min-width: 600px) and (max-width: 768px) {
 }
 
 @media screen and (max-width: 600px) {

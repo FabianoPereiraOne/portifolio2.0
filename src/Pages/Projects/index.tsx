@@ -49,8 +49,7 @@ export const Projects = () => {
       description.length > 0 &&
       fileCapa !== null &&
       duration.length > 0 &&
-      galleryImages.length > 0 &&
-      url.length > 0
+      galleryImages.length > 0
     ) {
       const skills = handleGetSkillsChecked()
       setLoad({ ...load, add: true })

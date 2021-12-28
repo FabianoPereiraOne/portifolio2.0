@@ -352,7 +352,7 @@ export const PortfolioProvider = ({
             duration: snapshot.data().duration,
             gallery: snapshot.data().gallery,
             id: snapshot.data().id,
-            url: snapshot.data().link
+            url: snapshot.data().url
           })
         }
       })
