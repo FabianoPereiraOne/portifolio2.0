@@ -25,7 +25,8 @@ import {
   getStorage,
   ref,
   uploadBytes,
-  deleteObject
+  deleteObject,
+  listAll
 } from 'firebase/storage'
 import * as Types from '../types/contextTypes'
 import { toast } from 'react-toastify'
@@ -303,6 +304,23 @@ export const PortfolioProvider = ({
       })
   }
 
+  const handleListDocStorage = async (id: string) => {
+    const projectRefStorage = ref(getStorage(), `projects/${id}`)
+    const result = await listAll(projectRefStorage).catch(error =>
+      console.log(error)
+    )
+
+    if (result) {
+      const nameImages = result.items.map(imageDatas => {
+        return imageDatas.name
+      })
+
+      return nameImages
+    } else {
+      return null
+    }
+  }
+
   const handleDeleteImage = async (
     collect: string,
     id: string,
@@ -315,8 +333,16 @@ export const PortfolioProvider = ({
   }
 
   const handleDeleteProject = async (project: ProjectProps) => {
-    await handleDeleteImage('projects', project.id, 'capaLarge')
-    await handleDeleteImage('projects', project.id, 'capaSmall')
+    const nameImagesStorage = await handleListDocStorage(project.id)
+    if (nameImagesStorage !== undefined && nameImagesStorage !== null) {
+      for (const index in nameImagesStorage) {
+        await handleDeleteImage(
+          'projects',
+          project.id,
+          nameImagesStorage[index]
+        )
+      }
+    }
     await handleDeleteDoc('projects', project.id)
   }
 
@@ -389,7 +415,8 @@ export const PortfolioProvider = ({
         handleToggleChecked,
         handleLoadMore,
         handleGetProject,
-        setProjects
+        setProjects,
+        handleListDocStorage
       }}
     >
       {children}

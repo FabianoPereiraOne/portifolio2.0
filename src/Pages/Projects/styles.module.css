@@ -231,6 +231,14 @@
   }
 }
 
+.container_load {
+  width: 3rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 400px) {
   .container_gallery {
     flex-direction: column;

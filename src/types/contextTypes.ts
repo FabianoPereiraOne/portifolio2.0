@@ -24,12 +24,13 @@ export type PortfolioContextTypes = {
   handleDeleteDoc: (collect: string, id: string) => Promise<void>
   setProjectWidth: (state: number) => void
   handleDeleteImage: (collect: string, id: string, name: string) => void
-  handleDeleteProject: (project: ProjectProps) => void
+  handleDeleteProject: (project: ProjectProps) => Promise<void>
   handleToggleChecked: (skillClick: SkillsTypes) => void
   handleLoadMore: () => Promise<void>
   handleGetProject: (id: string) => Promise<void>
   setProjects: (state: ProjectProps[]) => void
   handleGetOnProjects: () => Promise<void>
+  handleListDocStorage: (id: string) => Promise<string[] | null>
 }
 
 export type portfolioProviderTypes = {

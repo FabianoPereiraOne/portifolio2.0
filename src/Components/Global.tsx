@@ -181,14 +181,12 @@ export const ContainerRowColumn = styled.section`
 `
 
 export const RowDatas = styled.li`
-  & {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
   & p {
     max-width: 25rem;
     overflow: hidden;
@@ -204,13 +202,16 @@ export const RowDatas = styled.li`
     height: 2rem;
     border: none;
     background-color: var(--black-light);
-    font-size: 1.5rem;
-    color: var(--white-normal);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 0.2rem;
     transition: 0.3s;
+  }
+
+  & button svg {
+    font-size: 1.5rem;
+    color: var(--white-normal);
   }
 
   & button:hover {

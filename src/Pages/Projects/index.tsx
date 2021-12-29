@@ -10,6 +10,7 @@ import { ProjectProps } from '../../types/ProjectProps'
 import { Loading } from '../../Components/Loading'
 import { LabelUpload } from '../../Components/Global'
 import { GalleryImages, FileType, AcceptedTypes } from '../../types/global'
+import { ClockLoader } from 'react-spinners'
 
 export const Projects = () => {
   const useContext = usePortfolioContext()
@@ -360,13 +361,24 @@ export const Projects = () => {
                     return (
                       <CG.RowDatas key={index.toString()}>
                         <p>{project.name}</p>
-                        <button
-                          onClick={() => {
-                            useContext.handleDeleteDoc('projects', project.id)
-                          }}
-                        >
-                          <Fi.FiTrash />
-                        </button>
+                        {load.delete ? (
+                          <div className={styles.container_load}>
+                            <ClockLoader color="white" size={35} />
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              setLoad({ ...load, delete: true })
+                              useContext
+                                .handleDeleteProject(project)
+                                .finally(() =>
+                                  setLoad({ ...load, delete: false })
+                                )
+                            }}
+                          >
+                            <Fi.FiTrash />
+                          </button>
+                        )}
                       </CG.RowDatas>
                     )
                   }
