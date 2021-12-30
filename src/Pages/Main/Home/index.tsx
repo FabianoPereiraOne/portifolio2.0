@@ -4,66 +4,15 @@ import logo from '../../../assets/logo.svg'
 import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { ProgressBar, ButtonPrimary } from '../../../Components/Global'
-import { useState, useEffect, useRef, RefObject } from 'react'
+import { useState } from 'react'
 
 function Inicio() {
   const [progress, setProgress] = useState(0)
   const [toggleMenu, setToggleMenu] = useState(false)
-  // eslint-disable-next-line
-  const [textCode, setTextCode] = useState('Desenvolvedor Front-End')
-  const textAnimationUpRef = useRef<HTMLParagraphElement>(null)
-  const printerCode = useRef<HTMLParagraphElement>(null)
 
   function handleScroll(progress: number) {
     setProgress(progress)
   }
-
-  function toggleAnimationCss() {
-    if (textAnimationUpRef.current !== null) {
-      textAnimationUpRef.current.classList.toggle(Styled.text_up)
-    }
-  }
-
-  const handleCodeText = (
-    element: RefObject<HTMLParagraphElement>,
-    text: string,
-    time: number,
-    indice: number
-  ) => {
-    const valueCurrent = element.current
-    if (valueCurrent !== null) {
-      setTimeout(() => {
-        valueCurrent.textContent += text.charAt(indice)
-        indice++
-        handleCodeText(element, text, time, indice)
-      }, time)
-    }
-  }
-
-  const handleClearCode = (printerCode: RefObject<HTMLParagraphElement>) => {
-    if (printerCode.current !== null) {
-      printerCode.current.textContent = ''
-    }
-  }
-
-  useEffect(() => {
-    const interval = setInterval(toggleAnimationCss, 5000)
-    const codeAnimationTimeOut = setTimeout(
-      () => handleCodeText(printerCode, textCode, 100, 0),
-      2000
-    )
-    const intervalCodeText = setInterval(() => {
-      handleClearCode(printerCode)
-      handleCodeText(printerCode, textCode, 100, 0)
-    }, 9999)
-
-    return () => {
-      clearInterval(interval)
-      clearInterval(intervalCodeText)
-      clearTimeout(codeAnimationTimeOut)
-    }
-    // eslint-disable-next-line
-  }, [])
 
   return (
     <section className={Styled.section_home} id="inicio">
@@ -158,8 +107,8 @@ function Inicio() {
         <h1>Fabiano Pereira</h1>
         <div className={Styled.content_text_code}>
           <span className={Styled.key_green}>{'{'}</span>
-          <p ref={printerCode}></p>
-          <span className={Styled.key_green}> {'}'}</span>
+          <p>Desenvolvedor Front-End</p>
+          <span className={Styled.key_green}>{'}'}</span>
         </div>
         <div className={Styled.btn_group}>
           <Scroll.Link to="sobre" smooth>

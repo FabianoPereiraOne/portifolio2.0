@@ -83,6 +83,7 @@ export const Project = () => {
                         hasMasterSpinner={false}
                         src={image}
                         alt={project.name}
+                        className={styles.slide_image}
                       />
                     </Slide>
                   )
