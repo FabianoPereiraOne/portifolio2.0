@@ -109,7 +109,9 @@ export const PortfolioProvider = ({
       'projects'
     )
 
-    const resultCreated = format(new Date(), 'yyyy-MM-dd', { locale: ptBR })
+    const resultCreated = format(new Date(), 'yyyy-MM-dd HH:mm:ss', {
+      locale: ptBR
+    })
 
     await setDoc(docRef, {
       name: preProject.name,
